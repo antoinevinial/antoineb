@@ -1,15 +1,18 @@
 mixin slider-projects(nbItems)
 	div.grid
 		div.row
-			ul.projects.js-projects
-				- for (i = 0; i < nbItems; i++)
-					li.projects__item.cell-2.js-projects-item
-						a.projects__link(href="#")
-							img.projects__img(src="http://placehold.it/416x250")
-							h2.projects__title Impelled to confer perpetuity
-							span.projects__label Interactive
-					li.projects__item.cell-2.js-projects-item
-						a.projects__link(href="#")
-							img.projects__img(src="http://placehold.it/416x510")
-							h2.projects__title Impelled to confer perpetuity
-							span.projects__label Interactive
+			div.projects.js-projects
+				//- ul.projects__pager.js-projects-pager
+				//- 	li.projects__pager__item.is-active
+				ul.projects__list.js-projects-list
+					- for (i = 0; i < nbItems; i++)
+						li.projects__item.cell-2.js-projects-item
+							a.projects__link(href="#")
+								img.projects__img(src="http://placehold.it/416x250")
+								h2.projects__title Impelled to confer perpetuity
+								span.projects__label Interactive
+						li.projects__item.cell-2.js-projects-item
+							a.projects__link(href="#")
+								img.projects__img(src="http://placehold.it/416x510")
+								h2.projects__title Impelled to confer perpetuity
+								span.projects__label Interactive

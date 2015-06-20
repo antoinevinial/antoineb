@@ -335,22 +335,39 @@ Inspired by Standard module format + Octave & Octave guidelines
 https://github.com/stubbornella/oocss/wiki/standard-module-format
 
 */
-.projects__item {
-  margin-bottom: 3.125rem; }
-.projects__link {
-  display: block; }
-.projects__img {
-  display: block;
-  margin-bottom: 1.125rem; }
-.projects__title {
-  font-size: 1.125rem;
-  line-height: 1.5; }
-.projects__label {
-  display: block;
-  margin-top: -0.3125rem;
-  font-size: 0.75rem;
-  color: #828282;
-  text-transform: uppercase; }
+.projects {
+  position: relative; }
+  .projects__item {
+    margin-bottom: 3.125rem; }
+  .projects__link {
+    display: block; }
+  .projects__img {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 1.125rem; }
+  .projects__title {
+    font-size: 1.125rem;
+    line-height: 1.5; }
+  .projects__label {
+    display: block;
+    margin-top: -0.3125rem;
+    font-size: 0.75rem;
+    color: #828282;
+    text-transform: uppercase; }
+  .projects__pager {
+    position: absolute !important;
+    top: 0;
+    right: -3.125rem;
+    width: 26px; }
+    .projects__pager__item {
+      float: left;
+      width: 10px;
+      height: 5px;
+      margin: 0 0.0625rem 0.125rem;
+      background: #454545;
+      cursor: pointer; }
+      .projects__pager__item.is-active {
+        background: #ffffff; }
 
 .dev-grid {
   display: none;
