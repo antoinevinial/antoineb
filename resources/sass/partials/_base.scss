@@ -16,6 +16,11 @@
 /* ------------------------------------------------------------------ */
 /*        PROJECT STYLESHEET
 /* ------------------------------------------------------------------ */
+@import "layout/grid";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/print";
+
 @import "ui/reset";
 @import "ui/base";
 @import "ui/typography";
@@ -23,11 +28,7 @@
 @import "ui/buttons";
 @import "ui/lists";
 @import "ui/box";
+@import "ui/projects";
 @import "ui/others";
-
-@import "layout/grid";
-@import "layout/header";
-@import "layout/footer";
-@import "layout/print";
 
 

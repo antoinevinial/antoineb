@@ -132,6 +132,112 @@ img.picture {
 /* ------------------------------------------------------------------ */
 /*        PROJECT STYLESHEET
 /* ------------------------------------------------------------------ */
+.grid {
+  max-width: 1024px;
+  padding: 0 4rem; }
+
+.row {
+  margin-left: -32px;
+  margin-right: -32px; }
+
+[class*="cell-"] {
+  min-height: 1px;
+  float: left;
+  padding-left: 32px;
+  padding-right: 32px; }
+
+.cell-1 {
+  width: 25%; }
+
+.cell-2 {
+  width: 50%; }
+
+.cell-3 {
+  width: 75%; }
+
+.cell-4 {
+  width: 100%; }
+
+.prepend-1 {
+  margin-left: 25%; }
+
+.prepend-2 {
+  margin-left: 50%; }
+
+.prepend-3 {
+  margin-left: 75%; }
+
+.prepend-4 {
+  margin-left: 100%; }
+
+.append-1 {
+  margin-right: 25%; }
+
+.append-2 {
+  margin-right: 50%; }
+
+.append-3 {
+  margin-right: 75%; }
+
+.append-4 {
+  margin-right: 100%; }
+
+.header {
+  margin: 3.75rem 0 5rem;
+  overflow: hidden; }
+  .header__nav {
+    padding-top: 2.5rem;
+    border-top: 1px solid #454545; }
+  .header__item {
+    display: inline-block;
+    margin-right: 2.1875rem; }
+  .header__link {
+    font-size: 1.125rem;
+    color: #828282; }
+    .header__link.is-active {
+      color: #ffffff; }
+
+@media print {
+  /* ------------------------------------------------------------------ */
+  /* DEFAULT PRINT STYLE
+	/* from HTML5 Boilerplate styles - h5bp.com
+	/* ------------------------------------------------------------------ */
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important; }
+  a, a:visited {
+    text-decoration: underline; }
+  a[href]:after {
+    content: " (" attr(href) ")"; }
+  abbr[title]:after {
+    content: " (" attr(title) ")"; }
+  /*
+     * Don't show links for images, or javascript/internal links
+     */
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+    content: ""; }
+  pre, blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid; }
+  thead {
+    display: table-header-group;
+    /* h5bp.com/t */ }
+  tr, img {
+    page-break-inside: avoid; }
+  img {
+    max-width: 100% !important; }
+  @page {
+    margin: 0.5cm; }
+
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3; }
+  h2, h3 {
+    page-break-after: avoid; } }
+
 *, *:before, *:after {
   box-sizing: border-box; }
 
@@ -229,6 +335,23 @@ Inspired by Standard module format + Octave & Octave guidelines
 https://github.com/stubbornella/oocss/wiki/standard-module-format
 
 */
+.projects__item {
+  margin-bottom: 3.125rem; }
+.projects__link {
+  display: block; }
+.projects__img {
+  display: block;
+  margin-bottom: 1.125rem; }
+.projects__title {
+  font-size: 1.125rem;
+  line-height: 1.5; }
+.projects__label {
+  display: block;
+  margin-top: -0.3125rem;
+  font-size: 0.75rem;
+  color: #828282;
+  text-transform: uppercase; }
+
 .dev-grid {
   display: none;
   position: fixed;
@@ -260,112 +383,6 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   font-family: inherit;
   color: black;
   border: none; }
-
-.grid {
-  max-width: 1024px;
-  padding: 0 4rem; }
-
-.row {
-  margin-left: -32px;
-  margin-right: -32px; }
-
-[class*="cell-"] {
-  min-height: 1px;
-  float: left;
-  padding-left: 32px;
-  padding-right: 32px; }
-
-.cell-1 {
-  width: 25%; }
-
-.cell-2 {
-  width: 50%; }
-
-.cell-3 {
-  width: 75%; }
-
-.cell-4 {
-  width: 100%; }
-
-.prepend-1 {
-  margin-left: 25%; }
-
-.prepend-2 {
-  margin-left: 50%; }
-
-.prepend-3 {
-  margin-left: 75%; }
-
-.prepend-4 {
-  margin-left: 100%; }
-
-.append-1 {
-  margin-right: 25%; }
-
-.append-2 {
-  margin-right: 50%; }
-
-.append-3 {
-  margin-right: 75%; }
-
-.append-4 {
-  margin-right: 100%; }
-
-.header {
-  margin-top: 3.75rem;
-  overflow: hidden; }
-  .header__nav {
-    padding-top: 2.5rem;
-    border-top: 1px solid #454545; }
-  .header__item {
-    display: inline-block;
-    margin-right: 2.1875rem; }
-  .header__link {
-    font-size: 1.125rem;
-    color: #828282; }
-    .header__link.is-active {
-      color: #ffffff; }
-
-@media print {
-  /* ------------------------------------------------------------------ */
-  /* DEFAULT PRINT STYLE
-	/* from HTML5 Boilerplate styles - h5bp.com
-	/* ------------------------------------------------------------------ */
-  * {
-    background: transparent !important;
-    color: #000 !important;
-    /* Black prints faster: h5bp.com/s */
-    box-shadow: none !important;
-    text-shadow: none !important; }
-  a, a:visited {
-    text-decoration: underline; }
-  a[href]:after {
-    content: " (" attr(href) ")"; }
-  abbr[title]:after {
-    content: " (" attr(title) ")"; }
-  /*
-     * Don't show links for images, or javascript/internal links
-     */
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
-    content: ""; }
-  pre, blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid; }
-  thead {
-    display: table-header-group;
-    /* h5bp.com/t */ }
-  tr, img {
-    page-break-inside: avoid; }
-  img {
-    max-width: 100% !important; }
-  @page {
-    margin: 0.5cm; }
-
-  p, h2, h3 {
-    orphans: 3;
-    widows: 3; }
-  h2, h3 {
-    page-break-after: avoid; } }
 
 
 /*# sourceMappingURL=maps/styles.css.map */

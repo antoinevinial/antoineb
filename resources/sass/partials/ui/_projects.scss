@@ -1,0 +1,27 @@
+.projects {
+	&__item {
+		margin-bottom: pxToRem(50px);
+	}
+
+	&__link {
+		display: block;
+	}
+
+	&__img {
+		display: block;
+		margin-bottom: pxToRem(18px);
+	}
+
+	&__title {
+		font-size: pxToRem(18px);
+		line-height: 1.5;
+	}
+
+	&__label {
+		display: block;
+		margin-top: pxToRem(-5px);
+		font-size: pxToRem(12px);
+		color: $color-grey;
+		text-transform: uppercase;
+	}
+}
