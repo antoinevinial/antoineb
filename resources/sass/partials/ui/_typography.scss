@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'theinhardtmedium';
+    src: url('../fonts/theinhardtmed-webfont.eot');
+    src: url('../fonts/theinhardtmed-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/theinhardtmed-webfont.woff2') format('woff2'),
+         url('../fonts/theinhardtmed-webfont.woff') format('woff'),
+         url('../fonts/theinhardtmed-webfont.ttf') format('truetype'),
+         url('../fonts/theinhardtmed-webfont.svg#theinhardtmedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'theinhardtregular';
+    src: url('../fonts/theinhardtreg-webfont.eot');
+    src: url('../fonts/theinhardtreg-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/theinhardtreg-webfont.woff2') format('woff2'),
+         url('../fonts/theinhardtreg-webfont.woff') format('woff'),
+         url('../fonts/theinhardtreg-webfont.ttf') format('truetype'),
+         url('../fonts/theinhardtreg-webfont.svg#theinhardtregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'theinhardtthin';
+    src: url('../fonts/theinhardtthin-webfont.eot');
+    src: url('../fonts/theinhardtthin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/theinhardtthin-webfont.woff2') format('woff2'),
+         url('../fonts/theinhardtthin-webfont.woff') format('woff'),
+         url('../fonts/theinhardtthin-webfont.ttf') format('truetype'),
+         url('../fonts/theinhardtthin-webfont.svg#theinhardtthin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Extend based on the font */
+
+%InhardtMedium {
+    font-family: 'theinhardtmedium', Arial, sans-serif;
+}
+
+%InhardtRegular {
+    font-family: 'theinhardtregular', Arial, sans-serif;
+}
+
+%InhardtThin {
+    font-family: 'theinhardtthin', Arial, sans-serif;
+}

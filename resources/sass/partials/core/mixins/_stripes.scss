@@ -1,0 +1,67 @@
+/*
+ * STRIPES MIXIN BY CHRIS COYIER
+ *
+ * Usage :
+ * - Hard mode : you specify each color / position
+ * - Auto mode : just the colors, the widths will be "automatic"
+ *
+ * Exemple :
+ * Colors only (auto-mode)
+ * $treehouse-auto: #fa9300, #66c9ee, #c9c9c9, #82b964, #d24d33, #fffbdb, #2e77bb, #6bd5b1, #f87aa0, #c9c9c9, #72664e, #ccd600, #fffbdb, #df620e, #993838, #ff9600, #d24d33, #8960a7, #82b964, #f87aa0, #d43f3f, #668000, #ff9600, #8960a7, #c9c9c9, #993838, #ccd600, #668000, #f4cc13, #72664e, #fa9300, #66c9ee, #c9c9c9, #82b964, #ccd600, #fffbdb, #2e77bb, #6bd5b1, #f87aa0, #c9c9c9, #fa9300, #66c9ee, #c9c9c9, #82b964, #ccd600, #fffbdb, #fa9300;
+ *
+ * Color-stops (hard-mode)
+ * $treehouse-hard: #fa9300 2.61%, #66c9ee 4.35%, #c9c9c9 6.96%, #82b964 9.13%, #d24d33 11.3%, #fffbdb 13.91%, #2e77bb 16.52%, #6bd5b1 17.82%, #f87aa0 19.12%, #c9c9c9 21.29%, #72664e 23.9%, #ccd600 26.07%, #fffbdb 28.68%, #df620e 31.29%, #993838 33.03%, #ff9600 34.33%, #d24d33 36.94%, #8960a7 39.55%, #82b964 42.16%, #f87aa0 43.36%, #d43f3f 45.63%, #668000 47.8%, #ff9600 50.41%, #8960a7 51.71%, #c9c9c9 53.88%, #993838 55.18%, #ccd600 57.79%, #668000 59.53%, #f4cc13 60.83%, #72664e 63.44%, #fa9300 66.05%, #66c9ee 67.35%, #c9c9c9 69.96%, #82b964 71.7%, #ccd600 74.31%, #fffbdb 76.92%, #2e77bb 79.53%, #6bd5b1 80.4%, #f87aa0 81.7%, #c9c9c9 83.87%, #fa9300 86.04%, #66c9ee 87.78%, #c9c9c9 90.39%, #82b964 92.56%, #ccd600 95.17%, #fffbdb 97.34%, #fa9300 100%;
+ *
+ * @include stripes($treehouse-auto, to right);
+ * or @include stripes($treehouse-hard, to right);
+ *
+ *
+ * Reference : http://css-tricks.com/striped-background-gradients/
+ *
+ */
+
+@mixin stripes($colors, $direction: "to bottom") {
+    $stripe-width: 100% / length($colors);
+    $auto:         if( type-of(nth($colors, 1)) == list, false, true );
+    $gradient:     ();
+
+    @for $i from 1 through length($colors) {
+        $item: nth($colors, $i);
+        $dump: ();
+
+        /* If we're in auto-mode,
+         * $item equals a color,
+         * color-stops are automatically calculated based on $i
+         */
+        @if $auto == true {
+            $dump: $item $stripe-width * ($i - 1), $item $stripe-width * $i;
+            /*      red   0%                      , red   50%
+             * ^ This is what the first loop run would output with a 2 colors gradient
+             */
+        }
+
+        /* If we're in hard-mode
+         */
+        @else {
+            /* We check if it is the first run loop;
+             * if it isn't, we add the current color with the previous stop
+             */
+            @if $i > 1 {
+              $previous-item: nth($colors, $i - 1);
+              $dump: append($dump, nth($item, 1) nth($previous-item, 2));
+            }
+            /* No matter what,
+             * we add the new color stop
+             */
+            $dump: append($dump, $item);
+       }
+
+       /* And no matter what,
+        * we append $dump to $gradient using join(),
+        * separating both with a comma by forcing it as a 3rd argument
+        */
+       $gradient: join($gradient, $dump, comma);
+    }
+
+    @include background-image(linear-gradient($direction, $gradient));
+}

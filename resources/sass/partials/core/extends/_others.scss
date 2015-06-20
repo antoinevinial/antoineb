@@ -1,0 +1,25 @@
+%clearfix {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+%pointer {
+    cursor:pointer;
+}
+
+%background-cover {
+    background-size:cover;
+    /* If you need it, you can place here the background-size.htc */
+}
+
+//hardware acceleration
+%ha {
+    transform: translate3d(0,0,0);
+}

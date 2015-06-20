@@ -1,0 +1,27 @@
+/*
+More info : http://msdn.microsoft.com/en-us/library/ms532969%28v=vs.85%29.aspx
+http://stackoverflow.com/questions/2991623/make-background-size-work-in-ie
+*/
+
+
+@mixin oo-background-size($path, $modernizr){
+    @if $modernizr == true {
+        .backgroundsize & {
+            background:image-url($path) no-repeat center center;
+            background-size:cover;
+        }
+
+        .no-backgroundsize & {
+            background:image-url($path) no-repeat center center;
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{image-url($path, true)}',sizingMethod='scale');
+            -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{image-url($path, true)}',sizingMethod='scale')";
+        }
+    }
+
+    @else {
+        background:image-url($path) no-repeat center center;
+        background-size:cover;
+        filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{image-url($path, true)}',sizingMethod='scale');
+        -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{image-url($path, true)}',sizingMethod='scale')";
+    }
+}

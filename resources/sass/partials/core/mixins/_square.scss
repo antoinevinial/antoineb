@@ -1,0 +1,5 @@
+@mixin square($dim:10px){
+    @include inline-block();
+    width:$dim;
+    height:$dim;
+}

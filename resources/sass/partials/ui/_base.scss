@@ -1,0 +1,13 @@
+body {
+	@extend %InhardtRegular;
+	font-size:#{$base-font-size};
+    line-height:#{$base-line-height};
+    color: $color-font;
+	background: $background-dark;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}

@@ -1,0 +1,44 @@
+// Grid for the dev environnement.
+
+.dev-grid {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    pointer-events: none;
+
+    &.is-visible {
+        display: block;
+    }
+
+    .grid,
+    .row {
+        height: 100%;
+    }
+
+    [class*="cell-"] {
+        height: 100%;
+    }
+
+    .cell-content {
+        display: block;
+        width: 100%;
+        background-color: rgba(142,239,186,0.5);
+    }
+}
+
+.dev-grid__btn {
+    display: inline-block;
+    position: fixed;
+    top: pxToRem(10px);
+    right: pxToRem(10px);
+    padding: pxToRem(10px) pxToRem(15px);
+    font-size: pxToRem(14px);
+    cursor: pointer;
+    z-index: 20;
+    background: white;
+    font-family: inherit;
+    color: black;
+    border: none;
+}

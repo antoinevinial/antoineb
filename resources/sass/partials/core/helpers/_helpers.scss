@@ -1,0 +1,52 @@
+.ir {
+    display: block;
+    text-indent: -999em;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    text-align: left;
+    direction: ltr;
+}
+
+.ir br {
+    display: none;
+}
+
+.hidden {
+    display:none;
+}
+
+.clearfix {
+    @extend %clearfix;
+}
+
+img.picture {
+    display:block;
+}
+
+/* Alignments */
+.float-right  { float:right;}
+.float-left   { float:left;}
+.align-left   { text-align:left;}
+.align-center { text-align:center;}
+.align-right  { text-align:right;}
+
+
+/* Bottom margins */
+//@include trailers(false, '-nano' '-micro' '-small' '' '-big' '-mega' '-giga' '-tera', 0.25 0.5 0.75 1 1.5 2 3 4);
+/* Top margins */
+//@include leaders(false, '-nano' '-micro' '-small' '' '-big' '-mega' '-giga' '-tera', 0.25 0.5 0.75 1 1.5 2 3 4);
+
+/* ------------------------------------------------------------------ */
+/*        MOBILE (UNCOMMENT IF NEEDED)
+/* ------------------------------------------------------------------ */
+
+/*
+@include mobile-only {
+    .align-center-mobile { text-align:center; }
+    .align-left-mobile   { text-align:left; }
+    .align-right-mobile  { text-align:right; }
+
+    .hidden-mobile { display:none !important; }
+}
+*/
+

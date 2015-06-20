@@ -1,0 +1,5 @@
+@mixin appearance($val) {
+    -webkit-appearance:$val;
+    -moz-appearance:$val;
+    appearance:$val;
+}

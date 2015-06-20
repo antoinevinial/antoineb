@@ -1,0 +1,42 @@
+/*-------------------------------------------
+    GENERIC TRANSITIONS
+-------------------------------------------*/
+
+$duration:200ms;
+$transition-timing-function:ease;
+
+%border-transition {
+    transition: border-color $duration $transition-timing-function;
+}
+
+%opacity-transition {
+    transition: opacity $duration $transition-timing-function;
+}
+
+%background-transition {
+    transition: background-color $duration $transition-timing-function;
+}
+
+%width-transition {
+    transition: width $duration $transition-timing-function;
+}
+
+%all-transition {
+    transition: all $duration $transition-timing-function;
+}
+
+%top-transition {
+    transition: top $duration $transition-timing-function;
+}
+
+%right-transition {
+    transition: right $duration $transition-timing-function;
+}
+
+%bottom-transition {
+    transition: bottom $duration $transition-timing-function;
+}
+
+%left-transition {
+    transition: left $duration $transition-timing-function;
+}

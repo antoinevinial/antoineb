@@ -1,0 +1,52 @@
+/* ------------------------------------------------------------------ */
+/*        TRAILER / LEADERS
+/* ------------------------------------------------------------------ */
+
+@mixin margin-leader($n:1, $context:$base-font-size) {
+    margin-top: em( $n*$base-line-height, $context );
+}
+
+@mixin margin-trailer($n:1, $context:$base-font-size) {
+    margin-bottom: em( $n*$base-line-height, $context );
+}
+
+@mixin padding-leader($n:1, $context:$base-font-size) {
+    padding-top: em( $n*$base-line-height, $context );
+}
+
+@mixin padding-trailer($n:1, $context:$base-font-size) {
+    padding-bottom: em( $n*$base-line-height, $context );
+}
+
+
+//@TODO
+//
+// @mixin trailers($mobile:false, $name:'-nano' '-micro' '-small' '' '-big' '-mega' '-giga' '-tera', $depths:0.25 0.5 0.75 1 1.5 2 3 4) {
+
+//     @for $i from 1 through length($name) {
+//         .trailer#{ nth($name, $i) } { @include trailer( nth($depths, $i) ); }
+//     }
+
+//     @if $mobile == true {
+//         @include mobile-only {
+//             @for $i from 1 through length($name) {
+//                 .trailer#{ nth($name, $i) }-mobile { @include trailer( nth($depths, $i) ); }
+//             }
+//         }
+//     }
+// }
+
+// @mixin leaders($mobile:false, $name:'-nano' '-micro' '-small' '' '-big' '-mega' '-giga' '-tera', $depths:0.25 0.5 0.75 1 1.5 2 3 4) {
+
+//     @for $i from 1 through length($name) {
+//         .leader#{ nth($name, $i) } { @include leader( nth($depths, $i) ); }
+//     }
+
+//     @if $mobile == true {
+//         @include mobile-only {
+//             @for $i from 1 through length($name) {
+//                 .leader#{ nth($name, $i) }-mobile { @include leader( nth($depths, $i) ); }
+//             }
+//         }
+//     }
+// }

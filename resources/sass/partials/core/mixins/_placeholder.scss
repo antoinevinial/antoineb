@@ -1,0 +1,14 @@
+@mixin input-placeholder($color, $font:"12px Arial,sans-serif") {
+    &.placeholder {
+        color: $color; 
+        font:unquote($font);
+    }
+    &:-moz-placeholder {
+        color: $color; 
+        font:unquote($font);
+    }
+    &::-webkit-input-placeholder {
+        color: $color;
+        font:unquote($font);
+    }
+}

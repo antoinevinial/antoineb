@@ -1,0 +1,23 @@
+.header {
+	margin-top: pxToRem(60px);
+	overflow: hidden;	
+
+	&__nav {
+		padding-top: pxToRem(40px);
+		border-top: 1px solid $border-color;
+	}
+
+	&__item {
+		display: inline-block;
+		margin-right: pxToRem(35px);
+	}
+
+	&__link {
+		font-size: pxToRem(18px);
+		color: $color-grey;
+
+		&.is-active {
+			color: $color-font;
+		}
+	}
+}
