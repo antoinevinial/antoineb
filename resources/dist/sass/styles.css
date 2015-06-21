@@ -381,7 +381,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     top: 0 !important;
     left: 100%;
     width: 26px;
-    padding-top: 3.125rem;
+    padding-top: 1.5625rem;
     /* Modifiers */ }
     .projects__pager__list {
       position: relative; }

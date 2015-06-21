@@ -172,9 +172,6 @@ var projects = {
     scrollTo: function scrollTo($el) {
         var self = this;
 
-        // If the window is already scrolling, do nothing.
-        if (this.isAnimate) { return; }
-
         // Scroll to the element.
         this.isAnimate = true;
         $("html, body").animate({ scrollTop: $el.offset().top }, this.timer, function() {
