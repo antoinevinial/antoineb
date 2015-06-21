@@ -116,7 +116,7 @@ var projects = {
     },
 
     pressKeyboard: function pressKeyboard(e) {
-        // If user press arrow up
+        // If user press arrow up, go prev.
         if (e.keyCode == 38) { this.ui.$pagerPrev.trigger('click'); }
 
         // If user press arrow down, go next.
