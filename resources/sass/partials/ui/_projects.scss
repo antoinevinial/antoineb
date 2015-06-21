@@ -2,7 +2,8 @@
 	position: relative;
 
 	&__item {
-		margin-bottom: pxToRem(50px);
+		width: 50%;
+		padding: pxToRem(25px) pxToRem($gutter);
 	}
 
 	&__link {
@@ -28,11 +29,39 @@
 		text-transform: uppercase;
 	}
 
+	&__btn {
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		background: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
+
+		/* Modifiers */
+
+		&--prev {
+			margin-bottom: pxToRem(25px);
+		}
+
+		.icon-arrow-down {
+			display: block;
+			margin-top: pxToRem(25px);
+		}
+	}
+
 	&__pager {
 		position: absolute !important;
-		top: 0;
-		right: pxToRem(-50px);
+		top: 0 !important;
+		left: 100%;
 		width: 26px;
+		padding-top: pxToRem(50px);
+
+		&__list {
+			position: relative;
+		}
 
 		&__item {
 			float: left;
@@ -42,9 +71,28 @@
 			background: $border-color;
 			cursor: pointer;
 
+			&:hover,
 			&.is-active {
 				background: $color-font;
 			}
+		}
+
+		/* Modifiers */
+		&.is-sticky {
+			position: fixed !important;	
+			top: 0;
+		}
+	}
+
+	/* Modifiers */
+
+	&.is-scrolled {
+		.projects__item {
+			opacity: 0.5;
+
+			&.is-active {
+				opacity: 1;
+			}			
 		}
 	}
 }

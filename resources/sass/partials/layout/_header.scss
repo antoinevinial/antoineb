@@ -16,7 +16,8 @@
 		font-size: pxToRem(18px);
 		color: $color-grey;
 
-		&.is-active {
+		&:hover,
+		&.is-active{
 			color: $color-font;
 		}
 	}

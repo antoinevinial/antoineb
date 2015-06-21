@@ -194,7 +194,7 @@ img.picture {
   .header__link {
     font-size: 1.125rem;
     color: #828282; }
-    .header__link.is-active {
+    .header__link:hover, .header__link.is-active {
       color: #ffffff; }
 
 @media print {
@@ -310,6 +310,10 @@ a {
 body {
   font-family: 'theinhardtregular', Arial, sans-serif; }
 
+.icon-arrow-up, .icon-arrow-down {
+  width: 7px;
+  height: 16px; }
+
 /* Nav header */
 .nav-header {
   overflow: hidden; }
@@ -336,9 +340,11 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
 
 */
 .projects {
-  position: relative; }
+  position: relative;
+  /* Modifiers */ }
   .projects__item {
-    margin-bottom: 3.125rem; }
+    width: 50%;
+    padding: 1.5625rem 2rem; }
   .projects__link {
     display: block; }
   .projects__img {
@@ -354,11 +360,31 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     font-size: 0.75rem;
     color: #828282;
     text-transform: uppercase; }
+  .projects__btn {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    /* Modifiers */ }
+    .projects__btn--prev {
+      margin-bottom: 1.5625rem; }
+    .projects__btn .icon-arrow-down {
+      display: block;
+      margin-top: 1.5625rem; }
   .projects__pager {
     position: absolute !important;
-    top: 0;
-    right: -3.125rem;
-    width: 26px; }
+    top: 0 !important;
+    left: 100%;
+    width: 26px;
+    padding-top: 3.125rem;
+    /* Modifiers */ }
+    .projects__pager__list {
+      position: relative; }
     .projects__pager__item {
       float: left;
       width: 10px;
@@ -366,12 +392,21 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       margin: 0 0.0625rem 0.125rem;
       background: #454545;
       cursor: pointer; }
-      .projects__pager__item.is-active {
+      .projects__pager__item:hover, .projects__pager__item.is-active {
         background: #ffffff; }
+    .projects__pager.is-sticky {
+      position: fixed !important;
+      top: 0; }
+  .projects.is-scrolled .projects__item {
+    opacity: 0.5; }
+    .projects.is-scrolled .projects__item.is-active {
+      opacity: 1; }
 
 .dev-grid {
   display: none;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 9;

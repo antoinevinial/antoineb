@@ -4,6 +4,10 @@ var imagesLoaded = require('imagesloaded');
 var projects = {
 
     ui: {},
+    timer: 400,
+    isAnimate: false,
+    itemActive: 0,
+    stickyPosition: {},
 
     init: function init() {
         this.bindUI();
@@ -12,6 +16,7 @@ var projects = {
     },
 
     bindUI: function bindUI() {
+        this.ui.$win      = $(window);
         this.ui.$projects = $('.js-projects');
         this.ui.$list     = this.ui.$projects.find('.js-projects-list');
         this.ui.$items    = this.ui.$projects.find('.js-projects-item');
@@ -39,28 +44,45 @@ var projects = {
     },
 
     buildPager: function buildPager() {
-        var self = this,
-            pagerHTML = '';
+        var pagerHTML = '';
 
         // Starting pager html markup.
-        pagerHTML += '<ul class="projects__pager js-projects-pager">';
+        pagerHTML += '<div class="projects__pager js-projects-pager">';
+        pagerHTML += '<button class="projects__btn projects__btn--prev js-projects-pager-prev"><svg class="icon icon-arrow-up"><path fill="#ffffff" d="M3.5,0 L7,5 L4,5 L3.99743652,16 L3,16 L3,5 L0,5 L3.5,0 Z"></path></svg></button>';
+        pagerHTML += '<ul class="projects__pager__list js-projects-pager-list">';
 
         // For each projects item, create a pager-item.
         $.each(this.ui.$items, function() {
-            // Add a pager-item.
             pagerHTML += '<li class="projects__pager__item js-projects-pager-item"></li>';
         });
 
         // Close the pager.
         pagerHTML += '</ul>';
+        pagerHTML += '<button class="projects__btn projects__btn--next js-projects-pager-next"><svg class="icon icon-arrow-down"><path fill="#ffffff" d="M2.99694824,0 L3,11.001709 L0,11.001709 L3.5,16.001709 L7,11.001709 L4,11.001709 L4,0.00170898438 L2.99694824,0 Z"></path></svg></button>';
+        pagerHTML += '</div>';
 
         // Append the pager.
         this.ui.$projects.prepend(pagerHTML);
 
         // Bind new UI.
         this.ui.$pager = $('.js-projects-pager');
+        this.ui.$pagerList  = this.ui.$pager.find('.js-projects-pager-list');
         this.ui.$pagerItems = this.ui.$pager.find('.js-projects-pager-item');
+        this.ui.$pagerPrev  = this.ui.$pager.find('.js-projects-pager-prev');
+        this.ui.$pagerNext  = this.ui.$pager.find('.js-projects-pager-next');
 
+        // Bind events.
+        this.ui.$pagerPrev.on('click', $.proxy(this.goPrev, this));
+        this.ui.$pagerNext.on('click', $.proxy(this.goNext, this));
+        this.ui.$win.on('keydown', $.proxy(this.pressKeyboard, this));
+
+        // Update pager.
+        this.updatePager();
+    },
+
+    updatePager: function updatePager() {
+        var self = this;
+        
         // For each pager items, adjust its height based on the image ratio.
         $.each(this.ui.$items, function() {
 
@@ -68,25 +90,120 @@ var projects = {
             var $img = $(this).find('img');
 
             // Calculate the ratio of the image.
-            var imgH  = $img.height(),
-                imgW  = $img.width(),
-                imgRatio = Math.round(imgH / imgW * 100)/100;
+            var imgRatio = Math.round($img.height() / $img.width() * 100)/100;
 
             // Get the items index and the corresponding pager item.
-            var itemIndex  = $(this).index(),
-                $pagerItem = $(self.ui.$pagerItems[itemIndex]);
-
-            // Get pager item width.
-            var pagerItemW = $pagerItem.width();
+            var $pagerItem = $(self.ui.$pagerItems[$(this).index()]);
 
             // Set height on the pager item.
-            $pagerItem.height(pagerItemW * imgRatio);
+            $pagerItem.height($pagerItem.width() * imgRatio);
         });
 
         // Init new isotope function on the pager.
-        this.ui.$pager.isotope({
+        this.ui.$pagerList.isotope({
             itemSelector: '.js-projects-pager-item'
         });
+
+        // Bind click on pager items.
+        this.ui.$pagerItems.on('click', $.proxy(this.goClick, this));
+
+        // Save sticky top and left position.
+        this.stickyPosition.top  = this.ui.$pager.offset().top;
+        this.stickyPosition.left = this.ui.$pager.offset().left;
+
+        // Bind scroll to turn pager into sticky one.
+        this.ui.$win.on('scroll', $.proxy(this.stickyPager, this));
+    },
+
+    pressKeyboard: function pressKeyboard(e) {
+        // If user press arrow up
+        if (e.keyCode == 38) { this.ui.$pagerPrev.trigger('click'); }
+
+        // If user press arrow down, go next.
+        if (e.keyCode == 40) { this.ui.$pagerNext.trigger('click'); }
+    },
+
+    goClick: function goClick(e) {
+        var self = this,
+            $el = $(e.currentTarget);
+
+        // Get the index of the clicked pager item and update itemActive variable.
+        var index = $el.index();
+        this.itemActive = index;
+
+        // Get the corresponding projects item.
+        var $target = $(this.ui.$items[index]);
+
+        // Scroll to the target position.
+        this.scrollTo($target);
+
+        // Update itemActive variable.
+        this.itemActive = index;
+    },
+
+    goNext: function goNext() {
+        // If we're on the last item, stop the function.
+        if (this.itemActive >= this.ui.$items.length) { return; }
+
+        // Update itemActive variable.
+        this.itemActive++;
+
+        // Get the target item.
+        var $target = $(this.ui.$items[this.itemActive]);
+
+        // Scroll to the target position.
+        this.scrollTo($target);
+    },
+
+    goPrev: function goPrev() {
+        // If we're on the last item, stop the function.
+        if (this.itemActive == 0) { return; }
+
+        // Update itemActive variable.
+        this.itemActive--;
+
+        // Get the target item.
+        var $target = $(this.ui.$items[this.itemActive]);
+
+        // Scroll to the target position.
+        this.scrollTo($target);
+    },
+
+    scrollTo: function scrollTo($el) {
+        var self = this;
+
+        // If the window is already scrolling, do nothing.
+        if (this.isAnimate) { return; }
+
+        // Scroll to the element.
+        this.isAnimate = true;
+        $("html, body").animate({ scrollTop: $el.offset().top }, this.timer, function() {
+            self.isAnimate = false;
+        });
+
+        // Add class is-scrolled on the projects.
+        this.ui.$projects.addClass('is-scrolled');
+
+        // Remove is-active class to all items and add it to the target.
+        this.ui.$items.removeClass('is-active');
+        $el.addClass('is-active');
+
+        // Update pager.
+        this.ui.$pagerItems.removeClass('is-active');
+        $(this.ui.$pagerItems[$el.index()]).addClass('is-active');
+    },
+
+    stickyPager: function stickyPager(e) {
+        var scrollTop = this.ui.$win.scrollTop();
+        
+        // Make pager sticky or not based on the scroll position.
+        if (scrollTop >= this.stickyPosition.top) {
+            this.ui.$pager.addClass('is-sticky');
+            this.ui.$pager.css({ 'left' : this.stickyPosition.left });
+        } else {
+            this.ui.$pager.removeClass('is-sticky');
+            this.ui.$pager.css({ 'left' : '100%' });
+        }
     }
 };
 
