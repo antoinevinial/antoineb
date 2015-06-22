@@ -345,7 +345,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   .projects__item {
     width: 50%;
     padding: 1.5625rem 2rem;
-    transition: all 0.25s ease; }
+    transition: all 0.25s linear; }
   .projects__link {
     display: block; }
   .projects__img {
@@ -395,7 +395,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       cursor: pointer; }
       .projects__pager__item:hover, .projects__pager__item.is-active {
         background: #ffffff;
-        transition: all 0.25s ease; }
+        transition: all 0.25s linear; }
     .projects__pager.is-sticky {
       position: fixed !important;
       top: 0; }
