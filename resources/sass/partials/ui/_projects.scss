@@ -4,6 +4,7 @@
 	&__item {
 		width: 50%;
 		padding: pxToRem(25px) pxToRem($gutter);
+		@include transition(all $transition-quick ease);
 	}
 
 	&__link {
@@ -74,6 +75,7 @@
 			&:hover,
 			&.is-active {
 				background: $color-font;
+				@include transition(all $transition-quick ease);
 			}
 		}
 

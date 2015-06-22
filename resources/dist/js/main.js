@@ -320,9 +320,12 @@ var imagesLoaded = require('imagesloaded');
 var projects = {
 
     ui: {},
-    timer: 400,
-    isAnimate: false,
+    timer: 300,
     itemActive: 0,
+
+    isAnimate: false,
+    isAlreadyPress: false,
+
     stickyPosition: {},
 
     init: function init() {
@@ -349,6 +352,7 @@ var projects = {
         // When all images are loaded, build the pager.
         this.ui.$list.imagesLoaded(function() {
             self.buildPager();
+            self.stickyPager();
         });
     },
 
@@ -420,8 +424,9 @@ var projects = {
             itemSelector: '.js-projects-pager-item'
         });
 
-        // Bind click on pager items.
+        // Bind click on pager items and bind window load.
         this.ui.$pagerItems.on('click', $.proxy(this.goClick, this));
+        this.stickyPager();
 
         // Save sticky top and left position.
         this.stickyPosition.top  = this.ui.$pager.offset().top;
@@ -432,16 +437,20 @@ var projects = {
     },
 
     pressKeyboard: function pressKeyboard(e) {
+
         // If user press arrow up, go prev.
-        if (e.keyCode == 38) { this.ui.$pagerPrev.trigger('click'); }
+        if (e.keyCode == 38) { e.preventDefault(); this.ui.$pagerPrev.trigger('click'); }
 
         // If user press arrow down, go next.
-        if (e.keyCode == 40) { this.ui.$pagerNext.trigger('click'); }
+        if (e.keyCode == 40) { e.preventDefault(); this.ui.$pagerNext.trigger('click'); }
     },
 
     goClick: function goClick(e) {
         var self = this,
             $el = $(e.currentTarget);
+
+        // If the window is already scrolling, do nothing.
+        if (this.isAnimate) { return; }
 
         // Get the index of the clicked pager item and update itemActive variable.
         var index = $el.index();
@@ -458,11 +467,18 @@ var projects = {
     },
 
     goNext: function goNext() {
+        // If the window is already scrolling, do nothing.
+        if (this.isAnimate) { return; }
+
         // If we're on the last item, stop the function.
-        if (this.itemActive >= this.ui.$items.length) { return; }
+        if (this.itemActive > this.ui.$items.length - 2) { return; }
 
         // Update itemActive variable.
-        this.itemActive++;
+        if (!this.isAlreadyPress) {
+            this.isAlreadyPress = true;
+        } else {
+            this.itemActive++;
+        }
 
         // Get the target item.
         var $target = $(this.ui.$items[this.itemActive]);
@@ -472,6 +488,9 @@ var projects = {
     },
 
     goPrev: function goPrev() {
+        // If the window is already scrolling, do nothing.
+        if (this.isAnimate) { return; }
+
         // If we're on the last item, stop the function.
         if (this.itemActive == 0) { return; }
 
@@ -488,10 +507,13 @@ var projects = {
     scrollTo: function scrollTo($el) {
         var self = this;
 
-        // Scroll to the element.
+        // Set isAnimate variable to true.
         this.isAnimate = true;
+
+        // Scroll to the element.
         $("html, body").animate({ scrollTop: $el.offset().top }, this.timer, function() {
-            self.isAnimate = false;
+            // Add small setTimeout to prevent un-focus project list.
+            setTimeout(function() { self.isAnimate = false; }, 20);
         });
 
         // Add class is-scrolled on the projects.
@@ -508,6 +530,12 @@ var projects = {
 
     stickyPager: function stickyPager(e) {
         var scrollTop = this.ui.$win.scrollTop();
+
+        // If user didn't click on prev/next/item, un-focus list.
+        if (!this.isAnimate) {
+            this.ui.$projects.removeClass('is-scrolled');
+            this.ui.$pagerItems.removeClass('is-active');
+        }
         
         // Make pager sticky or not based on the scroll position.
         if (scrollTop >= this.stickyPosition.top) {
