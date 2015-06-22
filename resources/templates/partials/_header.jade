@@ -1,4 +1,4 @@
-header.header
+header.header.js-header
 	div.grid
 		div.row
 			div.cell-4
@@ -9,3 +9,7 @@ header.header
 								a.header__link.is-active(href="#") Antoine Barrès
 						li.header__item
 							a.header__link(href="#") Profile
+					- if (filters)
+						div.header__filters
+							button.header__filters__btn
+								+icon-filters

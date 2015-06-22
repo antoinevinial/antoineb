@@ -183,9 +183,11 @@ img.picture {
   margin-right: 100%; }
 
 .header {
-  margin: 3.75rem 0 5rem;
-  overflow: hidden; }
+  margin: 3.75rem 0 2.5rem;
+  overflow: hidden;
+  /* Modifiers */ }
   .header__nav {
+    position: relative;
     padding-top: 2.5rem;
     border-top: 1px solid #454545; }
   .header__item {
@@ -196,6 +198,22 @@ img.picture {
     color: #828282; }
     .header__link:hover, .header__link.is-active {
       color: #ffffff; }
+  .header__filters {
+    position: absolute;
+    top: 2.5rem;
+    right: 0; }
+    .header__filters__btn {
+      background: none;
+      border: none;
+      border-radius: 0;
+      outline: none;
+      cursor: pointer; }
+      .header__filters__btn path {
+        fill: #787878; }
+      .header__filters__btn:hover path {
+        fill: white; }
+  .header.is-fade {
+    opacity: 0; }
 
 @media print {
   /* ------------------------------------------------------------------ */
@@ -285,6 +303,14 @@ a {
   color: inherit;
   text-decoration: none; }
 
+/* Main container */
+.main.is-fade {
+  opacity: 0; }
+
+/* Transitions */
+.header, .header__link, .header__filters__btn path, .main {
+  transition: all 0.25s ease; }
+
 @font-face {
   font-family: 'theinhardtmedium';
   src: url('../fonts/theinhardtmed-webfont.eot');
@@ -313,6 +339,10 @@ body {
 .icon-arrow-up, .icon-arrow-down {
   width: 7px;
   height: 16px; }
+
+.icon-filters {
+  width: 15px;
+  height: 14px; }
 
 /* Nav header */
 .nav-header {
@@ -344,8 +374,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   /* Modifiers */ }
   .projects__item {
     width: 50%;
-    padding: 1.5625rem 2rem;
-    transition: all 0.25s linear; }
+    padding: 1.5625rem 2rem; }
   .projects__link {
     display: block; }
   .projects__img {
@@ -400,7 +429,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       position: fixed !important;
       top: 0; }
   .projects.is-scrolled .projects__item {
-    opacity: 0.5; }
+    opacity: 0.5;
+    transition: all 0.25s linear; }
     .projects.is-scrolled .projects__item.is-active {
       opacity: 1; }
 

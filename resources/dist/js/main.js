@@ -3,6 +3,8 @@
 var oo       = require('../libs/oo.js');
 var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
+var carousel = require('./modules/carousel.js');
+var pageTransition = require('./modules/page-transition.js');
 
 (function ($, oo, win) {
 
@@ -16,9 +18,19 @@ var projects = require('./modules/projects.js');
     	projects.init();
     }
 
+    // Init carousel module.
+    if ($('.js-carousel').length) {
+    	carousel.init();
+    }
+
+    // Init page transition module.
+    if ($('.js-page-transition').length) {
+        pageTransition.init();
+    }
+
 })(jQuery, oo, window);
 
-},{"../libs/oo.js":2,"./modules/dev-grid.js":3,"./modules/projects.js":4}],2:[function(require,module,exports){
+},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/page-transition.js":5,"./modules/projects.js":6}],2:[function(require,module,exports){
 /*
 * Declaration of the global namespace oo
 *  with 3 defaults namespace : utils, modules, plugins, libs
@@ -287,6 +299,24 @@ var oo = (function($, oo){
 module.exports = oo;
 
 },{}],3:[function(require,module,exports){
+var carousel = {
+
+	init: function init() {
+		console.log('hello');
+	},
+
+	bindUI: function bindUI() {
+
+	},
+
+	bindEvents: function bindEvents() {
+
+	}
+};
+
+//Export module
+module.exports = carousel;
+},{}],4:[function(require,module,exports){
 var devGrid = {
 
     ui: {},
@@ -313,7 +343,48 @@ var devGrid = {
 //Export module
 module.exports = devGrid;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+var pageTransition = {
+
+	ui: {},
+
+	init: function init() {
+		this.bindUI();
+		this.bindEvents();
+	}, 
+
+	bindUI: function bindUI() {
+		this.ui.$header = $('.js-header');
+		this.ui.$main   = $('.js-main');
+		this.ui.$link   = $('.js-page-transition');
+	},
+
+	bindEvents: function bindEvents() {
+		this.ui.$link.on('click', $.proxy(this.fadePage, this));
+	},
+
+	fadePage: function fadePage(e) {
+		// Prevent default;
+		e.preventDefault();
+
+		// Save URL.
+		var url = $(e.currentTarget).attr('href');
+
+		// Fade out main.
+		this.ui.$main.addClass('is-fade');
+
+		// Fade out header.
+		this.ui.$header.addClass('is-fade');
+
+		// Go to the URL.
+		setTimeout(function() {
+			window.location = url;
+		}, 250);
+	}
+};
+
+module.exports = pageTransition;
+},{}],6:[function(require,module,exports){
 // Require imagesloaded plugin.
 var imagesLoaded = require('imagesloaded');
 
@@ -437,7 +508,6 @@ var projects = {
     },
 
     pressKeyboard: function pressKeyboard(e) {
-
         // If user press arrow up, go prev.
         if (e.keyCode == 38) { e.preventDefault(); this.ui.$pagerPrev.trigger('click'); }
 
@@ -513,7 +583,7 @@ var projects = {
         // Scroll to the element.
         $("html, body").animate({ scrollTop: $el.offset().top }, this.timer, function() {
             // Add small setTimeout to prevent un-focus project list.
-            setTimeout(function() { self.isAnimate = false; }, 20);
+            setTimeout(function() { self.isAnimate = false; }, 100);
         });
 
         // Add class is-scrolled on the projects.
@@ -551,7 +621,7 @@ var projects = {
 //Export module
 module.exports = projects;
 
-},{"imagesloaded":5}],5:[function(require,module,exports){
+},{"imagesloaded":7}],7:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -888,7 +958,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":6,"wolfy87-eventemitter":7}],6:[function(require,module,exports){
+},{"eventie":8,"wolfy87-eventemitter":9}],8:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -972,7 +1042,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/

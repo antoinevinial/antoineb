@@ -2,6 +2,8 @@
 var oo       = require('../libs/oo.js');
 var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
+var carousel = require('./modules/carousel.js');
+var pageTransition = require('./modules/page-transition.js');
 
 (function ($, oo, win) {
 
@@ -13,6 +15,16 @@ var projects = require('./modules/projects.js');
 	// Init projects module.
     if ($('.js-projects').length) {
     	projects.init();
+    }
+
+    // Init carousel module.
+    if ($('.js-carousel').length) {
+    	carousel.init();
+    }
+
+    // Init page transition module.
+    if ($('.js-page-transition').length) {
+        pageTransition.init();
     }
 
 })(jQuery, oo, window);

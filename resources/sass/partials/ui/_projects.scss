@@ -4,7 +4,6 @@
 	&__item {
 		width: 50%;
 		padding: pxToRem(25px) pxToRem($gutter);
-		@include transition(all $transition-quick linear);
 	}
 
 	&__link {
@@ -91,6 +90,7 @@
 	&.is-scrolled {
 		.projects__item {
 			opacity: 0.5;
+			@include transition(all $transition-quick linear);
 
 			&.is-active {
 				opacity: 1;

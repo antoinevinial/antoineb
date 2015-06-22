@@ -121,7 +121,6 @@ var projects = {
     },
 
     pressKeyboard: function pressKeyboard(e) {
-
         // If user press arrow up, go prev.
         if (e.keyCode == 38) { e.preventDefault(); this.ui.$pagerPrev.trigger('click'); }
 
@@ -197,7 +196,7 @@ var projects = {
         // Scroll to the element.
         $("html, body").animate({ scrollTop: $el.offset().top }, this.timer, function() {
             // Add small setTimeout to prevent un-focus project list.
-            setTimeout(function() { self.isAnimate = false; }, 20);
+            setTimeout(function() { self.isAnimate = false; }, 100);
         });
 
         // Add class is-scrolled on the projects.

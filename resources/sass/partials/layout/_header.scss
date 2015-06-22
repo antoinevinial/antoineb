@@ -1,8 +1,10 @@
 .header {
-	margin: pxToRem(60px) 0 pxToRem(80px);
+	@extend %transitionEase;
+	margin: pxToRem(60px) 0 pxToRem(40px);
 	overflow: hidden;	
 
 	&__nav {
+		position: relative;
 		padding-top: pxToRem(40px);
 		border-top: 1px solid $border-color;
 	}
@@ -13,6 +15,7 @@
 	}
 
 	&__link {
+		@extend %transitionEase;
 		font-size: pxToRem(18px);
 		color: $color-grey;
 
@@ -20,5 +23,35 @@
 		&.is-active{
 			color: $color-font;
 		}
+	}
+
+	&__filters {
+		position: absolute;
+		top: pxToRem(40px);
+		right: 0;
+
+		&__btn {
+			background: none;
+			border: none;
+			border-radius: 0;
+			outline: none;
+			cursor: pointer;
+
+			path {
+				@extend %transitionEase;
+				fill: $color-grey-light;
+			}
+
+			&:hover {
+				path {
+					fill: white;
+				}
+			}
+		}
+	}
+
+	/* Modifiers */
+	&.is-fade {
+		opacity: 0;
 	}
 }

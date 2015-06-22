@@ -11,3 +11,21 @@ a {
 	color: inherit;
 	text-decoration: none;
 }
+
+
+/* Main container */
+
+.main {
+	@extend %transitionEase;
+
+	&.is-fade {
+		opacity: 0;
+	}
+}
+
+
+/* Transitions */
+
+%transitionEase {
+	@include transition(all $transition-quick ease);
+}
