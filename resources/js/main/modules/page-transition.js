@@ -4,6 +4,7 @@ var pageTransition = {
 
 	init: function init() {
 		this.bindUI();
+		this.pageLoad();
 		this.bindEvents();
 	}, 
 
@@ -15,6 +16,12 @@ var pageTransition = {
 
 	bindEvents: function bindEvents() {
 		this.ui.$link.on('click', $.proxy(this.fadePage, this));
+	},
+
+
+	pageLoad: function pageLoad() {
+		this.ui.$header.removeClass('is-fade');
+		this.ui.$main.removeClass('is-fade');
 	},
 
 	fadePage: function fadePage(e) {

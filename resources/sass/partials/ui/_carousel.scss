@@ -1,3 +1,86 @@
 .carousel{
+	position: relative;
 
+	&__img {
+	    display: block;
+	    max-width: 100%;
+	    margin: 0 auto;
+	}
+
+	&__wrapper {
+	    position: relative;
+	}
+
+	&__slider {
+		@extend %transitionEase;
+		width: 10000px;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	}
+
+	&__item {
+		@extend %transitionEase;
+	  	float: left;
+	  	height: 400px;
+	  	padding-right: pxToRem($gutter * 2);
+	  	list-style: none;
+
+	  	&--txt {
+	  		position: relative;
+	  		width: 300px;
+
+	  		.carousel__item__container {
+	  			position: absolute;
+	  			top: 0;
+	  			left: 0;
+	  			right: pxToRem($gutter * 2);
+	  			height: 100%;
+	  			padding: pxToRem(100px) pxToRem(60px);
+	  			background: black;
+	  		}
+	  	}
+	}
+
+	&__pager {
+		position: absolute;
+		top: pxToRem(-75px);
+		left: 45%;
+	}
+
+	&__btn {
+		padding: pxToRem(15px) pxToRem(25px);
+		background: none;
+		border: none;
+		border-radius: 0;
+		outline: none;
+		cursor: pointer;
+	}
+
+	/* Texte */
+
+	&__section + &__section {
+		margin-top: pxToRem(20px);
+	}
+
+	&__label {
+		display: block;
+		color: $color-grey;
+	}
+
+	&__value {
+		display: block;
+	}
+}
+
+@media screen and (max-height: 900px) {
+	.carousel {
+		&__item {
+			height: 400px;
+		}
+
+		.carousel__item__container {
+			padding: pxToRem(50px) pxToRem(30px);
+		}
+	}
 }

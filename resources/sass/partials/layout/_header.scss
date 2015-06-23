@@ -25,6 +25,46 @@
 		}
 	}
 
+	&__label {
+		display: inline-block;
+		margin-right: pxToRem(8px);
+	}
+
+	&__title {
+		@extend %InhardtRegular;
+		font-size: pxToRem(12px);
+		color: $color-grey;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+
+	&__back {
+		@extend %InhardtThin;
+		@extend %transitionEase;
+		position: absolute;
+		top: pxToRem(40px);
+		right: 0;
+		font-size: 18px;
+		color: $color-grey;
+
+		.icon {
+			margin-left: pxToRem(6px);
+
+			path {
+				fill: $color-grey;
+				@extend %transitionEase;
+			}
+		}
+
+		&:hover {
+			color: white;
+
+			path {
+				fill: white;
+			}
+		}
+	}
+
 	&__filters {
 		position: absolute;
 		top: pxToRem(40px);
@@ -53,5 +93,11 @@
 	/* Modifiers */
 	&.is-fade {
 		opacity: 0;
+	}
+
+	&--project {
+		.header__item {
+			margin-right: pxToRem(25px);
+		}
 	}
 }

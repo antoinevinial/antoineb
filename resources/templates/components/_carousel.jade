@@ -1,2 +1,24 @@
-mixin carousel
-	h1 Carousel
+mixin carousel(nbItems)
+	div.carousel.js-carousel
+		div.carousel__pager
+			button.carousel__btn.carousel__btn--prev.js-carousel-prev
+				+icon-arrow-left
+			button.carousel__btn.carousel__btn--next.js-carousel-next
+				+icon-arrow-right
+		div.carousel__wrapper
+			ul.carousel__slider.js-carousel-slider
+				li.carousel__item.carousel__item--txt.js-carousel-item
+					div.carousel__item__container
+						div.carousel__section
+							span.carousel__label For
+							span.carousel__value Vanderway, LA, E&B
+						div.carousel__section
+							span.carousel__label Since
+							span.carousel__value 2012 to 2015
+						div.carousel__section
+							span.carousel__label On
+							span.carousel__value Ergonomie, Experience, Interactive
+
+				- for (i = 0; i < nbItems; i++)
+					li.carousel__item.js-carousel-item
+						img.carousel__img.js-carousel-img(src="http://placehold.it/250x400")

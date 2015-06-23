@@ -5,6 +5,7 @@ body {
     color: $color-font;
 	background: $background-dark;
 	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
 }
 
 a {
