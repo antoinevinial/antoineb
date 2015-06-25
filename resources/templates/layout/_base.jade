@@ -4,12 +4,13 @@ html
 		include ../partials/_metas
 
 	body
-		include ../components/_base
-		include ../partials/_grid
-		include ../partials/_header
-		
-		main.main.is-fade.js-main
-			block content
-				
-		include ../partials/_scripts
+		div.site-container.js-site-container
+			include ../components/_base
+			include ../partials/_grid
+			include ../partials/_header
+			
+			main.main.is-fade.js-main
+				block content
+					
+			include ../partials/_scripts
 

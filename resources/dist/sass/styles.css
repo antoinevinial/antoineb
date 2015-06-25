@@ -488,7 +488,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     float: left;
     height: 400px;
     padding-right: 4rem;
-    list-style: none; }
+    cursor: pointer; }
     .carousel__item--txt {
       position: relative;
       width: 300px; }

@@ -24,7 +24,7 @@
 	  	float: left;
 	  	height: 400px;
 	  	padding-right: pxToRem($gutter * 2);
-	  	list-style: none;
+	  	cursor: pointer;
 
 	  	&--txt {
 	  		position: relative;

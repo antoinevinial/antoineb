@@ -1,9 +1,10 @@
 var carousel = {
 
 	ui: {},
+
 	left: 0,
-	isAnimate: false,
 	itemActive: 0,
+	isAnimate: false,
 
 	init: function init() {
 		this.bindUI();
@@ -22,6 +23,7 @@ var carousel = {
 	bindEvents: function bindEvents() {
 		this.ui.$next.on('click', $.proxy(this.goNext, this));
 		this.ui.$prev.on('click', $.proxy(this.goPrev, this));
+		this.ui.$items.on('click', $.proxy(this.goClick, this));
 		this.ui.$win.on('keydown', $.proxy(this.pressKeyboard, this));
 	},
 
@@ -39,10 +41,7 @@ var carousel = {
 
 	goNext: function goNext() {
 		// Check if we're not on the last item.
-		if (this.itemActive < this.ui.$items.length - 1 && !this.isAnimate) {
-			// Update itemActive variable.
-			this.itemActive++;
-
+		if (this.itemActive < this.ui.$items.length - 1) {
 			// Find the next item.
 			var $target = $(this.ui.$items[this.itemActive]);
 
@@ -57,17 +56,17 @@ var carousel = {
 
 			// Launch the is animated function.
             this.trackCSSAnimationEnd();
+
+        	// Update itemActive variable.
+			this.itemActive++;
 		}
 	},
 
 	goPrev: function goPrev() {
 		// Check if we're not on the last item.
-		if (this.itemActive > 0 && !this.isAnimate) {
-			// Update itemActive variable.
-			this.itemActive--;
-
+		if (this.itemActive > 0) {
 			// Find the next item.
-			var $target = $(this.ui.$items[this.itemActive]);
+			var $target = $(this.ui.$items[this.itemActive - 1]);
 
 			// Get the width of the next item.
 			var targetW = $target.outerWidth();
@@ -80,10 +79,42 @@ var carousel = {
 
 			// Launch the is animated function.
             this.trackCSSAnimationEnd();
+
+            // Update itemActive variable.
+			this.itemActive--;
 		}
 	},
 
+	goClick: function goClick(e) {
+		var index = $(e.currentTarget).index();
+
+		// Get the target item.
+		var $target = $(this.ui.$items[index]);
+
+		// Reset left position.
+		this.left = 0;
+
+		// Loop through each list item to get the left position.
+		for (i=0; i < index; i++) {
+			this.left -= $(this.ui.$items[i]).outerWidth();
+		}
+
+		// Translate carousel.
+		this.slideCarousel();
+
+		// Launch the is animated function.
+        this.trackCSSAnimationEnd();
+
+        // Update itemActive variable.
+		this.itemActive = index;
+	},
+
+	setHeightContainer: function setHeightContainer() {
+
+	},
+
 	slideCarousel: function slideCarousel() {
+		// Slide the carousel.
 		this.ui.$slider.css({
             "-webkit-transform":"translate(" + this.left + "px,0)",
             "-moz-transform":"translate(" + this.left + "px,0)",
@@ -100,8 +131,7 @@ var carousel = {
         this.isAnimate = true;
 
         // Track when CSS3 animation ends.
-        this.ui.$carousel.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(e) {
-
+        this.ui.$carousel.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function() {
             // Set the isAnimate variable to false.
             self.isAnimate = false;
         });
