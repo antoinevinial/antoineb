@@ -9,7 +9,17 @@ header.header.js-header
 								a.header__link.is-active(href="#") Antoine Barrès
 						li.header__item
 							a.header__link(href="#") Profile
-					- if (filters)
 						div.header__filters
 							button.header__filters__btn
 								+icon-filters
+							div.header__filters__modal
+								ul.header__filters__modal__list
+									li.header__filters__modal__item
+										a.header__filters__modal__link(href="#") #[+icon-interactive] Interactive
+									li.header__filters__modal__item
+										a.header__filters__modal__link(href="#") #[+icon-motion] Motion
+									li.header__filters__modal__item
+										a.header__filters__modal__link(href="#") #[+icon-illustration] Illustration
+									li.header__filters__modal__item
+										a.header__filters__modal__link(href="#") #[+icon-photography] Photography
+

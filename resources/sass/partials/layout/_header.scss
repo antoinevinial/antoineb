@@ -28,6 +28,7 @@
 	&__label {
 		display: inline-block;
 		margin-right: pxToRem(8px);
+		font-size: pxToRem(18px);
 	}
 
 	&__title {
@@ -69,8 +70,12 @@
 		position: absolute;
 		top: pxToRem(40px);
 		right: 0;
+		width: 100%;
 
 		&__btn {
+			float: right;
+			position: relative;
+			top: 6px;
 			background: none;
 			border: none;
 			border-radius: 0;
@@ -85,6 +90,43 @@
 			&:hover {
 				path {
 					fill: white;
+				}
+			}
+		}
+
+		&__modal {
+			position: absolute;
+			top: 0;
+			right: 0;
+
+			&__item {
+				float: left;
+				margin-right: pxToRem(30px);
+			}
+
+			&__link {
+				@extend %transitionEase;
+				font-size: pxToRem(12px);
+				letter-spacing: 1px;
+				color: $color-grey;
+
+				&:hover {
+					color: white;
+
+					.icon {
+						path {
+							fill: white;
+						}
+					}
+				}
+			}
+
+			.icon {
+				margin-right: pxToRem(5px);
+
+				path {
+					@extend %transitionEase;
+					fill: $color-grey;
 				}
 			}
 		}

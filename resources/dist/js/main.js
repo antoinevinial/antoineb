@@ -523,7 +523,7 @@ var imagesLoaded = require('imagesloaded');
 var projects = {
 
     ui: {},
-    timer: 300,
+    timer: 250,
     itemActive: 0,
 
     isAnimate: false,

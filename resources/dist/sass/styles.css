@@ -200,7 +200,8 @@ img.picture {
       color: #ffffff; }
   .header__label {
     display: inline-block;
-    margin-right: 0.5rem; }
+    margin-right: 0.5rem;
+    font-size: 1.125rem; }
   .header__title {
     font-size: 0.75rem;
     color: #828282;
@@ -223,8 +224,12 @@ img.picture {
   .header__filters {
     position: absolute;
     top: 2.5rem;
-    right: 0; }
+    right: 0;
+    width: 100%; }
     .header__filters__btn {
+      float: right;
+      position: relative;
+      top: 6px;
       background: none;
       border: none;
       border-radius: 0;
@@ -234,6 +239,25 @@ img.picture {
         fill: #787878; }
       .header__filters__btn:hover path {
         fill: white; }
+    .header__filters__modal {
+      position: absolute;
+      top: 0;
+      right: 0; }
+      .header__filters__modal__item {
+        float: left;
+        margin-right: 1.875rem; }
+      .header__filters__modal__link {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+        color: #828282; }
+        .header__filters__modal__link:hover {
+          color: white; }
+          .header__filters__modal__link:hover .icon path {
+            fill: white; }
+      .header__filters__modal .icon {
+        margin-right: 0.3125rem; }
+        .header__filters__modal .icon path {
+          fill: #828282; }
   .header.is-fade {
     opacity: 0; }
   .header--project .header__item {
@@ -333,7 +357,7 @@ a {
   opacity: 0; }
 
 /* Transitions */
-.header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .main, .carousel__slider, .carousel__item {
+.header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal .icon path, .main, .carousel__slider, .carousel__item {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -379,6 +403,22 @@ a {
 .icon-close {
   width: 9px;
   height: 9px; }
+
+.icon-interactive {
+  width: 12px;
+  height: 17px; }
+
+.icon-motion {
+  width: 15px;
+  height: 15px; }
+
+.icon-illustration {
+  width: 15px;
+  height: 14px; }
+
+.icon-photography {
+  width: 14px;
+  height: 16px; }
 
 /* Nav header */
 .nav-header {
