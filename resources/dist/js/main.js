@@ -669,9 +669,6 @@ var projects = {
     },
 
     goNext: function goNext() {
-        // If the window is already scrolling, do nothing.
-        // if (this.isAnimate) { return; }
-
         // If we're on the last item, stop the function.
         if (this.itemActive > this.ui.$items.length - 2) { return; }
 
@@ -690,9 +687,6 @@ var projects = {
     },
 
     goPrev: function goPrev() {
-        // If the window is already scrolling, do nothing.
-        if (this.isAnimate) { return; }
-
         // If we're on the last item, stop the function.
         if (this.itemActive == 0) { return; }
 
@@ -713,7 +707,7 @@ var projects = {
         this.isAnimate = true;
 
         // Scroll to the element.
-        $("html, body").animate({ scrollTop: $el.offset().top }, this.timer, function() {
+        $("html, body").stop().animate({ scrollTop: $el.offset().top }, this.timer, function() {
             // Add small setTimeout to prevent un-focus project list.
             setTimeout(function() { self.isAnimate = false; }, 100);
         });
