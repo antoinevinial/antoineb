@@ -86,7 +86,7 @@ var projects = {
 
     updatePager: function updatePager() {
         var self = this;
-        
+
         // For each pager items, adjust its height based on the image ratio.
         $.each(this.ui.$items, function() {
 
@@ -151,7 +151,7 @@ var projects = {
 
     goNext: function goNext() {
         // If the window is already scrolling, do nothing.
-        if (this.isAnimate) { return; }
+        // if (this.isAnimate) { return; }
 
         // If we're on the last item, stop the function.
         if (this.itemActive > this.ui.$items.length - 2) { return; }
@@ -219,7 +219,7 @@ var projects = {
             this.ui.$projects.removeClass('is-scrolled');
             this.ui.$pagerItems.removeClass('is-active');
         }
-        
+
         // Make pager sticky or not based on the scroll position.
         if (scrollTop >= this.stickyPosition.top) {
             this.ui.$pager.addClass('is-sticky');
