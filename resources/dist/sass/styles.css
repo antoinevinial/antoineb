@@ -182,6 +182,15 @@ img.picture {
 .append-4 {
   margin-right: 100%; }
 
+@media (max-width: 480px) {
+  [class*="cell-"] {
+    float: none;
+    padding: 0; }
+  .grid {
+    padding: 0 1.25rem; }
+  .row {
+    margin: 0; } }
+
 .header {
   margin: 3.75rem 0 2.5rem;
   overflow: hidden;
@@ -224,44 +233,70 @@ img.picture {
   .header__filters {
     position: absolute;
     top: 2.5rem;
-    right: 0;
-    width: 100%; }
-    .header__filters__btn {
-      float: right;
-      position: relative;
-      top: 6px;
-      background: none;
-      border: none;
-      border-radius: 0;
-      outline: none;
-      cursor: pointer; }
-      .header__filters__btn path {
-        fill: #787878; }
-      .header__filters__btn:hover path {
+    right: 0; }
+  .header__filters__btn {
+    float: right;
+    position: relative;
+    top: 6px;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer; }
+    .header__filters__btn path {
+      fill: #787878; }
+    .header__filters__btn:hover path {
+      fill: white; }
+  .header__filters__modal {
+    position: absolute;
+    top: 0;
+    right: 1.75rem;
+    display: none; }
+  .header__filters__modal__item {
+    float: left;
+    margin-right: 1.875rem; }
+  .header__filters__modal__link {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: #828282; }
+    .header__filters__modal__link .icon {
+      margin-right: 0.3125rem; }
+    .header__filters__modal__link:hover {
+      color: white; }
+      .header__filters__modal__link:hover .icon path {
         fill: white; }
-    .header__filters__modal {
-      position: absolute;
-      top: 0;
-      right: 0; }
-      .header__filters__modal__item {
-        float: left;
-        margin-right: 1.875rem; }
-      .header__filters__modal__link {
-        font-size: 0.75rem;
-        letter-spacing: 1px;
-        color: #828282; }
-        .header__filters__modal__link:hover {
-          color: white; }
-          .header__filters__modal__link:hover .icon path {
-            fill: white; }
-      .header__filters__modal .icon {
-        margin-right: 0.3125rem; }
-        .header__filters__modal .icon path {
-          fill: #828282; }
   .header.is-fade {
     opacity: 0; }
+  .header.is-open .header__filters {
+    width: 100%; }
+  .header.is-open .header__filters__modal {
+    display: block; }
   .header--project .header__item {
     margin-right: 1.5625rem; }
+  @media (max-width: 480px) {
+    .header {
+      margin-top: 2.5rem;
+      overflow: visible; }
+      .header__nav {
+        padding-top: 1.5rem; }
+      .header__item {
+        float: none;
+        display: inline-block; }
+      .header__filters {
+        top: 0.9375rem;
+        width: 100%; }
+      .header__filters__btn {
+        top: 0.625rem;
+        z-index: 2; }
+      .header__filters__modal {
+        right: 0rem;
+        width: 100%;
+        padding: 0.625rem 0;
+        background: #161616;
+        z-index: 1; }
+      .header__filters__modal__item {
+        float: none;
+        margin-bottom: 0.9375rem; } }
 
 @media print {
   /* ------------------------------------------------------------------ */
@@ -357,7 +392,7 @@ a {
   opacity: 0; }
 
 /* Transitions */
-.header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal .icon path, .main, .carousel__slider, .carousel__item {
+.header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -509,6 +544,13 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     transition: all 0.25s linear; }
     .projects.is-scrolled .projects__item.is-active {
       opacity: 1; }
+  @media (max-width: 480px) {
+    .projects__pager {
+      display: none; }
+    .projects__item {
+      position: static !important;
+      width: 100%;
+      padding: 0rem 0rem 2.5rem; } }
 
 .carousel {
   position: relative;
@@ -584,6 +626,9 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     display: block;
     width: 100%;
     background-color: rgba(142, 239, 186, 0.5); }
+  @media (max-width: 480px) {
+    .dev-grid {
+      display: none; } }
 
 .dev-grid__btn {
   display: inline-block;
@@ -598,6 +643,9 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   font-family: inherit;
   color: black;
   border: none; }
+  @media (max-width: 480px) {
+    .dev-grid__btn {
+      display: none; } }
 
 
 /*# sourceMappingURL=maps/styles.css.map */

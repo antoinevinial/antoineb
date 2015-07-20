@@ -1,7 +1,7 @@
 .header {
 	@extend %transitionEase;
 	margin: pxToRem(60px) 0 pxToRem(40px);
-	overflow: hidden;	
+	overflow: hidden;
 
 	&__nav {
 		position: relative;
@@ -70,63 +70,58 @@
 		position: absolute;
 		top: pxToRem(40px);
 		right: 0;
-		width: 100%;
+	}
 
-		&__btn {
-			float: right;
-			position: relative;
-			top: 6px;
-			background: none;
-			border: none;
-			border-radius: 0;
-			outline: none;
-			cursor: pointer;
+	&__filters__btn {
+		float: right;
+		position: relative;
+		top: 6px;
+		background: none;
+		border: none;
+		border-radius: 0;
+		outline: none;
+		cursor: pointer;
 
-			path {
-				@extend %transitionEase;
-				fill: $color-grey-light;
-			}
-
-			&:hover {
-				path {
-					fill: white;
-				}
-			}
+		path {
+			@extend %transitionEase;
+			fill: $color-grey-light;
 		}
 
-		&__modal {
-			position: absolute;
-			top: 0;
-			right: 0;
-
-			&__item {
-				float: left;
-				margin-right: pxToRem(30px);
+		&:hover {
+			path {
+				fill: white;
 			}
+		}
+	}
 
-			&__link {
-				@extend %transitionEase;
-				font-size: pxToRem(12px);
-				letter-spacing: 1px;
-				color: $color-grey;
+	&__filters__modal {
+		position: absolute;
+		top: 0;
+		right: pxToRem(28px);
+		display: none;
+	}
 
-				&:hover {
-					color: white;
+	&__filters__modal__item {
+		float: left;
+		margin-right: pxToRem(30px);
+	}
 
-					.icon {
-						path {
-							fill: white;
-						}
-					}
-				}
-			}
+	&__filters__modal__link {
+		@extend %transitionEase;
+		font-size: pxToRem(12px);
+		letter-spacing: 1px;
+		color: $color-grey;
+
+		.icon {
+			margin-right: pxToRem(5px);
+		}
+
+		&:hover {
+			color: white;
 
 			.icon {
-				margin-right: pxToRem(5px);
-
 				path {
-					@extend %transitionEase;
-					fill: $color-grey;
+					fill: white;
 				}
 			}
 		}
@@ -137,9 +132,56 @@
 		opacity: 0;
 	}
 
+	&.is-open {
+		.header__filters {
+			width: 100%;
+		}
+
+		.header__filters__modal {
+			display: block;
+		}
+	}
+
 	&--project {
 		.header__item {
 			margin-right: pxToRem(25px);
+		}
+	}
+
+	@include mobile {
+		margin-top: pxToRem(40px);
+		overflow: visible;
+
+		&__nav {
+			padding-top: pxToRem(24px);
+		}
+
+		&__item {
+			float: none;
+			display: inline-block;
+		}
+
+		&__filters {
+			top: pxToRem(15px);
+			width: 100%;
+		}
+
+		&__filters__btn {
+			top: pxToRem(10px);
+			z-index: 2;
+		}
+
+		&__filters__modal {
+			right: pxToRem(0px);
+			width: 100%;
+			padding: pxToRem(10px) 0;
+			background: $background-dark;
+			z-index: 1;
+		}
+
+		&__filters__modal__item {
+			float: none;
+			margin-bottom: pxToRem(15px);
 		}
 	}
 }

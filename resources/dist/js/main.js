@@ -4,6 +4,7 @@ var oo       = require('../libs/oo.js');
 var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
+var filters  = require('./modules/filters.js');
 var pageTransition = require('./modules/page-transition.js');
 
 (function ($, oo, win) {
@@ -28,9 +29,14 @@ var pageTransition = require('./modules/page-transition.js');
         pageTransition.init();
     }
 
+    // Init filters module.
+    if ($('.js-header-filters-btn').length) {
+        filters.init();
+    }
+
 })(jQuery, oo, window);
 
-},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/page-transition.js":5,"./modules/projects.js":6}],2:[function(require,module,exports){
+},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/filters.js":5,"./modules/page-transition.js":6,"./modules/projects.js":7}],2:[function(require,module,exports){
 /*
 * Declaration of the global namespace oo
 *  with 3 defaults namespace : utils, modules, plugins, libs
@@ -469,6 +475,32 @@ var devGrid = {
 module.exports = devGrid;
 
 },{}],5:[function(require,module,exports){
+var filters = {
+
+	ui: {},
+
+	init: function init() {
+		this.bindUI();
+		this.bindEvents();
+	},
+
+	bindUI: function bindUI() {
+		this.ui.$header = $('.js-header');
+		this.ui.$btn    = this.ui.$header.find('.js-header-filters-btn');
+	},
+
+	bindEvents: function bindEvents() {
+		this.ui.$btn.on('click', $.proxy(this.toggleFilters, this));
+	},
+
+	toggleFilters: function toggleFilters() {
+		this.ui.$header.toggleClass('is-open');
+	}
+
+};
+
+module.exports = filters;
+},{}],6:[function(require,module,exports){
 var pageTransition = {
 
 	ui: {},
@@ -516,7 +548,7 @@ var pageTransition = {
 };
 
 module.exports = pageTransition;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Require imagesloaded plugin.
 var imagesLoaded = require('imagesloaded');
 
@@ -747,7 +779,7 @@ var projects = {
 //Export module
 module.exports = projects;
 
-},{"imagesloaded":7}],7:[function(require,module,exports){
+},{"imagesloaded":8}],8:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -1084,7 +1116,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":8,"wolfy87-eventemitter":9}],8:[function(require,module,exports){
+},{"eventie":9,"wolfy87-eventemitter":10}],9:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -1168,7 +1200,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
