@@ -5,6 +5,7 @@ var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
 var filters  = require('./modules/filters.js');
+var profile  = require('./modules/profile.js');
 var pageTransition = require('./modules/page-transition.js');
 
 (function ($, oo, win) {
@@ -34,9 +35,14 @@ var pageTransition = require('./modules/page-transition.js');
         filters.init();
     }
 
+    // Init profile module.
+    if ($('.js-profile').length) {
+        profile.init();
+    }
+
 })(jQuery, oo, window);
 
-},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/filters.js":5,"./modules/page-transition.js":6,"./modules/projects.js":7}],2:[function(require,module,exports){
+},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/filters.js":5,"./modules/page-transition.js":6,"./modules/profile.js":7,"./modules/projects.js":8}],2:[function(require,module,exports){
 /*
 * Declaration of the global namespace oo
 *  with 3 defaults namespace : utils, modules, plugins, libs
@@ -549,6 +555,41 @@ var pageTransition = {
 
 module.exports = pageTransition;
 },{}],7:[function(require,module,exports){
+var profile = {
+
+	ui: {},
+
+	init: function init() {
+		this.bindUI();
+		this.bindEvents();
+	},
+
+	bindUI: function bindUI() {
+		this.ui.$body    = $('body');
+		this.ui.$profile = $('.js-profile');
+		this.ui.$toggle  = $('.js-profile-toggle');
+	},
+
+	bindEvents: function bindEvents() {
+		this.ui.$toggle.on('click', $.proxy(this.toggleProfile, this));
+	},
+
+	toggleProfile: function toggleProfile(e) {
+		// Prevent default.
+		e.preventDefault();
+
+		// Show/hide profile layer.
+		this.ui.$profile.toggleClass('is-hidden');
+
+		// Disable scroll for body.
+		this.ui.$body.toggleClass('no-scroll');
+	}
+
+};
+
+//Export module
+module.exports = profile;
+},{}],8:[function(require,module,exports){
 // Require imagesloaded plugin.
 var imagesLoaded = require('imagesloaded');
 
@@ -779,7 +820,7 @@ var projects = {
 //Export module
 module.exports = projects;
 
-},{"imagesloaded":8}],8:[function(require,module,exports){
+},{"imagesloaded":9}],9:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -1116,7 +1157,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":9,"wolfy87-eventemitter":10}],9:[function(require,module,exports){
+},{"eventie":10,"wolfy87-eventemitter":11}],10:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -1200,7 +1241,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/

@@ -1,6 +1,6 @@
 .header {
 	@extend %transitionEase;
-	margin: pxToRem(60px) 0 pxToRem(40px);
+	padding: pxToRem(60px) 0 pxToRem(40px);
 	overflow: hidden;
 
 	&__nav {
@@ -98,7 +98,9 @@
 		position: absolute;
 		top: 0;
 		right: pxToRem(28px);
-		display: none;
+		opacity: 0;
+		pointer-events: none;
+		@include transition(all 0.25s ease);
 	}
 
 	&__filters__modal__item {
@@ -138,7 +140,8 @@
 		}
 
 		.header__filters__modal {
-			display: block;
+			opacity: 1;
+			pointer-events: auto;
 		}
 	}
 

@@ -23,6 +23,10 @@ img.picture {
     display:block;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 /* Alignments */
 .float-right  { float:right;}
 .float-left   { float:left;}

@@ -71,8 +71,7 @@ http://stackoverflow.com/questions/2991623/make-background-size-work-in-ie
 -------------------------------------------*/
 .clearfix:before, .clearfix:after {
   content: " ";
-  display: table; }
-.clearfix:after {
+  display: table;
   clear: both; }
 
 /* ------------------------------------------------------------------ */
@@ -94,6 +93,9 @@ http://stackoverflow.com/questions/2991623/make-background-size-work-in-ie
 
 img.picture {
   display: block; }
+
+.no-scroll {
+  overflow: hidden; }
 
 /* Alignments */
 .float-right {
@@ -192,7 +194,7 @@ img.picture {
     margin: 0; } }
 
 .header {
-  margin: 3.75rem 0 2.5rem;
+  padding: 3.75rem 0 2.5rem;
   overflow: hidden;
   /* Modifiers */ }
   .header__nav {
@@ -251,7 +253,9 @@ img.picture {
     position: absolute;
     top: 0;
     right: 1.75rem;
-    display: none; }
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease; }
   .header__filters__modal__item {
     float: left;
     margin-right: 1.875rem; }
@@ -270,7 +274,8 @@ img.picture {
   .header.is-open .header__filters {
     width: 100%; }
   .header.is-open .header__filters__modal {
-    display: block; }
+    opacity: 1;
+    pointer-events: auto; }
   .header--project .header__item {
     margin-right: 1.5625rem; }
   @media (max-width: 480px) {
@@ -607,6 +612,32 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   .carousel .carousel__item__container {
     padding: 3.125rem 1.875rem; } }
 
+.profile {
+  position: fixed;
+  top: 180px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 90px 0;
+  z-index: 10;
+  background: #090909;
+  overflow: scroll;
+  transition: all 0.25s ease;
+  /* Modifiers */ }
+  .profile__hr {
+    width: 60px;
+    height: 1px;
+    margin: 40px 0 50px;
+    border: none;
+    background: #454545; }
+  .profile__list {
+    margin-top: 6.25rem; }
+  .profile__link {
+    color: #828282; }
+  .profile.is-hidden {
+    opacity: 0;
+    pointer-events: none; }
+
 .dev-grid {
   display: none;
   position: fixed;
@@ -614,7 +645,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 9;
+  z-index: 11;
   pointer-events: none; }
   .dev-grid.is-visible {
     display: block; }

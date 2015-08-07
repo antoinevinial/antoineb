@@ -4,6 +4,7 @@ var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
 var filters  = require('./modules/filters.js');
+var profile  = require('./modules/profile.js');
 var pageTransition = require('./modules/page-transition.js');
 
 (function ($, oo, win) {
@@ -31,6 +32,11 @@ var pageTransition = require('./modules/page-transition.js');
     // Init filters module.
     if ($('.js-header-filters-btn').length) {
         filters.init();
+    }
+
+    // Init profile module.
+    if ($('.js-profile').length) {
+        profile.init();
     }
 
 })(jQuery, oo, window);
