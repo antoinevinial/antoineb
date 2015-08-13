@@ -613,30 +613,18 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     padding: 3.125rem 1.875rem; } }
 
 .profile {
-  position: fixed;
-  top: 180px;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  padding: 90px 0;
-  z-index: 10;
+  padding: 80px 0;
   background: #090909;
-  overflow: scroll;
-  transition: all 0.25s ease;
-  /* Modifiers */ }
+  overflow: hidden; }
   .profile__hr {
+    display: block;
     width: 60px;
     height: 1px;
-    margin: 40px 0 50px;
-    border: none;
-    background: #454545; }
+    margin: 40px 0;
+    background: #454545;
+    border: none; }
   .profile__list {
-    margin-top: 6.25rem; }
-  .profile__link {
-    color: #828282; }
-  .profile.is-hidden {
-    opacity: 0;
-    pointer-events: none; }
+    margin-top: 100px; }
 
 .dev-grid {
   display: none;
