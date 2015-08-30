@@ -316,10 +316,14 @@ var carousel = {
 	init: function init() {
 		this.bindUI();
 		this.bindEvents();
+		this.checkMobileDesktop();
+		this.slideCarousel();
 	},
 
 	bindUI: function bindUI() {
 		this.ui.$win      = $(window);
+		this.ui.$body     = $('body');
+		this.ui.$header   = $('.js-header');
 		this.ui.$carousel = $('.js-carousel');
 		this.ui.$slider   = this.ui.$carousel.find('.js-carousel-slider');
 		this.ui.$items    = this.ui.$carousel.find('.js-carousel-item');
@@ -332,6 +336,23 @@ var carousel = {
 		this.ui.$prev.on('click', $.proxy(this.goPrev, this));
 		this.ui.$items.on('click', $.proxy(this.goClick, this));
 		this.ui.$win.on('keydown', $.proxy(this.pressKeyboard, this));
+		this.ui.$win.on('resize', $.proxy(this.checkMobileDesktop, this));
+	},
+
+	checkMobileDesktop: function checkMobileDesktop() {
+		// Check if we're on mobile.
+		if (window.outerWidth < 480) {
+			// Set width on items.
+			this.ui.$items.outerWidth(window.outerWidth);
+		} else {
+			// Reset items and slider width.
+			this.ui.$items.outerWidth('auto');
+		}
+
+		// Reset carousel.
+		this.itemActive = 0;
+		this.left = 0;
+		this.slideCarousel();
 	},
 
 	pressKeyboard: function pressKeyboard(e) {
@@ -358,14 +379,14 @@ var carousel = {
 			// Update left variable.
 			this.left -= targetW;
 
-			// Translate carousel.
-			this.slideCarousel();
-
 			// Launch the is animated function.
             this.trackCSSAnimationEnd();
 
         	// Update itemActive variable.
 			this.itemActive++;
+
+			// Translate carousel.
+			this.slideCarousel();
 		}
 	},
 
@@ -381,14 +402,14 @@ var carousel = {
 			// Update left variable.
 			this.left += targetW;
 
-			// Translate carousel.
-			this.slideCarousel();
-
 			// Launch the is animated function.
             this.trackCSSAnimationEnd();
 
             // Update itemActive variable.
 			this.itemActive--;
+
+			// Translate carousel.
+			this.slideCarousel();
 		}
 	},
 
@@ -406,18 +427,14 @@ var carousel = {
 			this.left -= $(this.ui.$items[i]).outerWidth();
 		}
 
-		// Translate carousel.
-		this.slideCarousel();
-
 		// Launch the is animated function.
         this.trackCSSAnimationEnd();
 
         // Update itemActive variable.
 		this.itemActive = index;
-	},
 
-	setHeightContainer: function setHeightContainer() {
-
+		// Translate carousel.
+		this.slideCarousel();
 	},
 
 	slideCarousel: function slideCarousel() {
@@ -429,6 +446,23 @@ var carousel = {
             "-o-transform":"translate(" + this.left + "px,0)",
             "transform":"translate(" + this.left + "px,0)"
         });
+
+        // Set height on the slider.
+        this.setHeightBody();
+	},
+
+	setHeightBody: function setHeightBody() {
+		// Get header height.
+		// var headerH = this.ui.$header.outerHeight();
+
+		// Get height of the active item.
+		// var sliderH = $(this.ui.$items[this.itemActive]).outerHeight();
+
+		// Add no scroll class on body.
+		// this.ui.$body.addClass('no-scroll');
+
+		// Set height on the slider.
+		// this.ui.$body.outerHeight(headerH + sliderH);
 	},
 
 	trackCSSAnimationEnd: function trackCSSAnimationEnd() {

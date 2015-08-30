@@ -1,5 +1,6 @@
 .carousel{
 	position: relative;
+	margin-bottom: 50px;
 
 	&__img {
 	    display: block;
@@ -13,16 +14,16 @@
 
 	&__slider {
 		@extend %transitionEase;
-		width: 10000px;
+		width: 100000px;
 	    margin: 0;
 	    padding: 0;
-	    overflow: hidden;
 	}
 
 	&__item {
 		@extend %transitionEase;
-	  	float: left;
-	  	height: 400px;
+		display: inline-block;
+		vertical-align: top;
+		margin-right: -4px;
 	  	padding-right: pxToRem($gutter * 2);
 	  	cursor: pointer;
 
@@ -31,12 +32,6 @@
 	  		width: 300px;
 
 	  		.carousel__item__container {
-	  			position: absolute;
-	  			top: 0;
-	  			left: 0;
-	  			right: pxToRem($gutter * 2);
-	  			height: 100%;
-	  			padding: pxToRem(100px) pxToRem(60px);
 	  			background: black;
 	  		}
 	  	}
@@ -75,12 +70,35 @@
 
 @media screen and (max-height: 900px) {
 	.carousel {
-		&__item {
-			height: 400px;
-		}
-
 		.carousel__item__container {
 			padding: pxToRem(50px) pxToRem(30px);
+		}
+	}
+}
+
+@include mobile {
+	.carousel {
+		&__item {
+			padding: 0 2rem;
+		}
+
+		&__pager {
+			position: static;
+			margin-bottom: 1rem;
+			padding: 0 2rem;
+			overflow: hidden;
+		}
+
+		&__btn {
+			&--prev {
+				float: left;
+				padding-left: 0;
+			}
+
+			&--next {
+				float: right;
+				padding-right: 0;
+			}
 		}
 	}
 }

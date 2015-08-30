@@ -1,11 +1,16 @@
 body {
 	@extend %InhardtRegular;
+	min-height: 100vh;
 	font-size:#{$base-font-size};
     line-height:#{$base-line-height};
     color: $color-font;
 	background: $background-dark;
 	-webkit-font-smoothing: antialiased;
 	overflow-x: hidden;
+
+	&.no-scroll {
+		overflow: scroll;
+	}
 }
 
 a {

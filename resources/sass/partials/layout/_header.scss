@@ -186,5 +186,13 @@
 			float: none;
 			margin-bottom: pxToRem(15px);
 		}
+
+		&__back {
+			top: 1.6rem;
+			
+			&__label {
+				display: none;
+			}
+		}
 	}
 }

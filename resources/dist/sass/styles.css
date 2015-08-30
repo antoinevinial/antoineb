@@ -301,7 +301,11 @@ img.picture {
         z-index: 1; }
       .header__filters__modal__item {
         float: none;
-        margin-bottom: 0.9375rem; } }
+        margin-bottom: 0.9375rem; }
+      .header__back {
+        top: 1.6rem; }
+        .header__back__label {
+          display: none; } }
 
 @media print {
   /* ------------------------------------------------------------------ */
@@ -381,12 +385,15 @@ table {
   border-spacing: 0; }
 
 body {
+  min-height: 100vh;
   font-size: 16px;
   line-height: 28px;
   color: #ffffff;
   background: #161616;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden; }
+  body.no-scroll {
+    overflow: scroll; }
 
 a {
   color: inherit;
@@ -559,6 +566,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
 
 .carousel {
   position: relative;
+  margin-bottom: 50px;
   /* Texte */ }
   .carousel__img {
     display: block;
@@ -567,25 +575,19 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   .carousel__wrapper {
     position: relative; }
   .carousel__slider {
-    width: 10000px;
+    width: 100000px;
     margin: 0;
-    padding: 0;
-    overflow: hidden; }
+    padding: 0; }
   .carousel__item {
-    float: left;
-    height: 400px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: -4px;
     padding-right: 4rem;
     cursor: pointer; }
     .carousel__item--txt {
       position: relative;
       width: 300px; }
       .carousel__item--txt .carousel__item__container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 4rem;
-        height: 100%;
-        padding: 6.25rem 3.75rem;
         background: black; }
   .carousel__pager {
     position: absolute;
@@ -607,10 +609,23 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     display: block; }
 
 @media screen and (max-height: 900px) {
-  .carousel__item {
-    height: 400px; }
   .carousel .carousel__item__container {
     padding: 3.125rem 1.875rem; } }
+
+@media (max-width: 480px) {
+  .carousel__item {
+    padding: 0 2rem; }
+  .carousel__pager {
+    position: static;
+    margin-bottom: 1rem;
+    padding: 0 2rem;
+    overflow: hidden; }
+  .carousel__btn--prev {
+    float: left;
+    padding-left: 0; }
+  .carousel__btn--next {
+    float: right;
+    padding-right: 0; } }
 
 .profile {
   padding: 80px 0;
