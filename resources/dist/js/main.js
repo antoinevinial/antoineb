@@ -317,6 +317,7 @@ var carousel = {
 		this.bindUI();
 		this.bindEvents();
 		this.checkMobileDesktop();
+		this.setCarouselHeight();
 		this.slideCarousel();
 	},
 
@@ -324,6 +325,7 @@ var carousel = {
 		this.ui.$win      = $(window);
 		this.ui.$body     = $('body');
 		this.ui.$header   = $('.js-header');
+		this.ui.$main     = $('.js-main');
 		this.ui.$carousel = $('.js-carousel');
 		this.ui.$slider   = this.ui.$carousel.find('.js-carousel-slider');
 		this.ui.$items    = this.ui.$carousel.find('.js-carousel-item');
@@ -332,6 +334,7 @@ var carousel = {
 	},
 
 	bindEvents: function bindEvents() {
+		this.ui.$win.on('load', $.proxy(this.setCarouselHeight, this));
 		this.ui.$next.on('click', $.proxy(this.goNext, this));
 		this.ui.$prev.on('click', $.proxy(this.goPrev, this));
 		this.ui.$items.on('click', $.proxy(this.goClick, this));
@@ -353,6 +356,15 @@ var carousel = {
 		this.itemActive = 0;
 		this.left = 0;
 		this.slideCarousel();
+	},
+
+	setCarouselHeight: function setCarouselHeight() {
+		// Set a min-height on the slider.
+		this.ui.$main.css('min-height', this.ui.$win.outerHeight() - this.ui.$header.outerHeight());
+
+		// Get current item height.
+		console.log($(this.ui.$items[this.itemActive]).outerHeight());
+
 	},
 
 	pressKeyboard: function pressKeyboard(e) {
@@ -481,6 +493,7 @@ var carousel = {
 
 //Export module
 module.exports = carousel;
+
 },{}],4:[function(require,module,exports){
 var devGrid = {
 
@@ -606,12 +619,16 @@ var projects = {
     bindUI: function bindUI() {
         this.ui.$win      = $(window);
         this.ui.$projects = $('.js-projects');
+        this.ui.$links    = $('.js-header-link');
         this.ui.$list     = this.ui.$projects.find('.js-projects-list');
         this.ui.$items    = this.ui.$projects.find('.js-projects-item');
     },
 
     bindEvents: function bindEvents() {
         var self = this;
+
+        // Filter projects.
+        this.ui.$links.on('click', $.proxy(this.filterItems, this));
 
         // When an image is loaded, adjust isotope layout.
         this.ui.$list.imagesLoaded().progress( function() {
@@ -807,6 +824,20 @@ var projects = {
             this.ui.$pager.removeClass('is-sticky');
             this.ui.$pager.css({ 'left' : '100%' });
         }
+    },
+
+    filterItems: function filterItems(e) {
+        // Prevent default.
+        e.preventDefault();
+
+        // Get href on click element.
+        var href = $(e.currentTarget).attr('href');
+
+        // Get target class name.
+        var target = '.' + href;
+
+        // Filter list.
+        this.ui.$list.isotope({ filter: target });
     }
 };
 

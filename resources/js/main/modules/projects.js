@@ -21,12 +21,16 @@ var projects = {
     bindUI: function bindUI() {
         this.ui.$win      = $(window);
         this.ui.$projects = $('.js-projects');
+        this.ui.$links    = $('.js-header-link');
         this.ui.$list     = this.ui.$projects.find('.js-projects-list');
         this.ui.$items    = this.ui.$projects.find('.js-projects-item');
     },
 
     bindEvents: function bindEvents() {
         var self = this;
+
+        // Filter projects.
+        this.ui.$links.on('click', $.proxy(this.filterItems, this));
 
         // When an image is loaded, adjust isotope layout.
         this.ui.$list.imagesLoaded().progress( function() {
@@ -222,6 +226,20 @@ var projects = {
             this.ui.$pager.removeClass('is-sticky');
             this.ui.$pager.css({ 'left' : '100%' });
         }
+    },
+
+    filterItems: function filterItems(e) {
+        // Prevent default.
+        e.preventDefault();
+
+        // Get href on click element.
+        var href = $(e.currentTarget).attr('href');
+
+        // Get target class name.
+        var target = '.' + href;
+
+        // Filter list.
+        this.ui.$list.isotope({ filter: target });
     }
 };
 

@@ -29,9 +29,10 @@
 
 	  	&--txt {
 	  		position: relative;
-	  		width: 300px;
 
 	  		.carousel__item__container {
+	  			min-height: 400px;
+	  			padding: 20px;
 	  			background: black;
 	  		}
 	  	}

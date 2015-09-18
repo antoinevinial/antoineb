@@ -23,6 +23,7 @@ a {
 
 .main {
 	@extend %transitionEase;
+	overflow: hidden;
 
 	&.is-fade {
 		opacity: 0;

@@ -400,8 +400,10 @@ a {
   text-decoration: none; }
 
 /* Main container */
-.main.is-fade {
-  opacity: 0; }
+.main {
+  overflow: hidden; }
+  .main.is-fade {
+    opacity: 0; }
 
 /* Transitions */
 .header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item {
@@ -585,9 +587,10 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     padding-right: 4rem;
     cursor: pointer; }
     .carousel__item--txt {
-      position: relative;
-      width: 300px; }
+      position: relative; }
       .carousel__item--txt .carousel__item__container {
+        min-height: 400px;
+        padding: 20px;
         background: black; }
   .carousel__pager {
     position: absolute;
