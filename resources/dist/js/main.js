@@ -604,6 +604,7 @@ var projects = {
     ui: {},
     timer: 250,
     itemActive: 0,
+    isotopeClasses: ['interactive', 'motion', 'photography', 'illustration'],
 
     isAnimate: false,
     isAlreadyPress: false,
@@ -650,7 +651,8 @@ var projects = {
     },
 
     buildPager: function buildPager() {
-        var pagerHTML = '';
+        var self = this,
+            pagerHTML = '';
 
         // Starting pager html markup.
         pagerHTML += '<div class="projects__pager js-projects-pager">';
@@ -659,7 +661,21 @@ var projects = {
 
         // For each projects item, create a pager-item.
         $.each(this.ui.$items, function() {
-            pagerHTML += '<li class="projects__pager__item js-projects-pager-item"></li>';
+            var itemClasses = $(this).attr('class').split(/\s+/),
+                targetClass = '';
+
+            // Loop through classes
+            for (var i = 0; i < itemClasses.length; i++) {
+                // Loop through global classes.
+                for (var j = 0; j < self.isotopeClasses.length; j++) {
+                    // If we find the same class, add it to the pager item.
+                    if (itemClasses[i] == self.isotopeClasses[j]) {
+                        targetClass = itemClasses[i];
+                    }
+                }
+            }
+
+            pagerHTML += '<li class="projects__pager__item js-projects-pager-item ' + targetClass + '"></li>';
         });
 
         // Close the pager.
@@ -762,6 +778,17 @@ var projects = {
             this.itemActive++;
         }
 
+        for (i = this.itemActive; i < this.ui.$items.length; i++) {
+            // Check if the item is visible;
+            var isVisible = $(this.ui.$items[i]).is(':visible');
+            
+            // If we find the visible element, update itemActive variable and return.
+            if (isVisible) { 
+                this.itemActive = i;
+                break;                
+            }
+        }
+
         // Get the target item.
         var $target = $(this.ui.$items[this.itemActive]);
 
@@ -773,14 +800,29 @@ var projects = {
         // If we're on the last item, stop the function.
         if (this.itemActive == 0) { return; }
 
-        // Update itemActive variable.
-        this.itemActive--;
+        var i = this.itemActive;
+        while(i--) {
+            var isVisible = $(this.ui.$items[i]).is(':visible');
+
+            // If we find the visible element, update itemActive variable and return.
+            if (isVisible) { 
+                this.itemActive = i;
+                break;                
+            }
+        }
+
+        // // Update itemActive variable.
+        // this.itemActive--;
 
         // Get the target item.
         var $target = $(this.ui.$items[this.itemActive]);
 
         // Scroll to the target position.
         this.scrollTo($target);
+    },
+
+    checkVisibleItem: function checkVisibleItem() {
+
     },
 
     scrollTo: function scrollTo($el) {
@@ -836,8 +878,14 @@ var projects = {
         // Get target class name.
         var target = '.' + href;
 
-        // Filter list.
+        // Filter list items.
         this.ui.$list.isotope({ filter: target });
+
+        // Filter pager items.
+        this.ui.$pagerList.isotope({ filter: target });
+
+        // Reset item active variable.
+        this.itemActive = 0;
     }
 };
 
