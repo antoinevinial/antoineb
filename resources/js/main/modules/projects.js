@@ -11,8 +11,6 @@ var projects = {
     isAnimate: false,
     isAlreadyPress: false,
 
-    stickyPosition: {},
-
     init: function init() {
         this.bindUI();
         this.buildGrid();
@@ -43,6 +41,9 @@ var projects = {
             self.buildPager();
             self.stickyPager();
         });
+
+        // Replace pager when resize window.
+        this.ui.$win.on('resize', $.proxy(this.stickyPager, this));
     },
 
     buildGrid: function buildGrid() {
@@ -132,10 +133,6 @@ var projects = {
         this.ui.$pagerItems.on('click', $.proxy(this.goClick, this));
         this.stickyPager();
 
-        // Save sticky top and left position.
-        this.stickyPosition.top  = this.ui.$pager.offset().top;
-        this.stickyPosition.left = this.ui.$pager.offset().left;
-
         // Bind scroll to turn pager into sticky one.
         this.ui.$win.on('scroll', $.proxy(this.stickyPager, this));
     },
@@ -223,10 +220,6 @@ var projects = {
         this.scrollTo($target);
     },
 
-    checkVisibleItem: function checkVisibleItem() {
-
-    },
-
     scrollTo: function scrollTo($el) {
         var self = this;
 
@@ -261,9 +254,12 @@ var projects = {
         }
 
         // Make pager sticky or not based on the scroll position.
-        if (scrollTop >= this.stickyPosition.top) {
+        if (scrollTop >= this.ui.$list.offset().top) {
+            // Calculate offset.
+            var offset = this.ui.$list.offset().left + this.ui.$list.outerWidth();
+
             this.ui.$pager.addClass('is-sticky');
-            this.ui.$pager.css({ 'left' : this.stickyPosition.left });
+            this.ui.$pager.css({ 'left' : offset });
         } else {
             this.ui.$pager.removeClass('is-sticky');
             this.ui.$pager.css({ 'left' : '100%' });
