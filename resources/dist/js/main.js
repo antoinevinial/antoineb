@@ -329,8 +329,8 @@ var carousel = {
 		this.ui.$carousel = $('.js-carousel');
 		this.ui.$slider   = this.ui.$carousel.find('.js-carousel-slider');
 		this.ui.$items    = this.ui.$carousel.find('.js-carousel-item');
-		this.ui.$next     = this.ui.$carousel.find('.js-carousel-next');
-		this.ui.$prev     = this.ui.$carousel.find('.js-carousel-prev');
+		this.ui.$next     = $('.js-carousel-next');
+		this.ui.$prev     = $('.js-carousel-prev');
 	},
 
 	bindEvents: function bindEvents() {
@@ -344,11 +344,9 @@ var carousel = {
 
 	checkMobileDesktop: function checkMobileDesktop() {
 		// Check if we're on mobile.
-		if (window.outerWidth < 480) {
-			// Set width on items.
-			this.ui.$items.outerWidth(window.outerWidth);
+		if (this.ui.$win.outerWidth() <= 480) {
+			this.ui.$items.outerWidth(this.ui.$win.outerWidth());
 		} else {
-			// Reset items and slider width.
 			this.ui.$items.outerWidth('auto');
 		}
 
@@ -360,11 +358,7 @@ var carousel = {
 
 	setCarouselHeight: function setCarouselHeight() {
 		// Set a min-height on the slider.
-		this.ui.$main.css('min-height', this.ui.$win.outerHeight() - this.ui.$header.outerHeight());
-
-		// Get current item height.
-		console.log($(this.ui.$items[this.itemActive]).outerHeight());
-
+		this.ui.$main.css('height', $(this.ui.$items[this.itemActive]).outerHeight());		
 	},
 
 	pressKeyboard: function pressKeyboard(e) {
@@ -460,21 +454,7 @@ var carousel = {
         });
 
         // Set height on the slider.
-        this.setHeightBody();
-	},
-
-	setHeightBody: function setHeightBody() {
-		// Get header height.
-		// var headerH = this.ui.$header.outerHeight();
-
-		// Get height of the active item.
-		// var sliderH = $(this.ui.$items[this.itemActive]).outerHeight();
-
-		// Add no scroll class on body.
-		// this.ui.$body.addClass('no-scroll');
-
-		// Set height on the slider.
-		// this.ui.$body.outerHeight(headerH + sliderH);
+        this.setCarouselHeight();
 	},
 
 	trackCSSAnimationEnd: function trackCSSAnimationEnd() {
@@ -532,12 +512,14 @@ var filters = {
 	},
 
 	bindUI: function bindUI() {
-		this.ui.$header = $('.js-header');
+		this.ui.$header = $('.js-header');	
 		this.ui.$btn    = this.ui.$header.find('.js-header-filters-btn');
+		this.ui.$links  = this.ui.$header.find('.js-header-link');
 	},
 
 	bindEvents: function bindEvents() {
 		this.ui.$btn.on('click', $.proxy(this.toggleFilters, this));
+		this.ui.$links.on('click', $.proxy(this.toggleFilters, this));
 	},
 
 	toggleFilters: function toggleFilters() {

@@ -1,0 +1,13 @@
+.tpl-project {
+	.main {
+		min-height: calc(100vh - 170px);
+	}
+}
+
+@include mobile {
+	.tpl-project {
+		.main {
+			min-height: calc(100vh - 210px);
+		}
+	}	
+}

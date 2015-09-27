@@ -9,6 +9,10 @@
 		border-top: 1px solid $border-color;
 	}
 
+	&__list {
+		display: inline-block;
+	}
+
 	&__item {
 		display: inline-block;
 		margin-right: pxToRem(35px);
@@ -42,9 +46,11 @@
 	&__back {
 		@extend %InhardtThin;
 		@extend %transitionEase;
-		position: absolute;
-		top: pxToRem(40px);
-		right: 0;
+		// position: absolute;
+		// top: pxToRem(40px);
+		// right: 0;
+		float: right;
+		margin-left: 25px;
 		font-size: 18px;
 		color: $color-grey;
 
@@ -146,6 +152,8 @@
 	}
 
 	&--project {
+		height: 170px;
+		
 		.header__item {
 			margin-right: pxToRem(25px);
 		}
@@ -193,6 +201,16 @@
 			&__label {
 				display: none;
 			}
+		}
+	}
+
+	&--project {
+		height: 210px;
+		margin-top: 0;
+		
+		.header__item {
+			display: block;
+			margin-right: pxToRem(25px);
 		}
 	}
 }

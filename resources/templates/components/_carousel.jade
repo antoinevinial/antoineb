@@ -18,11 +18,9 @@ mixin carousel(nbItems)
 						div.carousel__section
 							span.carousel__label On
 							span.carousel__value Ergonomie, Experience, Interactive
-
-				- for (i = 0; i < nbItems; i++)
-					li.carousel__item.js-carousel-item
-						img.carousel__img.js-carousel-img(src="http://placehold.it/416x510")
-					li.carousel__item.js-carousel-item
-						img.carousel__img.js-carousel-img(src="http://placehold.it/416x900")
-					li.carousel__item.js-carousel-item
-						img.carousel__img.js-carousel-img(src="http://placehold.it/200x300")
+				li.carousel__item.js-carousel-item
+					img.carousel__img.js-carousel-img(src="img/416x510.jpg")
+				li.carousel__item.js-carousel-item
+					img.carousel__img.js-carousel-img(src="http://placehold.it/416x900")
+				li.carousel__item.js-carousel-item
+					img.carousel__img.js-carousel-img(src="http://placehold.it/200x300")

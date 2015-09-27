@@ -201,6 +201,8 @@ img.picture {
     position: relative;
     padding-top: 2.5rem;
     border-top: 1px solid #454545; }
+  .header__list {
+    display: inline-block; }
   .header__item {
     display: inline-block;
     margin-right: 2.1875rem; }
@@ -219,9 +221,8 @@ img.picture {
     text-transform: uppercase;
     letter-spacing: 2px; }
   .header__back {
-    position: absolute;
-    top: 2.5rem;
-    right: 0;
+    float: right;
+    margin-left: 25px;
     font-size: 18px;
     color: #828282; }
     .header__back .icon {
@@ -276,8 +277,10 @@ img.picture {
   .header.is-open .header__filters__modal {
     opacity: 1;
     pointer-events: auto; }
-  .header--project .header__item {
-    margin-right: 1.5625rem; }
+  .header--project {
+    height: 170px; }
+    .header--project .header__item {
+      margin-right: 1.5625rem; }
   @media (max-width: 480px) {
     .header {
       margin-top: 2.5rem;
@@ -306,6 +309,12 @@ img.picture {
         top: 1.6rem; }
         .header__back__label {
           display: none; } }
+  .header--project {
+    height: 210px;
+    margin-top: 0; }
+    .header--project .header__item {
+      display: block;
+      margin-right: 1.5625rem; }
 
 @media print {
   /* ------------------------------------------------------------------ */
@@ -347,6 +356,13 @@ img.picture {
     widows: 3; }
   h2, h3 {
     page-break-after: avoid; } }
+
+.tpl-project .main {
+  min-height: calc(100vh - 170px); }
+
+@media (max-width: 480px) {
+  .tpl-project .main {
+    min-height: calc(100vh - 210px); } }
 
 *, *:before, *:after {
   box-sizing: border-box; }
@@ -406,7 +422,7 @@ a {
     opacity: 0; }
 
 /* Transitions */
-.header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item {
+.header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -431,7 +447,7 @@ a {
   font-style: normal; }
 
 /* Extend based on the font */
-.header__title, body {
+.header__title, body, .carousel__btn {
   font-family: 'theinhardtregular', Arial, sans-serif; }
 
 .header__back {
@@ -593,16 +609,26 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
         padding: 20px;
         background: black; }
   .carousel__pager {
-    position: absolute;
-    top: -4.6875rem;
-    left: 45%; }
+    float: right; }
   .carousel__btn {
-    padding: 0.9375rem 1.5625rem;
+    padding: 0 1.5625rem;
+    font-size: 18px;
+    color: #828282;
     background: none;
     border: none;
     border-radius: 0;
     outline: none;
     cursor: pointer; }
+    .carousel__btn svg {
+      position: relative;
+      top: -2px;
+      margin: 0 5px; }
+    .carousel__btn path {
+      fill: #828282; }
+    .carousel__btn:hover {
+      color: white; }
+      .carousel__btn:hover path {
+        fill: white; }
   .carousel__section + .carousel__section {
     margin-top: 1.25rem; }
   .carousel__label {
@@ -617,18 +643,19 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
 
 @media (max-width: 480px) {
   .carousel__item {
-    padding: 0 2rem; }
+    padding: 0 20px; }
   .carousel__pager {
-    position: static;
-    margin-bottom: 1rem;
-    padding: 0 2rem;
+    float: none;
+    margin-top: 2rem;
     overflow: hidden; }
   .carousel__btn--prev {
     float: left;
     padding-left: 0; }
   .carousel__btn--next {
     float: right;
-    padding-right: 0; } }
+    padding-right: 0; }
+  .carousel__btn__label {
+    display: none; } }
 
 .profile {
   padding: 80px 0;

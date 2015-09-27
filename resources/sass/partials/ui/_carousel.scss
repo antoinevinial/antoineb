@@ -39,18 +39,39 @@
 	}
 
 	&__pager {
-		position: absolute;
-		top: pxToRem(-75px);
-		left: 45%;
+		float: right;
 	}
 
 	&__btn {
-		padding: pxToRem(15px) pxToRem(25px);
+		@extend %transitionEase;
+		@extend %InhardtRegular;
+		padding: 0 pxToRem(25px);
+		font-size: 18px;
+		color: $color-grey;
 		background: none;
 		border: none;
 		border-radius: 0;
 		outline: none;
 		cursor: pointer;
+
+		svg {
+			position: relative;
+			top: -2px;
+			margin: 0 5px;
+		}
+
+		path {
+			@extend %transitionEase;
+			fill: $color-grey;
+		}
+
+		&:hover {
+			color: white;
+
+			path {
+				fill: white;
+			}
+		}
 	}
 
 	/* Texte */
@@ -80,13 +101,12 @@
 @include mobile {
 	.carousel {
 		&__item {
-			padding: 0 2rem;
+			padding: 0 20px;
 		}
 
 		&__pager {
-			position: static;
-			margin-bottom: 1rem;
-			padding: 0 2rem;
+			float: none;
+			margin-top: 2rem;
 			overflow: hidden;
 		}
 
@@ -101,5 +121,9 @@
 				padding-right: 0;
 			}
 		}
+	}
+
+	.carousel__btn__label {
+		display: none;
 	}
 }
