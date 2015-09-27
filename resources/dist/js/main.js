@@ -607,7 +607,7 @@ var projects = {
     isotopeClasses: ['interactive', 'motion', 'photography', 'illustration'],
 
     isAnimate: false,
-    isAlreadyPress: false,
+    isAlreadyPrev: false,
 
     init: function init() {
         this.bindUI();
@@ -765,40 +765,39 @@ var projects = {
     },
 
     goNext: function goNext() {
-        // If we're on the last item, stop the function.
-        if (this.itemActive > this.ui.$items.length - 2) { return; }
+        var isVisible;
 
-        // Update itemActive variable.
-        if (!this.isAlreadyPress) {
-            this.isAlreadyPress = true;
-        } else {
-            this.itemActive++;
-        }
+        // If we're on the last item, stop the function.
+        if (this.itemActive >= this.ui.$items.length) { return; }
 
         for (i = this.itemActive; i < this.ui.$items.length; i++) {
             // Check if the item is visible;
-            var isVisible = $(this.ui.$items[i]).is(':visible');
+            isVisible = $(this.ui.$items[i]).is(':visible');
             
             // If we find the visible element, update itemActive variable and return.
             if (isVisible) { 
                 this.itemActive = i;
-                break;                
+                break;
             }
+
+            // If we reach the end of the list.
+            if(i == this.ui.$items.length - 1) { return; }
         }
 
-        // Get the target item.
-        var $target = $(this.ui.$items[this.itemActive]);
-
         // Scroll to the target position.
-        this.scrollTo($target);
+        this.scrollTo($(this.ui.$items[this.itemActive]));
+
+        // Update itemActive variable.
+        this.itemActive++;
     },
 
     goPrev: function goPrev() {
-        // If we're on the last item, stop the function.
-        if (this.itemActive == 0) { return; }
+        // If we're on the first item, stop the function.
+        if ((this.itemActive + 1) == 0) { return; }
 
         var i = this.itemActive;
-        while(i--) {
+
+        while(i > 0) {
             var isVisible = $(this.ui.$items[i]).is(':visible');
 
             // If we find the visible element, update itemActive variable and return.
@@ -806,16 +805,16 @@ var projects = {
                 this.itemActive = i;
                 break;                
             }
+
+            // If we reach the begining of the list.
+            if(i == 1) { return; }
         }
 
-        // // Update itemActive variable.
-        // this.itemActive--;
-
-        // Get the target item.
-        var $target = $(this.ui.$items[this.itemActive]);
-
         // Scroll to the target position.
-        this.scrollTo($target);
+        this.scrollTo($(this.ui.$items[this.itemActive]));
+
+        // Update itemActive variable.
+        this.itemActive--;
     },
 
     scrollTo: function scrollTo($el) {
@@ -880,7 +879,7 @@ var projects = {
         // Filter pager items.
         this.ui.$pagerList.isotope({ filter: target });
 
-        // Reset item active variable.
+        // Reset item active variable and isAlreadyPress variable.
         this.itemActive = 0;
     }
 };
