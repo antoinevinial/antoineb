@@ -12,5 +12,5 @@ gulp.task('templates', function() {
             return "Jade: " + error.message;
         }))
     )
-    .pipe(gulp.dest(paths.dist));
+    .pipe(gulp.dest('../'));
 });

@@ -21,5 +21,5 @@ gulp.task('sass', function () {
         }))
         .pipe(postcss([ autoprefixer({ browsers: ['last 2 version'] }) ])) //configure
         .pipe(sourcemaps.write(paths.maps))
-        .pipe(gulp.dest(paths.dist + paths.css));
+        .pipe(gulp.dest('../css'));
 });
