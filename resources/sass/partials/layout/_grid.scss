@@ -48,6 +48,12 @@ $gutterMobile: 20px;
         padding: 0;
     }
 
+    @for $i from 1 through $cols {
+        .prepend-#{$i} {
+            margin-left: 0;
+        }
+    }
+
     .grid {
         padding: 0 pxToRem($gutterMobile);
     }

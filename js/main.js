@@ -589,7 +589,7 @@ var projects = {
     isotopeClasses: ['interactive', 'motion', 'photography', 'illustration'],
 
     isAnimate: false,
-    isAlreadyPrev: false,
+    hasAlreadySlide: false,
 
     init: function init() {
         this.bindUI();
@@ -680,6 +680,7 @@ var projects = {
         this.ui.$pagerPrev.on('click', $.proxy(this.goPrev, this));
         this.ui.$pagerNext.on('click', $.proxy(this.goNext, this));
         this.ui.$win.on('keydown', $.proxy(this.pressKeyboard, this));
+        this.ui.$win.on('mousewheel', $.proxy(this.toggleList, this));
 
         // Update pager.
         this.updatePager();
@@ -701,7 +702,7 @@ var projects = {
             var $pagerItem = $(self.ui.$pagerItems[$(this).index()]);
 
             // Set height on the pager item.
-            $pagerItem.height($pagerItem.width() * imgRatio);
+            $pagerItem.height(Math.ceil($pagerItem.width() * imgRatio));
         });
 
         // Init new isotope function on the pager.
@@ -747,56 +748,28 @@ var projects = {
     },
 
     goNext: function goNext() {
-        var isVisible;
+        // Return if we reach the bottom of the list.
+        if ((this.itemActive + 1) == this.ui.$items.length) { return; }
 
-        // If we're on the last item, stop the function.
-        if (this.itemActive >= this.ui.$items.length) { return; }
-
-        for (i = this.itemActive; i < this.ui.$items.length; i++) {
-            // Check if the item is visible;
-            isVisible = $(this.ui.$items[i]).is(':visible');
-            
-            // If we find the visible element, update itemActive variable and return.
-            if (isVisible) { 
-                this.itemActive = i;
-                break;
-            }
-
-            // If we reach the end of the list.
-            if(i == this.ui.$items.length - 1) { return; }
+        // Update item active variable.
+        if (!this.hasAlreadySlide) {
+            this.hasAlreadySlide = true;
+        } else {
+            this.itemActive++;
         }
 
-        // Scroll to the target position.
+        // Scroll to target item.
         this.scrollTo($(this.ui.$items[this.itemActive]));
-
-        // Update itemActive variable.
-        this.itemActive++;
     },
 
     goPrev: function goPrev() {
-        // If we're on the first item, stop the function.
-        if ((this.itemActive + 1) == 0) { return; }
+        // If we're on the first item, return.
+        if (this.itemActive == 0) { return; }
 
-        var i = this.itemActive;
-
-        while(i > 0) {
-            var isVisible = $(this.ui.$items[i]).is(':visible');
-
-            // If we find the visible element, update itemActive variable and return.
-            if (isVisible) { 
-                this.itemActive = i;
-                break;                
-            }
-
-            // If we reach the begining of the list.
-            if(i == 1) { return; }
-        }
-
-        // Scroll to the target position.
-        this.scrollTo($(this.ui.$items[this.itemActive]));
-
-        // Update itemActive variable.
+        // Update item variable.
         this.itemActive--;
+
+        this.scrollTo($(this.ui.$items[this.itemActive]));
     },
 
     scrollTo: function scrollTo($el) {
@@ -824,13 +797,8 @@ var projects = {
     },
 
     stickyPager: function stickyPager(e) {
-        var scrollTop = this.ui.$win.scrollTop();
-
-        // If user didn't click on prev/next/item, un-focus list.
-        if (!this.isAnimate) {
-            this.ui.$projects.removeClass('is-scrolled');
-            this.ui.$pagerItems.removeClass('is-active');
-        }
+        var self = this,
+            scrollTop = this.ui.$win.scrollTop();
 
         // Make pager sticky or not based on the scroll position.
         if (scrollTop >= this.ui.$list.offset().top) {
@@ -861,8 +829,20 @@ var projects = {
         // Filter pager items.
         this.ui.$pagerList.isotope({ filter: target });
 
+        // Hide pager.
+        this.ui.$pager.addClass('is-fade');
+
         // Reset item active variable and isAlreadyPress variable.
         this.itemActive = 0;
+    },
+
+    toggleList: function toggleList(e) {
+        // If user didn't click on prev/next/item, un-focus list.
+
+        if (!this.isAnimate) {
+            this.ui.$projects.removeClass('is-scrolled');
+            this.ui.$pagerItems.removeClass('is-active');
+        }
     }
 };
 

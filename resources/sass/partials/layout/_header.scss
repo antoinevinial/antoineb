@@ -76,12 +76,12 @@
 		position: absolute;
 		top: pxToRem(40px);
 		right: 0;
+		width: 500px;
 	}
 
 	&__filters__btn {
 		float: right;
-		position: relative;
-		top: 6px;
+		margin-top: 6px;
 		background: none;
 		border: none;
 		border-radius: 0;
@@ -141,10 +141,6 @@
 	}
 
 	&.is-open {
-		.header__filters {
-			width: 100%;
-		}
-
 		.header__filters__modal {
 			opacity: 1;
 			pointer-events: auto;
@@ -160,7 +156,7 @@
 	}
 
 	@include mobile {
-		margin-top: pxToRem(40px);
+		margin-top: pxToRem(0);
 		overflow: visible;
 
 		&__nav {
@@ -172,13 +168,18 @@
 			display: inline-block;
 		}
 
+		&__link {
+			position: relative;
+			z-index: 10;
+		}
+
 		&__filters {
 			top: pxToRem(15px);
-			width: 100%;
 		}
 
 		&__filters__btn {
-			top: pxToRem(10px);
+			position: relative;
+			top: pxToRem(6px);
 			z-index: 2;
 		}
 
@@ -202,11 +203,17 @@
 				display: none;
 			}
 		}
+
+		&.is-open {
+			.header__filters {
+				width: 100%;
+				z-index: 15;
+			}
+		}
 	}
 
 	&--project {
 		height: 210px;
-		margin-top: 0;
 		
 		.header__item {
 			display: block;

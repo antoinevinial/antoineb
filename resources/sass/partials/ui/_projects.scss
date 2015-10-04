@@ -83,6 +83,10 @@
 			position: fixed !important;	
 			top: 0;
 		}
+
+		&.is-fade {
+			opacity: 0;
+		}
 	}
 
 	/* Modifiers */

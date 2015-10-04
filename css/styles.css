@@ -188,6 +188,14 @@ img.picture {
   [class*="cell-"] {
     float: none;
     padding: 0; }
+  .prepend-1 {
+    margin-left: 0; }
+  .prepend-2 {
+    margin-left: 0; }
+  .prepend-3 {
+    margin-left: 0; }
+  .prepend-4 {
+    margin-left: 0; }
   .grid {
     padding: 0 1.25rem; }
   .row {
@@ -236,11 +244,11 @@ img.picture {
   .header__filters {
     position: absolute;
     top: 2.5rem;
-    right: 0; }
+    right: 0;
+    width: 500px; }
   .header__filters__btn {
     float: right;
-    position: relative;
-    top: 6px;
+    margin-top: 6px;
     background: none;
     border: none;
     border-radius: 0;
@@ -272,8 +280,6 @@ img.picture {
         fill: white; }
   .header.is-fade {
     opacity: 0; }
-  .header.is-open .header__filters {
-    width: 100%; }
   .header.is-open .header__filters__modal {
     opacity: 1;
     pointer-events: auto; }
@@ -283,18 +289,21 @@ img.picture {
       margin-right: 1.5625rem; }
   @media (max-width: 480px) {
     .header {
-      margin-top: 2.5rem;
+      margin-top: 0/pxrem;
       overflow: visible; }
       .header__nav {
         padding-top: 1.5rem; }
       .header__item {
         float: none;
         display: inline-block; }
+      .header__link {
+        position: relative;
+        z-index: 10; }
       .header__filters {
-        top: 0.9375rem;
-        width: 100%; }
+        top: 0.9375rem; }
       .header__filters__btn {
-        top: 0.625rem;
+        position: relative;
+        top: 0.375rem;
         z-index: 2; }
       .header__filters__modal {
         right: 0rem;
@@ -308,10 +317,12 @@ img.picture {
       .header__back {
         top: 1.6rem; }
         .header__back__label {
-          display: none; } }
+          display: none; }
+      .header.is-open .header__filters {
+        width: 100%;
+        z-index: 15; } }
   .header--project {
-    height: 210px;
-    margin-top: 0; }
+    height: 210px; }
     .header--project .header__item {
       display: block;
       margin-right: 1.5625rem; }
@@ -358,11 +369,7 @@ img.picture {
     page-break-after: avoid; } }
 
 .tpl-project .main {
-  min-height: calc(100vh - 170px); }
-
-@media (max-width: 480px) {
-  .tpl-project .main {
-    min-height: calc(100vh - 210px); } }
+  min-height: calc(100vh - 210px); }
 
 *, *:before, *:after {
   box-sizing: border-box; }
@@ -569,6 +576,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     .projects__pager.is-sticky {
       position: fixed !important;
       top: 0; }
+    .projects__pager.is-fade {
+      opacity: 0; }
   .projects.is-scrolled .projects__item {
     opacity: 0.5;
     transition: all 0.25s linear; }
@@ -661,6 +670,9 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   padding: 80px 0;
   background: #090909;
   overflow: hidden; }
+  .profile__img {
+    display: block;
+    max-width: 100%; }
   .profile__hr {
     display: block;
     width: 60px;
@@ -668,8 +680,13 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     margin: 40px 0;
     background: #454545;
     border: none; }
-  .profile__list {
-    margin-top: 100px; }
+  .profile__txt {
+    margin-bottom: 100px; }
+  @media (max-width: 480px) {
+    .profile__txt {
+      margin-bottom: 50px; }
+    .profile__list {
+      margin-top: 25px; } }
 
 .dev-grid {
   display: none;
