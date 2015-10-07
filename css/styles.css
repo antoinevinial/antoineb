@@ -537,29 +537,15 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     margin-top: -0.3125rem;
     font-size: 0.75rem;
     color: #828282;
-    text-transform: uppercase; }
-  .projects__btn {
-    display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    /* Modifiers */ }
-    .projects__btn--prev {
-      margin-bottom: 1.5625rem; }
-    .projects__btn .icon-arrow-down {
-      display: block;
-      margin-top: 1.5625rem; }
+    text-transform: uppercase;
+    letter-spacing: 1px; }
   .projects__pager {
     position: absolute !important;
     top: 0 !important;
     left: 100%;
     width: 26px;
     padding-top: 1.5625rem;
+    z-index: 10;
     /* Modifiers */ }
     .projects__pager__list {
       position: relative; }
@@ -578,6 +564,21 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       top: 0; }
     .projects__pager.is-fade {
       opacity: 0; }
+  .projects__btn {
+    position: relative;
+    left: -15px;
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer; }
+    .projects__btn svg {
+      margin-left: 15px; }
   .projects.is-scrolled .projects__item {
     opacity: 0.5;
     transition: all 0.25s linear; }

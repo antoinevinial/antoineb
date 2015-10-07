@@ -27,29 +27,7 @@
 		font-size: pxToRem(12px);
 		color: $color-grey;
 		text-transform: uppercase;
-	}
-
-	&__btn {
-		display: block;
-		width: 100%;
-		margin: 0;
-		padding: 0;
-		text-align: left;
-		background: none;
-		border: none;
-		outline: none;
-		cursor: pointer;
-
-		/* Modifiers */
-
-		&--prev {
-			margin-bottom: pxToRem(25px);
-		}
-
-		.icon-arrow-down {
-			display: block;
-			margin-top: pxToRem(25px);
-		}
+		letter-spacing: 1px;
 	}
 
 	&__pager {
@@ -58,6 +36,7 @@
 		left: 100%;
 		width: 26px;
 		padding-top: pxToRem(25px);
+		z-index: 10;
 
 		&__list {
 			position: relative;
@@ -80,12 +59,31 @@
 
 		/* Modifiers */
 		&.is-sticky {
-			position: fixed !important;	
+			position: fixed !important;
 			top: 0;
 		}
 
 		&.is-fade {
 			opacity: 0;
+		}
+	}
+
+	&__btn {
+		position: relative;
+		left: -15px;
+		display: block;
+		width: 50px;
+		height: 50px;
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		background: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
+
+		svg {
+			margin-left: 15px;
 		}
 	}
 
@@ -98,7 +96,7 @@
 
 			&.is-active {
 				opacity: 1;
-			}			
+			}
 		}
 	}
 
@@ -106,7 +104,7 @@
 		&__pager {
 			display: none;
 		}
-		
+
 		&__item {
 			position: static !important;
 			width: 100%;
