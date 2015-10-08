@@ -209,6 +209,15 @@ img.picture {
     position: relative;
     padding-top: 2.5rem;
     border-top: 1px solid #454545; }
+  .header__progress__container {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%; }
+  .header__progress {
+    width: 0;
+    height: 1px;
+    background-color: white; }
   .header__list {
     display: inline-block; }
   .header__item {
@@ -429,7 +438,7 @@ a {
     opacity: 0; }
 
 /* Transitions */
-.header, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
+.header, .header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
   transition: all 0.25s ease; }
 
 @font-face {

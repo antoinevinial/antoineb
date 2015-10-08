@@ -24,6 +24,9 @@ var carousel = {
 		this.ui.$items    = this.ui.$carousel.find('.js-carousel-item');
 		this.ui.$next     = $('.js-carousel-next');
 		this.ui.$prev     = $('.js-carousel-prev');
+
+		this.ui.$progressCont = $('.js-progress-container');
+		this.ui.$progress     = $('.js-progress');
 	},
 
 	bindEvents: function bindEvents() {
@@ -51,7 +54,7 @@ var carousel = {
 
 	setCarouselHeight: function setCarouselHeight() {
 		// Set a min-height on the slider.
-		this.ui.$main.css('height', $(this.ui.$items[this.itemActive]).outerHeight());		
+		this.ui.$main.css('height', $(this.ui.$items[this.itemActive]).outerHeight());
 	},
 
 	pressKeyboard: function pressKeyboard(e) {
@@ -148,6 +151,9 @@ var carousel = {
 
         // Set height on the slider.
         this.setCarouselHeight();
+
+        // Update progress.
+        this.updateProgress();
 	},
 
 	trackCSSAnimationEnd: function trackCSSAnimationEnd() {
@@ -161,6 +167,31 @@ var carousel = {
             // Set the isAnimate variable to false.
             self.isAnimate = false;
         });
+    },
+
+    updateProgress: function updateProgress() {
+    	var self = this,
+    		sliderW  = 0,
+    		currentW = 0;
+
+    	// Get total width for carousel.
+    	$.each(this.ui.$items, function() {
+    		sliderW += $(this).outerWidth();
+    	});
+
+    	// Get current width.
+    	$.each(this.ui.$items, function() {
+    		currentW += $(this).outerWidth();
+
+    		// Return if we reach the item active.
+    		if ($(this).index() == self.itemActive) { return false; }
+    	});
+
+    	// Calculate percentage for progress bar.
+    	var perc = Math.round(currentW / sliderW * 100) + '%';
+
+    	// Update progress bar width.
+    	this.ui.$progress.css('width', perc);
     }
 };
 

@@ -9,6 +9,20 @@
 		border-top: 1px solid $border-color;
 	}
 
+	&__progress__container {
+		position: absolute;
+		top: -1px;
+		left: 0;
+		width: 100%;
+	}
+
+	&__progress {
+		width: 0;
+		height: 1px;
+		background-color: white;
+		@extend %transitionEase;
+	}
+
 	&__list {
 		display: inline-block;
 	}
@@ -149,7 +163,7 @@
 
 	&--project {
 		height: 170px;
-		
+
 		.header__item {
 			margin-right: pxToRem(25px);
 		}
@@ -198,7 +212,7 @@
 
 		&__back {
 			top: 1.6rem;
-			
+
 			&__label {
 				display: none;
 			}
@@ -214,7 +228,7 @@
 
 	&--project {
 		height: 210px;
-		
+
 		.header__item {
 			display: block;
 			margin-right: pxToRem(25px);
