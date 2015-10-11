@@ -102,6 +102,10 @@
 		outline: none;
 		cursor: pointer;
 
+		.icon-close {
+			display: none;
+		}
+
 		path {
 			@extend %transitionEase;
 			fill: $color-grey-light;
@@ -158,6 +162,14 @@
 		.header__filters__modal {
 			opacity: 1;
 			pointer-events: auto;
+		}
+
+		.icon-close {
+			display: block;
+		}
+
+		.icon-filters {
+			display: none;
 		}
 	}
 

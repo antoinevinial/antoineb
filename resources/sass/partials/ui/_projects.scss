@@ -81,9 +81,16 @@
 		border: none;
 		outline: none;
 		cursor: pointer;
+		@include transition(all $transition-quick ease);
 
 		svg {
 			margin-left: 15px;
+		}
+
+		&.is-fade {
+			opacity: 0.2;
+			cursor: default;
+			pointer-events: none;
 		}
 	}
 

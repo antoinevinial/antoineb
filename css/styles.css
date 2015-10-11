@@ -263,6 +263,8 @@ img.picture {
     border-radius: 0;
     outline: none;
     cursor: pointer; }
+    .header__filters__btn .icon-close {
+      display: none; }
     .header__filters__btn path {
       fill: #787878; }
     .header__filters__btn:hover path {
@@ -292,6 +294,10 @@ img.picture {
   .header.is-open .header__filters__modal {
     opacity: 1;
     pointer-events: auto; }
+  .header.is-open .icon-close {
+    display: block; }
+  .header.is-open .icon-filters {
+    display: none; }
   .header--project {
     height: 170px; }
     .header--project .header__item {
@@ -585,9 +591,14 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     background: none;
     border: none;
     outline: none;
-    cursor: pointer; }
+    cursor: pointer;
+    transition: all 0.25s ease; }
     .projects__btn svg {
       margin-left: 15px; }
+    .projects__btn.is-fade {
+      opacity: 0.2;
+      cursor: default;
+      pointer-events: none; }
   .projects.is-scrolled .projects__item {
     opacity: 0.5;
     transition: all 0.25s linear; }

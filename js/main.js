@@ -747,6 +747,9 @@ var projects = {
 
         // Bind scroll to turn pager into sticky one.
         this.ui.$win.on('scroll', $.proxy(this.stickyPager, this));
+
+        // Check first last function.
+        this.checkFirstLast();
     },
 
     pressKeyboard: function pressKeyboard(e) {
@@ -825,6 +828,9 @@ var projects = {
         // Update pager.
         this.ui.$pagerItems.removeClass('is-active');
         $(this.ui.$pagerItems[$el.index()]).addClass('is-active');
+
+        // Check first last function.
+        this.checkFirstLast();
     },
 
     stickyPager: function stickyPager(e) {
@@ -873,6 +879,19 @@ var projects = {
         if (!this.isAnimate) {
             this.ui.$projects.removeClass('is-scrolled');
             this.ui.$pagerItems.removeClass('is-active');
+        }
+    },
+
+    checkFirstLast: function checkFirstLast() {
+        if (this.itemActive == 0) {
+            this.ui.$pagerPrev.addClass('is-fade');
+            this.ui.$pagerNext.removeClass('is-fade');
+        } else if (this.itemActive == (this.ui.$items.length - 1) ) {
+            this.ui.$pagerPrev.removeClass('is-fade');
+            this.ui.$pagerNext.addClass('is-fade');
+        } else {
+            this.ui.$pagerPrev.removeClass('is-fade');
+            this.ui.$pagerNext.removeClass('is-fade');
         }
     }
 };
