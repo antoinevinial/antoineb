@@ -1,8 +1,7 @@
 /* ------------------------------------------------------------------ */
 /*        OO CORE
 /* ------------------------------------------------------------------ */
-/*------------------------------------*\
-    PROJECT VARIABLES
+/*------------------------------------*    PROJECT VARIABLES
 \*------------------------------------*/
 /*-------------------------------------------
     FUNCTIONS
@@ -69,7 +68,8 @@ http://stackoverflow.com/questions/2991623/make-background-size-work-in-ie
 /*-------------------------------------------
     GENERIC TRANSITIONS
 -------------------------------------------*/
-.clearfix:before, .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   content: " ";
   display: table;
   clear: both; }
@@ -226,7 +226,8 @@ img.picture {
   .header__link {
     font-size: 1.125rem;
     color: #828282; }
-    .header__link:hover, .header__link.is-active {
+    .header__link:hover,
+    .header__link.is-active {
       color: #ffffff; }
   .header__label {
     display: inline-block;
@@ -304,7 +305,7 @@ img.picture {
       margin-right: 1.5625rem; }
   @media (max-width: 480px) {
     .header {
-      margin-top: 0/pxrem;
+      margin-top: 0;
       overflow: visible; }
       .header__nav {
         padding-top: 1.5rem; }
@@ -321,7 +322,7 @@ img.picture {
         top: 0.375rem;
         z-index: 2; }
       .header__filters__modal {
-        right: 0rem;
+        right: 0px;
         width: 100%;
         padding: 0.625rem 0;
         background: #161616;
@@ -335,12 +336,12 @@ img.picture {
           display: none; }
       .header.is-open .header__filters {
         width: 100%;
-        z-index: 15; } }
-  .header--project {
-    height: 210px; }
-    .header--project .header__item {
-      display: block;
-      margin-right: 1.5625rem; }
+        z-index: 15; }
+      .header--project {
+        height: 210px; }
+        .header--project .header__item {
+          display: block;
+          margin-right: 1.5625rem; } }
 
 @media print {
   /* ------------------------------------------------------------------ */
@@ -353,7 +354,8 @@ img.picture {
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important; }
-  a, a:visited {
+  a,
+  a:visited {
     text-decoration: underline; }
   a[href]:after {
     content: " (" attr(href) ")"; }
@@ -362,29 +364,35 @@ img.picture {
   /*
      * Don't show links for images, or javascript/internal links
      */
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
     content: ""; }
-  pre, blockquote {
+  pre,
+  blockquote {
     border: 1px solid #999;
     page-break-inside: avoid; }
   thead {
     display: table-header-group;
     /* h5bp.com/t */ }
-  tr, img {
+  tr,
+  img {
     page-break-inside: avoid; }
   img {
     max-width: 100% !important; }
   @page {
     margin: 0.5cm; }
-
-  p, h2, h3 {
+  p,
+  h2,
+  h3 {
     orphans: 3;
     widows: 3; }
-  h2, h3 {
+  h2,
+  h3 {
     page-break-after: avoid; } }
 
 .tpl-project .main {
-  min-height: calc(100vh - 210px); }
+  min-height: calc(100vh - 170px); }
 
 *, *:before, *:after {
   box-sizing: border-box; }
@@ -393,7 +401,19 @@ img.picture {
    v2.0 | 20110126
    License: none (public domain)
 */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -402,7 +422,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
   display: block; }
 
 body {
@@ -414,7 +435,8 @@ ol, ul {
 blockquote, q {
   quotes: none; }
 
-blockquote:before, blockquote:after, q:before, q:after {
+blockquote:before, blockquote:after,
+q:before, q:after {
   content: '';
   content: none; }
 
@@ -438,10 +460,11 @@ a {
   text-decoration: none; }
 
 /* Main container */
-.main {
+.main.is-fade {
+  opacity: 0; }
+
+.tpl-project .main {
   overflow: hidden; }
-  .main.is-fade {
-    opacity: 0; }
 
 /* Transitions */
 .header, .header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
@@ -449,22 +472,22 @@ a {
 
 @font-face {
   font-family: 'theinhardtmedium';
-  src: url('../fonts/theinhardtmed-webfont.eot');
-  src: url('../fonts/theinhardtmed-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/theinhardtmed-webfont.woff2') format('woff2'), url('../fonts/theinhardtmed-webfont.woff') format('woff'), url('../fonts/theinhardtmed-webfont.ttf') format('truetype'), url('../fonts/theinhardtmed-webfont.svg#theinhardtmedium') format('svg');
+  src: url("../fonts/theinhardtmed-webfont.eot");
+  src: url("../fonts/theinhardtmed-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/theinhardtmed-webfont.woff2") format("woff2"), url("../fonts/theinhardtmed-webfont.woff") format("woff"), url("../fonts/theinhardtmed-webfont.ttf") format("truetype"), url("../fonts/theinhardtmed-webfont.svg#theinhardtmedium") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'theinhardtregular';
-  src: url('../fonts/theinhardtreg-webfont.eot');
-  src: url('../fonts/theinhardtreg-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/theinhardtreg-webfont.woff2') format('woff2'), url('../fonts/theinhardtreg-webfont.woff') format('woff'), url('../fonts/theinhardtreg-webfont.ttf') format('truetype'), url('../fonts/theinhardtreg-webfont.svg#theinhardtregular') format('svg');
+  src: url("../fonts/theinhardtreg-webfont.eot");
+  src: url("../fonts/theinhardtreg-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/theinhardtreg-webfont.woff2") format("woff2"), url("../fonts/theinhardtreg-webfont.woff") format("woff"), url("../fonts/theinhardtreg-webfont.ttf") format("truetype"), url("../fonts/theinhardtreg-webfont.svg#theinhardtregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'theinhardtthin';
-  src: url('../fonts/theinhardtthin-webfont.eot');
-  src: url('../fonts/theinhardtthin-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/theinhardtthin-webfont.woff2') format('woff2'), url('../fonts/theinhardtthin-webfont.woff') format('woff'), url('../fonts/theinhardtthin-webfont.ttf') format('truetype'), url('../fonts/theinhardtthin-webfont.svg#theinhardtthin') format('svg');
+  src: url("../fonts/theinhardtthin-webfont.eot");
+  src: url("../fonts/theinhardtthin-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/theinhardtthin-webfont.woff2") format("woff2"), url("../fonts/theinhardtthin-webfont.woff") format("woff"), url("../fonts/theinhardtthin-webfont.ttf") format("truetype"), url("../fonts/theinhardtthin-webfont.svg#theinhardtthin") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -472,14 +495,16 @@ a {
 .header__title, body, .carousel__btn {
   font-family: 'theinhardtregular', Arial, sans-serif; }
 
-.header__back {
+.profile__title {
   font-family: 'theinhardtthin', Arial, sans-serif; }
 
-.icon-arrow-up, .icon-arrow-down {
+.icon-arrow-up,
+.icon-arrow-down {
   width: 7px;
   height: 16px; }
 
-.icon-arrow-left, .icon-arrow-right {
+.icon-arrow-left,
+.icon-arrow-right {
   width: 16px;
   height: 7px; }
 
@@ -571,7 +596,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       margin: 0 0.0625rem 0.125rem;
       background: #454545;
       cursor: pointer; }
-      .projects__pager__item:hover, .projects__pager__item.is-active {
+      .projects__pager__item:hover,
+      .projects__pager__item.is-active {
         background: #ffffff;
         transition: all 0.25s linear; }
     .projects__pager.is-sticky {
@@ -610,7 +636,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     .projects__item {
       position: static !important;
       width: 100%;
-      padding: 0rem 0rem 2.5rem; } }
+      padding: 0px 0px 2.5rem; } }
 
 .carousel {
   position: relative;
@@ -627,16 +653,17 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     margin: 0;
     padding: 0; }
   .carousel__item {
-    display: inline-block;
-    vertical-align: top;
-    margin-right: -4px;
-    padding-right: 4rem;
+    display: block;
+    float: left;
+    padding-left: 4rem;
     cursor: pointer; }
     .carousel__item--txt {
-      position: relative; }
+      position: relative;
+      padding-left: 0; }
       .carousel__item--txt .carousel__item__container {
-        min-height: 400px;
-        padding: 20px;
+        min-height: 425px;
+        width: 300px;
+        padding: 63px;
         background: black; }
   .carousel__pager {
     float: right; }
@@ -674,6 +701,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
 @media (max-width: 480px) {
   .carousel__item {
     padding: 0 20px; }
+    .carousel__item--txt .carousel__item__container {
+      width: 100%; }
   .carousel__pager {
     float: none;
     margin-top: 2rem;
@@ -687,10 +716,30 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   .carousel__btn__label {
     display: none; } }
 
+.tpl-profile {
+  background-color: #090909; }
+  .tpl-profile .header {
+    background-color: #161616; }
+
 .profile {
-  padding: 80px 0;
-  background: #090909;
   overflow: hidden; }
+  .profile .grid {
+    position: relative;
+    height: calc(100vh - 169px);
+    padding-top: 80px;
+    padding-bottom: 80px; }
+    .profile .grid:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 100%;
+      bottom: 0;
+      display: block;
+      width: 9999px;
+      background-color: #161616; }
+  .profile__title {
+    font-size: 5rem;
+    color: #454545; }
   .profile__img {
     display: block;
     max-width: 100%; }
@@ -720,7 +769,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   pointer-events: none; }
   .dev-grid.is-visible {
     display: block; }
-  .dev-grid .grid, .dev-grid .row {
+  .dev-grid .grid,
+  .dev-grid .row {
     height: 100%; }
   .dev-grid [class*="cell-"] {
     height: 100%; }
@@ -748,6 +798,5 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   @media (max-width: 480px) {
     .dev-grid__btn {
       display: none; } }
-
 
 /*# sourceMappingURL=maps/styles.css.map */

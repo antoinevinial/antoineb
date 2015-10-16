@@ -21,18 +21,19 @@
 
 	&__item {
 		@extend %transitionEase;
-		display: inline-block;
-		vertical-align: top;
-		margin-right: -4px;
-	  	padding-right: pxToRem($gutter * 2);
+		display: block;
+		float: left;
+	  	padding-left: pxToRem($gutter * 2);
 	  	cursor: pointer;
 
 	  	&--txt {
 	  		position: relative;
+	  		padding-left: 0;
 
 	  		.carousel__item__container {
-	  			min-height: 400px;
-	  			padding: 20px;
+	  			min-height: 425px;
+	  			width: 300px;
+	  			padding: 63px;
 	  			background: black;
 	  		}
 	  	}
@@ -102,6 +103,12 @@
 	.carousel {
 		&__item {
 			padding: 0 20px;
+
+			&--txt {
+				.carousel__item__container {
+					width: 100%;
+				}
+			}
 		}
 
 		&__pager {

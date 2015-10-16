@@ -58,11 +58,7 @@
 	}
 
 	&__back {
-		@extend %InhardtThin;
 		@extend %transitionEase;
-		// position: absolute;
-		// top: pxToRem(40px);
-		// right: 0;
 		float: right;
 		margin-left: 25px;
 		font-size: 18px;
@@ -182,7 +178,7 @@
 	}
 
 	@include mobile {
-		margin-top: pxToRem(0);
+		margin-top: 0;
 		overflow: visible;
 
 		&__nav {
@@ -210,7 +206,7 @@
 		}
 
 		&__filters__modal {
-			right: pxToRem(0px);
+			right: 0px;
 			width: 100%;
 			padding: pxToRem(10px) 0;
 			background: $background-dark;
@@ -236,14 +232,14 @@
 				z-index: 15;
 			}
 		}
-	}
 
-	&--project {
-		height: 210px;
+		&--project {
+			height: 210px;
 
-		.header__item {
-			display: block;
-			margin-right: pxToRem(25px);
+			.header__item {
+				display: block;
+				margin-right: pxToRem(25px);
+			}
 		}
 	}
 }

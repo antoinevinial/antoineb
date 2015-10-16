@@ -1,7 +1,37 @@
+.tpl-profile {	
+	background-color: #090909;
+
+	.header {
+		background-color: $background-dark;
+	}
+}
+
 .profile {
-	padding: 80px 0;
-	background: #090909;
 	overflow: hidden;
+
+	.grid {
+		position: relative;
+		height: calc(100vh - 169px);
+		padding-top: 80px;
+		padding-bottom: 80px;
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 100%;
+			bottom: 0;
+			display: block;
+			width: 9999px;
+			background-color: $background-dark;
+		}
+	}
+
+	&__title {
+		@extend %InhardtThin;
+		font-size: pxToRem(80px);
+		color: $border-color;
+	}
 
 	&__img {
 		display: block;
