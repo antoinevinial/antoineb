@@ -1,10 +1,26 @@
-header.header
+header.header.js-header
 	div.grid
 		div.row
 			div.cell-4
 				nav.header__nav
 					ul.header__list
 						li.header__item
-							a.header__link.is-active(href="#") Antoine Barrès
+							h1
+								a.header__link.is-active.js-page-transition(href="/") Antoine Barrès
 						li.header__item
-							a.header__link(href="#") Profile
+							a.header__link.js-page-transition(href="profile.html") Profile
+						div.header__filters
+							button.header__filters__btn.js-header-filters-btn
+								+icon-filters
+								+icon-close
+							div.header__filters__modal
+								ul.header__filters__modal__list
+									li.header__filters__modal__item
+										a.header__filters__modal__link.js-header-link(href="interactive") #[+icon-interactive] Interactive
+									li.header__filters__modal__item
+										a.header__filters__modal__link.js-header-link(href="motion") #[+icon-motion] Motion
+									li.header__filters__modal__item
+										a.header__filters__modal__link.js-header-link(href="illustration") #[+icon-illustration] Illustration
+									li.header__filters__modal__item
+										a.header__filters__modal__link.js-header-link(href="photography") #[+icon-photography] Photography
+

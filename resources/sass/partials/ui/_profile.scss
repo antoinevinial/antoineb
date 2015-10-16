@@ -1,0 +1,63 @@
+.tpl-profile {	
+	background-color: #090909;
+
+	.header {
+		background-color: $background-dark;
+	}
+}
+
+.profile {
+	overflow: hidden;
+
+	.grid {
+		position: relative;
+		height: calc(100vh - 169px);
+		padding-top: 80px;
+		padding-bottom: 80px;
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 100%;
+			bottom: 0;
+			display: block;
+			width: 9999px;
+			background-color: $background-dark;
+		}
+	}
+
+	&__title {
+		@extend %InhardtThin;
+		font-size: pxToRem(80px);
+		color: $border-color;
+	}
+
+	&__img {
+		display: block;
+		max-width: 100%;
+	}
+
+	&__hr {
+		display: block;
+		width: 60px;
+		height: 1px;
+		margin: 40px 0;
+		background: $border-color;
+		border: none;
+	}
+
+	&__txt {
+		margin-bottom: 100px;
+	}
+
+	@include mobile {
+		&__txt {
+			margin-bottom: 50px;
+		}
+
+		&__list {
+			margin-top: 25px;
+		}
+	}
+}

@@ -11,7 +11,7 @@ gulp.task('browserify', function() {
         return "Js: " + error.message;
     }))
     .pipe(source('main.js'))
-    .pipe(gulp.dest(paths.dist + paths.scripts));
+    .pipe(gulp.dest('../js'));
 
     onError: notify.onError(function (error) {
                 return "Sass: " + error.message;

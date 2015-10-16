@@ -1,10 +1,30 @@
 .header {
-	margin-top: pxToRem(60px);
-	overflow: hidden;	
+	@extend %transitionEase;
+	padding: pxToRem(60px) 0 pxToRem(40px);
+	overflow: hidden;
 
 	&__nav {
+		position: relative;
 		padding-top: pxToRem(40px);
 		border-top: 1px solid $border-color;
+	}
+
+	&__progress__container {
+		position: absolute;
+		top: -1px;
+		left: 0;
+		width: 100%;
+	}
+
+	&__progress {
+		width: 0;
+		height: 1px;
+		background-color: white;
+		@extend %transitionEase;
+	}
+
+	&__list {
+		display: inline-block;
 	}
 
 	&__item {
@@ -13,11 +33,213 @@
 	}
 
 	&__link {
+		@extend %transitionEase;
 		font-size: pxToRem(18px);
 		color: $color-grey;
 
-		&.is-active {
+		&:hover,
+		&.is-active{
 			color: $color-font;
+		}
+	}
+
+	&__label {
+		display: inline-block;
+		margin-right: pxToRem(8px);
+		font-size: pxToRem(18px);
+	}
+
+	&__title {
+		@extend %InhardtRegular;
+		font-size: pxToRem(12px);
+		color: $color-grey;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+
+	&__back {
+		@extend %transitionEase;
+		float: right;
+		margin-left: 25px;
+		font-size: 18px;
+		color: $color-grey;
+
+		.icon {
+			margin-left: pxToRem(6px);
+
+			path {
+				fill: $color-grey;
+				@extend %transitionEase;
+			}
+		}
+
+		&:hover {
+			color: white;
+
+			path {
+				fill: white;
+			}
+		}
+	}
+
+	&__filters {
+		position: absolute;
+		top: pxToRem(40px);
+		right: 0;
+		width: 500px;
+	}
+
+	&__filters__btn {
+		float: right;
+		margin-top: 6px;
+		background: none;
+		border: none;
+		border-radius: 0;
+		outline: none;
+		cursor: pointer;
+
+		.icon-close {
+			display: none;
+		}
+
+		path {
+			@extend %transitionEase;
+			fill: $color-grey-light;
+		}
+
+		&:hover {
+			path {
+				fill: white;
+			}
+		}
+	}
+
+	&__filters__modal {
+		position: absolute;
+		top: 0;
+		right: pxToRem(28px);
+		opacity: 0;
+		pointer-events: none;
+		@include transition(all 0.25s ease);
+	}
+
+	&__filters__modal__item {
+		float: left;
+		margin-right: pxToRem(30px);
+	}
+
+	&__filters__modal__link {
+		@extend %transitionEase;
+		font-size: pxToRem(12px);
+		letter-spacing: 1px;
+		color: $color-grey;
+
+		.icon {
+			margin-right: pxToRem(5px);
+		}
+
+		&:hover {
+			color: white;
+
+			.icon {
+				path {
+					fill: white;
+				}
+			}
+		}
+	}
+
+	/* Modifiers */
+	&.is-fade {
+		opacity: 0;
+	}
+
+	&.is-open {
+		.header__filters__modal {
+			opacity: 1;
+			pointer-events: auto;
+		}
+
+		.icon-close {
+			display: block;
+		}
+
+		.icon-filters {
+			display: none;
+		}
+	}
+
+	&--project {
+		height: 170px;
+
+		.header__item {
+			margin-right: pxToRem(25px);
+		}
+	}
+
+	@include mobile {
+		margin-top: 0;
+		overflow: visible;
+
+		&__nav {
+			padding-top: pxToRem(24px);
+		}
+
+		&__item {
+			float: none;
+			display: inline-block;
+		}
+
+		&__link {
+			position: relative;
+			z-index: 10;
+		}
+
+		&__filters {
+			top: pxToRem(15px);
+		}
+
+		&__filters__btn {
+			position: relative;
+			top: pxToRem(6px);
+			z-index: 2;
+		}
+
+		&__filters__modal {
+			right: 0px;
+			width: 100%;
+			padding: pxToRem(10px) 0;
+			background: $background-dark;
+			z-index: 1;
+		}
+
+		&__filters__modal__item {
+			float: none;
+			margin-bottom: pxToRem(15px);
+		}
+
+		&__back {
+			top: 1.6rem;
+
+			&__label {
+				display: none;
+			}
+		}
+
+		&.is-open {
+			.header__filters {
+				width: 100%;
+				z-index: 15;
+			}
+		}
+
+		&--project {
+			height: 210px;
+
+			.header__item {
+				display: block;
+				margin-right: pxToRem(25px);
+			}
 		}
 	}
 }

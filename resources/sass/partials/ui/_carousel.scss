@@ -1,3 +1,136 @@
 .carousel{
+	position: relative;
+	margin-bottom: 50px;
 
+	&__img {
+	    display: block;
+	    max-width: 100%;
+	    margin: 0 auto;
+	}
+
+	&__wrapper {
+	    position: relative;
+	}
+
+	&__slider {
+		@extend %transitionEase;
+		width: 100000px;
+	    margin: 0;
+	    padding: 0;
+	}
+
+	&__item {
+		@extend %transitionEase;
+		display: block;
+		float: left;
+	  	padding-left: pxToRem($gutter * 2);
+	  	cursor: pointer;
+
+	  	&--txt {
+	  		position: relative;
+	  		padding-left: 0;
+
+	  		.carousel__item__container {
+	  			min-height: 425px;
+	  			width: 300px;
+	  			padding: 63px;
+	  			background: black;
+	  		}
+	  	}
+	}
+
+	&__pager {
+		float: right;
+	}
+
+	&__btn {
+		@extend %transitionEase;
+		@extend %InhardtRegular;
+		padding: 0 pxToRem(25px);
+		font-size: 18px;
+		color: $color-grey;
+		background: none;
+		border: none;
+		border-radius: 0;
+		outline: none;
+		cursor: pointer;
+
+		svg {
+			position: relative;
+			top: -2px;
+			margin: 0 5px;
+		}
+
+		path {
+			@extend %transitionEase;
+			fill: $color-grey;
+		}
+
+		&:hover {
+			color: white;
+
+			path {
+				fill: white;
+			}
+		}
+	}
+
+	/* Texte */
+
+	&__section + &__section {
+		margin-top: pxToRem(20px);
+	}
+
+	&__label {
+		display: block;
+		color: $color-grey;
+	}
+
+	&__value {
+		display: block;
+	}
+}
+
+@media screen and (max-height: 900px) {
+	.carousel {
+		.carousel__item__container {
+			padding: pxToRem(50px) pxToRem(30px);
+		}
+	}
+}
+
+@include mobile {
+	.carousel {
+		&__item {
+			padding: 0 20px;
+
+			&--txt {
+				.carousel__item__container {
+					width: 100%;
+				}
+			}
+		}
+
+		&__pager {
+			float: none;
+			margin-top: 2rem;
+			overflow: hidden;
+		}
+
+		&__btn {
+			&--prev {
+				float: left;
+				padding-left: 0;
+			}
+
+			&--next {
+				float: right;
+				padding-right: 0;
+			}
+		}
+	}
+
+	.carousel__btn__label {
+		display: none;
+	}
 }

@@ -16,18 +16,23 @@
 /* ------------------------------------------------------------------ */
 /*        PROJECT STYLESHEET
 /* ------------------------------------------------------------------ */
-@import "ui/reset";
-@import "ui/base";
-@import "ui/typography";
-@import "ui/nav";
-@import "ui/buttons";
-@import "ui/lists";
-@import "ui/box";
-@import "ui/others";
-
 @import "layout/grid";
 @import "layout/header";
 @import "layout/footer";
 @import "layout/print";
+@import "layout/templates";
+
+@import "ui/reset";
+@import "ui/base";
+@import "ui/typography";
+@import "ui/icons";
+@import "ui/nav";
+@import "ui/buttons";
+@import "ui/lists";
+@import "ui/box";
+@import "ui/projects";
+@import "ui/carousel";
+@import "ui/profile";
+@import "ui/others";
 
 

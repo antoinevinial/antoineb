@@ -1,0 +1,121 @@
+.projects {
+	position: relative;
+
+	&__item {
+		width: 50%;
+		padding: pxToRem(25px) pxToRem($gutter);
+	}
+
+	&__link {
+		display: block;
+	}
+
+	&__img {
+		display: block;
+		max-width: 100%;
+		margin-bottom: pxToRem(18px);
+	}
+
+	&__title {
+		font-size: pxToRem(18px);
+		line-height: 1.5;
+	}
+
+	&__label {
+		display: block;
+		margin-top: pxToRem(-5px);
+		font-size: pxToRem(12px);
+		color: $color-grey;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	&__pager {
+		position: absolute !important;
+		top: 0 !important;
+		left: 100%;
+		width: 26px;
+		padding-top: pxToRem(25px);
+		z-index: 10;
+
+		&__list {
+			position: relative;
+		}
+
+		&__item {
+			float: left;
+			width: 10px;
+			height: 5px;
+			margin: 0 pxToRem(1px) pxToRem(2px);
+			background: $border-color;
+			cursor: pointer;
+
+			&:hover,
+			&.is-active {
+				background: $color-font;
+				@include transition(all $transition-quick linear);
+			}
+		}
+
+		/* Modifiers */
+		&.is-sticky {
+			position: fixed !important;
+			top: 0;
+		}
+
+		&.is-fade {
+			opacity: 0;
+		}
+	}
+
+	&__btn {
+		position: relative;
+		left: -15px;
+		display: block;
+		width: 50px;
+		height: 50px;
+		margin: 0;
+		padding: 0;
+		text-align: left;
+		background: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		@include transition(all $transition-quick ease);
+
+		svg {
+			margin-left: 15px;
+		}
+
+		&.is-fade {
+			opacity: 0.2;
+			cursor: default;
+			pointer-events: none;
+		}
+	}
+
+	/* Modifiers */
+
+	&.is-scrolled {
+		.projects__item {
+			opacity: 0.5;
+			@include transition(all $transition-quick linear);
+
+			&.is-active {
+				opacity: 1;
+			}
+		}
+	}
+
+	@include mobile {
+		&__pager {
+			display: none;
+		}
+
+		&__item {
+			position: static !important;
+			width: 100%;
+			padding: 0px 0px pxToRem(40px);
+		}
+	}
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css" type="text/css">
+  </head>
+  <body>
+    <div class="site-container js-site-container">
+      <button class="dev-grid__btn js-dev-grid-btn">Grid</button>
+      <div class="dev-grid js-dev-grid">
+        <div class="grid">
+          <div class="row">
+            <div class="cell-1">
+              <div class="cell-content"></div>
+            </div>
+            <div class="cell-1">
+              <div class="cell-content"></div>
+            </div>
+            <div class="cell-1">
+              <div class="cell-content"></div>
+            </div>
+            <div class="cell-1">
+              <div class="cell-content"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <header class="header js-header">
+        <div class="grid">
+          <div class="row">
+            <div class="cell-4">
+              <nav class="header__nav">
+                <ul class="header__list">
+                  <li class="header__item">
+                    <h1><a href="/" class="header__link is-active js-page-transition">Antoine Barrès</a></h1>
+                  </li>
+                  <li class="header__item"><a href="profile.html" class="header__link js-page-transition">Profile</a></li>
+                  <div class="header__filters">
+                    <button class="header__filters__btn js-header-filters-btn">
+                            <svg class="icon icon-filters">
+                              <path fill="#ffffff" d="M0,2 L15,2 L15,3 L0,3 L0,2 Z M8,2 L8,1 L8.99680742,1 L9,0 L11,0 L11,1 L12,1.00174744 L12,2 L8,2 Z M8,3 L8,4 L9,4 L9,5 L11,5 L11,4 L12,4 L12,3 L8,3 Z M0,11 L15,11 L15,12 L0,12 L0,11 Z M3,11 L3,10 L4,10 L4,9 L6,9 L6,10 L7,10 L7,11 L3,11 Z M3,12 L3,13 L4,13 L4,14 L6,14 L6,13 L7,13 L7,12 L3,12 Z"></path>
+                            </svg>
+                            <svg class="icon icon-close">
+                              <path fill="#ffffff" d="M0,0 L1,0 L1,1 L0,1 L0,0 Z M1,1 L2,1 L2,2 L1,2 L1,1 Z M2,2 L3,2 L3,3 L2,3 L2,2 Z M3,3 L4,3 L4,4 L3,4 L3,3 Z M4,4 L5,4 L5,5 L4,5 L4,4 Z M3,5 L4,5 L4,6 L3,6 L3,5 Z M2,6 L3,6 L3,7 L2,7 L2,6 Z M1,7 L2,7 L2,8 L1,8 L1,7 Z M0,8 L1,8 L1,9 L0,9 L0,8 Z M5,3 L6,3 L6,4 L5,4 L5,3 Z M6,2 L7,2 L7,3 L6,3 L6,2 Z M7,1 L8,1 L8,2 L7,2 L7,1 Z M8,0 L9,0 L9,1 L8,1 L8,0 Z M5,5 L6,5 L6,6 L5,6 L5,5 Z M6,6 L7,6 L7,7 L6,7 L6,6 Z M7,7 L8,7 L8,8 L7,8 L7,7 Z M8,8 L9,8 L9,9 L8,9 L8,8 Z"></path>
+                            </svg>
+                    </button>
+                    <div class="header__filters__modal">
+                      <ul class="header__filters__modal__list">
+                        <li class="header__filters__modal__item"><a href="interactive" class="header__filters__modal__link js-header-link">
+                                  <svg class="icon icon-interactive">
+                                    <path fill="#ffffff" d="M4,0 L5,0 L5,2 L4,2 L4,0 Z M0,1 L1,1 L1,2 L0,2 L0,1 Z M1,2 L2,2 L2,3 L1,3 L1,2 Z M7,2 L8,2 L8,3 L7,3 L7,2 Z M8,1 L9,1 L9,2 L8,2 L8,1 Z M1,8 L2,8 L2,9 L1,9 L1,8 Z M2,9 L3,9 L3,10 L2,10 L2,9 Z M4,3 L5,3 L5,4 L4,4 L4,3 Z M6,6 L7,6 L7,7 L6,7 L6,6 Z M8,6 L9,6 L9,7 L8,7 L8,6 Z M10,7 L11,7 L11,8 L10,8 L10,7 Z M5,3 L6,3 L6,9 L5,9 L5,3 Z M7,6 L8,6 L8,9 L7,9 L7,6 Z M9,6 L10,6 L10,10 L9,10 L9,6 Z M11,7 L12,7 L12,15 L11,15 L11,7 Z M4,16 L10,16 L10,17 L4,17 L4,16 Z M10,15 L11,15 L11,16 L10,16 L10,15 Z M3,15 L4,15 L4,16 L3,16 L3,15 Z M0,9 L1,9 L1,11 L0,11 L0,9 Z M1,11 L2,11 L2,13 L1,13 L1,11 Z M2,13 L3,13 L3,15 L2,15 L2,13 Z M3,3 L4,3 L4,11 L3,11 L3,3 Z"></path>
+                                  </svg> Interactive</a></li>
+                        <li class="header__filters__modal__item"><a href="motion" class="header__filters__modal__link js-header-link">
+                                  <svg class="icon icon-motion">
+                                    <path fill="#ffffff" d="M0,0 L1,0 L1,1 L0,1 L0,0 Z M0,2 L1,2 L1,3 L0,3 L0,2 Z M0,4 L1,4 L1,5 L0,5 L0,4 Z M0,6 L1,6 L1,7 L0,7 L0,6 Z M0,8 L1,8 L1,9 L0,9 L0,8 Z M0,10 L1,10 L1,11 L0,11 L0,10 Z M0,12 L1,12 L1,13 L0,13 L0,12 Z M0,14 L1,14 L1,15 L0,15 L0,14 Z M14,0 L15,0 L15,1 L14,1 L14,0 Z M14,2 L15,2 L15,3 L14,3 L14,2 Z M14,4 L15,4 L15,5 L14,5 L14,4 Z M14,6 L15,6 L15,7 L14,7 L14,6 Z M14,8 L15,8 L15,9 L14,9 L14,8 Z M14,10 L15,10 L15,11 L14,11 L14,10 Z M14,12 L15,12 L15,13 L14,13 L14,12 Z M14,14 L15,14 L15,15 L14,15 L14,14 Z M2,0 L13,0 L13,1 L2,1 L2,0 Z M2,1 L3,1 L3,2 L2,2 L2,1 Z M12,1 L13,1 L13,2 L12,2 L12,1 Z M2,14 L3,14 L3,15 L2,15 L2,14 Z M12,14 L13,14 L13,15 L12,15 L12,14 Z M2,5 L3,5 L3,11 L2,11 L2,5 Z M12,5 L13,5 L13,11 L12,11 L12,5 Z M2,2 L13,2 L13,3 L2,3 L2,2 Z M2,4 L13,4 L13,5 L2,5 L2,4 Z M2,11 L13,11 L13,12 L2,12 L2,11 Z M2,13 L13,13 L13,14 L2,14 L2,13 Z"></path>
+                                  </svg> Motion</a></li>
+                        <li class="header__filters__modal__item"><a href="illustration" class="header__filters__modal__link js-header-link">
+                                  <svg class="icon icon-illustration">
+                                    <path fill="#ffffff" d="M12,2 L13,2 L13,4 L12,4 L12,2 Z M14,0 L15,0 L15,2 L14,2 L14,0 Z M13,1 L14,1 L14,3 L13,3 L13,1 Z M11,3 L12,3 L12,5 L11,5 L11,3 Z M10,4 L11,4 L11,6 L10,6 L10,4 Z M9,5 L10,5 L10,7 L9,7 L9,5 Z M8,6 L9,6 L9,8 L8,8 L8,6 Z M7,7 L8,7 L8,9 L7,9 L7,7 Z M6,8 L7,8 L7,9 L6,9 L6,8 Z M3,9 L6,9 L6,10 L3,10 L3,9 Z M5,10 L7,10 L7,11 L5,11 L5,10 Z M6,11 L7,11 L7,13 L6,13 L6,11 Z M0,12 L6,12 L6,13 L0,13 L0,12 Z M1,13 L5,13 L5,14 L1,14 L1,13 Z M2,10 L3,10 L3,12 L2,12 L2,10 Z M0,11 L2,11 L2,12 L0,12 L0,11 Z"></path>
+                                  </svg> Illustration</a></li>
+                        <li class="header__filters__modal__item"><a href="photography" class="header__filters__modal__link js-header-link">
+                                  <svg class="icon icon-photography">
+                                    <path fill="#ffffff" d="M0,1 L14,1 L14,2 L0,2 L0,1 Z M0,2 L1,2 L1,16 L0,16 L0,2 Z M1,15 L14,15 L14,16 L1,16 L1,15 Z M13,2 L14,2 L14,15 L13,15 L13,2 Z M2,0 L5,0 L5,1 L2,1 L2,0 Z M9,3 L12,3 L12,4 L9,4 L9,3 Z M9,5 L12,5 L12,6 L9,6 L9,5 Z M9,4 L10,4 L10,5 L9,5 L9,4 Z M11,4 L12,4 L12,5 L11,5 L11,4 Z M10,8 L13,8 L13,9 L10,9 L10,8 Z M1,8 L4,8 L4,9 L1,9 L1,8 Z M4,7 L5,7 L5,8 L4,8 L4,7 Z M5,6 L6,6 L6,7 L5,7 L5,6 Z M6,5 L8,5 L8,6 L6,6 L6,5 Z M6,8 L7,8 L7,9 L6,9 L6,8 Z M6,11 L8,11 L8,12 L6,12 L6,11 Z M8,10 L9,10 L9,11 L8,11 L8,10 Z M9,9 L10,9 L10,10 L9,10 L9,9 Z M9,7 L10,7 L10,8 L9,8 L9,7 Z M8,6 L9,6 L9,7 L8,7 L8,6 Z M5,10 L6,10 L6,11 L5,11 L5,10 Z M4,9 L5,9 L5,10 L4,10 L4,9 Z"></path>
+                                  </svg> Photography</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="main is-fade js-main">
+        <div class="grid">
+          <div class="row">
+            <div class="projects js-projects">
+              <ul class="projects__list js-projects-list">
+                <li class="projects__item js-projects-item interactive"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x250.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item motion"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item motion"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item photography"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item photography"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item interactive"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item photography"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item illustration"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item interactive"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x250.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item motion"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item motion"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item photography"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item photography"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item interactive"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item photography"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+                <li class="projects__item js-projects-item illustration"><a href="project.html" class="projects__link js-page-transition"><img src="img/416x510.jpg" class="projects__img">
+                    <h2 class="projects__title">Impelled to confer perpetuity</h2><span class="projects__label">Interactive</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+      <script src="js/vendor/jquery-2.1.3.min.js"></script>
+      <script src="js/vendor/isotope.pkgd.min.js"></script>
+      <script src="js/main.js"></script>
+    </div>
+  </body>
+</html>

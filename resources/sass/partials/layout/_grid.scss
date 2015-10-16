@@ -5,6 +5,8 @@ $gutter: 32px;
 $widthGrid: 960px;
 $width: $widthGrid + $gutter * 2;
 
+$gutterMobile: 20px;
+
 .grid {
     max-width: $width;
     padding: 0 pxToRem($gutter * 2);
@@ -37,5 +39,26 @@ $width: $widthGrid + $gutter * 2;
 @for $i from 1 through $cols {
     .append-#{$i} {
         margin-right: (100% / $cols) * $i;
+    }
+}
+
+@include mobile {
+    [class*="cell-"] {
+        float: none;
+        padding: 0;
+    }
+
+    @for $i from 1 through $cols {
+        .prepend-#{$i} {
+            margin-left: 0;
+        }
+    }
+
+    .grid {
+        padding: 0 pxToRem($gutterMobile);
+    }
+
+    .row {
+        margin: 0;
     }
 }
