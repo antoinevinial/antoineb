@@ -5,6 +5,7 @@ var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
 var filters  = require('./modules/filters.js');
 var pageTransition = require('./modules/page-transition.js');
+var header   = require('./modules/header.js');
 
 (function ($, oo, win) {
 
@@ -31,6 +32,11 @@ var pageTransition = require('./modules/page-transition.js');
     // Init filters module.
     if ($('.js-header-filters-btn').length) {
         filters.init();
+    }
+
+    // Init header module.
+    if($('.js-header-home').length) {
+        header.init();
     }
 
 })(jQuery, oo, window);

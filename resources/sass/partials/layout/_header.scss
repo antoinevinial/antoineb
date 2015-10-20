@@ -1,7 +1,13 @@
 .header {
-	@extend %transitionEase;
-	padding: pxToRem(60px) 0 pxToRem(40px);
+	margin-top: pxToRem(60px);
+	padding: 0 0 pxToRem(40px);
 	overflow: hidden;
+	background-color: $background-dark;
+	@include transition(opacity $transition-quick ease);
+
+	&--home {
+		height: pxToRem(110px);
+	}
 
 	&__nav {
 		position: relative;
@@ -178,8 +184,11 @@
 	}
 
 	@include mobile {
-		margin-top: 0;
 		overflow: visible;
+
+		&--home {
+			height: pxToRem(85px);
+		}
 
 		&__nav {
 			padding-top: pxToRem(24px);
@@ -241,5 +250,22 @@
 				margin-right: pxToRem(25px);
 			}
 		}
+	}
+}
+
+.is-header-sticky {
+	padding-top: pxToRem(170px);
+
+	.header--home {
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin-top: 0;
+		width: 100%;
+		z-index: 10;
+	}
+
+	@include mobile {
+		padding-top: pxToRem(145px);
 	}
 }

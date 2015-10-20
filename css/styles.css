@@ -202,9 +202,14 @@ img.picture {
     margin: 0; } }
 
 .header {
-  padding: 3.75rem 0 2.5rem;
+  margin-top: 3.75rem;
+  padding: 0 0 2.5rem;
   overflow: hidden;
+  background-color: #161616;
+  transition: opacity 0.25s ease;
   /* Modifiers */ }
+  .header--home {
+    height: 6.875rem; }
   .header__nav {
     position: relative;
     padding-top: 2.5rem;
@@ -305,8 +310,9 @@ img.picture {
       margin-right: 1.5625rem; }
   @media (max-width: 480px) {
     .header {
-      margin-top: 0;
       overflow: visible; }
+      .header--home {
+        height: 5.3125rem; }
       .header__nav {
         padding-top: 1.5rem; }
       .header__item {
@@ -342,6 +348,19 @@ img.picture {
         .header--project .header__item {
           display: block;
           margin-right: 1.5625rem; } }
+
+.is-header-sticky {
+  padding-top: 10.625rem; }
+  .is-header-sticky .header--home {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 0;
+    width: 100%;
+    z-index: 10; }
+  @media (max-width: 480px) {
+    .is-header-sticky {
+      padding-top: 9.0625rem; } }
 
 @media print {
   /* ------------------------------------------------------------------ */
@@ -467,7 +486,7 @@ a {
   overflow: hidden; }
 
 /* Transitions */
-.header, .header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
+.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -641,7 +660,6 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     .projects__pager {
       display: none; }
     .projects__item {
-      position: static !important;
       width: 100%;
       padding: 0px 0px 2.5rem; } }
 
