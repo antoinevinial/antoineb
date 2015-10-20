@@ -492,6 +492,9 @@ a {
   font-style: normal; }
 
 /* Extend based on the font */
+.carousel__item--next .carousel__item__content__label {
+  font-family: 'theinhardtmedium', Arial, sans-serif; }
+
 .header__title, body, .carousel__btn {
   font-family: 'theinhardtregular', Arial, sans-serif; }
 
@@ -507,6 +510,10 @@ a {
 .icon-arrow-right {
   width: 16px;
   height: 7px; }
+
+.icon-arrow-next {
+  width: 85px;
+  height: 35px; }
 
 .icon-filters {
   width: 15px;
@@ -665,6 +672,34 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
         width: 300px;
         padding: 63px;
         background: black; }
+    .carousel__item--next {
+      position: relative;
+      padding-left: 200px; }
+      .carousel__item--next .carousel__img {
+        opacity: 0.4; }
+      .carousel__item--next .carousel__item__content {
+        position: absolute;
+        top: 10.3125rem;
+        left: 10.375rem;
+        display: block; }
+        .carousel__item--next .carousel__item__content__label {
+          display: block;
+          font-size: 4.0625rem;
+          line-height: 1; }
+        .carousel__item--next .carousel__item__content__title {
+          display: inline-block;
+          margin-right: 0.9375rem;
+          font-size: 1.125rem;
+          line-height: 1; }
+        .carousel__item--next .carousel__item__content__category {
+          font-size: 0.875rem;
+          line-height: 1;
+          color: #828282;
+          text-transform: uppercase;
+          letter-spacing: 2px; }
+      .carousel__item--next .icon {
+        display: block;
+        margin-top: 1.875rem; }
   .carousel__pager {
     float: right; }
   .carousel__btn {
@@ -703,6 +738,13 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     padding: 0 20px; }
     .carousel__item--txt .carousel__item__container {
       width: 100%; }
+    .carousel__item--next .carousel__item__content {
+      top: 1.5625rem;
+      right: 2.1875rem;
+      left: 2.1875rem; }
+      .carousel__item--next .carousel__item__content__label {
+        margin-bottom: 0.625rem;
+        font-size: 2.8125rem; }
   .carousel__pager {
     float: none;
     margin-top: 2rem;
