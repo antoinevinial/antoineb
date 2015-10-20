@@ -95,6 +95,19 @@
 		width: 500px;
 	}
 
+	&__filters__reset {
+		display: none;
+		width: pxToRem(25px);
+		height: pxToRem(25px);
+
+		.icon {
+			position: relative;
+			top: pxToRem(12px);
+			display: block;
+			margin: 0 auto;
+		}
+	}
+
 	&__filters__btn {
 		float: right;
 		margin-top: 6px;
@@ -161,6 +174,15 @@
 	}
 
 	&.is-open {
+		.header__filters__btn {
+			display: none;
+		}
+
+		.header__filters__reset {
+			display: inline-block;
+			float: right;
+		}
+
 		.header__filters__modal {
 			opacity: 1;
 			pointer-events: auto;

@@ -10,12 +10,12 @@ var filters = {
 	bindUI: function bindUI() {
 		this.ui.$header = $('.js-header');	
 		this.ui.$btn    = this.ui.$header.find('.js-header-filters-btn');
-		this.ui.$links  = this.ui.$header.find('.js-header-link');
+		this.ui.$reset  = this.ui.$header.find('.js-header-link-reset');
 	},
 
 	bindEvents: function bindEvents() {
 		this.ui.$btn.on('click', $.proxy(this.toggleFilters, this));
-		this.ui.$links.on('click', $.proxy(this.toggleFilters, this));
+		this.ui.$reset.on('click', $.proxy(this.toggleFilters, this));
 	},
 
 	toggleFilters: function toggleFilters() {

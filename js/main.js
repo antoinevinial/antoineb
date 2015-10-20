@@ -551,12 +551,12 @@ var filters = {
 	bindUI: function bindUI() {
 		this.ui.$header = $('.js-header');	
 		this.ui.$btn    = this.ui.$header.find('.js-header-filters-btn');
-		this.ui.$links  = this.ui.$header.find('.js-header-link');
+		this.ui.$reset  = this.ui.$header.find('.js-header-link-reset');
 	},
 
 	bindEvents: function bindEvents() {
 		this.ui.$btn.on('click', $.proxy(this.toggleFilters, this));
-		this.ui.$links.on('click', $.proxy(this.toggleFilters, this));
+		this.ui.$reset.on('click', $.proxy(this.toggleFilters, this));
 	},
 
 	toggleFilters: function toggleFilters() {
@@ -675,6 +675,7 @@ var projects = {
         this.ui.$win      = $(window);
         this.ui.$projects = $('.js-projects');
         this.ui.$links    = $('.js-header-link');
+        this.ui.$reset    = $('.js-header-link-reset');
         this.ui.$list     = this.ui.$projects.find('.js-projects-list');
         this.ui.$items    = this.ui.$projects.find('.js-projects-item');
     },
@@ -684,6 +685,9 @@ var projects = {
 
         // Filter projects.
         this.ui.$links.on('click', $.proxy(this.filterItems, this));
+
+        // Reset projects.
+        this.ui.$reset.on('click', $.proxy(this.resetItems, this));
 
         // When an image is loaded, adjust isotope layout.
         this.ui.$list.imagesLoaded().progress( function() {
@@ -906,11 +910,22 @@ var projects = {
         // Filter list items.
         this.ui.$list.isotope({ filter: target });
 
-        // Filter pager items.
-        this.ui.$pagerList.isotope({ filter: target });
-
         // Hide pager.
         this.ui.$pager.addClass('is-fade');
+
+        // Reset item active variable and isAlreadyPress variable.
+        this.itemActive = 0;
+    },
+
+    resetItems: function resetItems(e) {
+        // Prevent default.
+        e.preventDefault();
+
+        // Filter list items.
+        this.ui.$list.isotope({ filter: '' });
+
+        // Shiw pager.
+        this.ui.$pager.removeClass('is-fade');
 
         // Reset item active variable and isAlreadyPress variable.
         this.itemActive = 0;

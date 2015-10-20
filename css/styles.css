@@ -261,6 +261,15 @@ img.picture {
     top: 2.5rem;
     right: 0;
     width: 500px; }
+  .header__filters__reset {
+    display: none;
+    width: 1.5625rem;
+    height: 1.5625rem; }
+    .header__filters__reset .icon {
+      position: relative;
+      top: 0.75rem;
+      display: block;
+      margin: 0 auto; }
   .header__filters__btn {
     float: right;
     margin-top: 6px;
@@ -297,6 +306,11 @@ img.picture {
         fill: white; }
   .header.is-fade {
     opacity: 0; }
+  .header.is-open .header__filters__btn {
+    display: none; }
+  .header.is-open .header__filters__reset {
+    display: inline-block;
+    float: right; }
   .header.is-open .header__filters__modal {
     opacity: 1;
     pointer-events: auto; }
@@ -687,7 +701,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       padding-left: 0; }
       .carousel__item--txt .carousel__item__container {
         min-height: 425px;
-        width: 300px;
+        width: 420px;
         padding: 63px;
         background: black; }
     .carousel__item--next {
