@@ -12,6 +12,7 @@ var header = {
 		this.ui.$win    = $(window);
 		this.ui.$body   = $('body');
 		this.ui.$header = $('.js-header-home');
+		this.ui.$main   = $('.js-main');
 
 		this.topPos = this.ui.$header.offset().top;
 	},

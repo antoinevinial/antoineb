@@ -581,6 +581,7 @@ var header = {
 		this.ui.$win    = $(window);
 		this.ui.$body   = $('body');
 		this.ui.$header = $('.js-header-home');
+		this.ui.$main   = $('.js-main');
 
 		this.topPos = this.ui.$header.offset().top;
 	},
@@ -915,6 +916,9 @@ var projects = {
 
         // Reset item active variable and isAlreadyPress variable.
         this.itemActive = 0;
+
+        // Scroll to top of the page.
+        $("html, body").animate({ scrollTop: 0 }, this.timer);
     },
 
     resetItems: function resetItems(e) {
@@ -929,6 +933,9 @@ var projects = {
 
         // Reset item active variable and isAlreadyPress variable.
         this.itemActive = 0;
+
+        // Scroll to top of the page.
+        $("html, body").animate({ scrollTop: 0 }, this.timer);
     },
 
     toggleList: function toggleList(e) {

@@ -1,6 +1,6 @@
 body {
 	@extend %InhardtRegular;
-	min-height: 100vh;
+	min-height: calc(100vh - 60px);
 	font-size:#{$base-font-size};
     line-height:#{$base-line-height};
     color: $color-font;
