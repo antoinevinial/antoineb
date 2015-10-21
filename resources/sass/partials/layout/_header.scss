@@ -149,9 +149,22 @@
 
 	&__filters__modal__link {
 		@extend %transitionEase;
+		position: relative;
 		font-size: pxToRem(12px);
 		letter-spacing: 1px;
 		color: $color-grey;
+
+		&:before {
+			@extend %transitionEase;
+			content: "";
+			position: absolute;
+			top: pxToRem(-49px);
+			left: 0;
+			display: block;
+			width: 100%;
+			height: 1px;
+			background-color: transparent;
+		}
 
 		.icon {
 			margin-right: pxToRem(5px);
@@ -160,10 +173,20 @@
 		&:hover {
 			color: white;
 
-			.icon {
-				path {
-					fill: white;
-				}
+			path {
+				fill: white;
+			}
+		}
+
+		&.is-active {
+			color: white;
+
+			&:before {
+				background-color: white;
+			}
+
+			path {
+				fill: white;
 			}
 		}
 	}
@@ -230,6 +253,11 @@
 			top: pxToRem(15px);
 		}
 
+		&__filters__reset {
+			position: relative;
+			z-index: 5;
+		}
+
 		&__filters__btn {
 			position: relative;
 			top: pxToRem(6px);
@@ -247,6 +275,12 @@
 		&__filters__modal__item {
 			float: none;
 			margin-bottom: pxToRem(15px);
+		}
+
+		&__filters__modal__link {
+			&:before {
+				display: none;
+			}
 		}
 
 		&__back {

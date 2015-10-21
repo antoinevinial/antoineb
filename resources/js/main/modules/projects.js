@@ -19,6 +19,7 @@ var projects = {
 
     bindUI: function bindUI() {
         this.ui.$win      = $(window);
+        this.ui.$header   = $('.js-header');
         this.ui.$projects = $('.js-projects');
         this.ui.$links    = $('.js-header-link');
         this.ui.$reset    = $('.js-header-link-reset');
@@ -206,7 +207,7 @@ var projects = {
         this.isAnimate = true;
 
         // Scroll to the element.
-        $("html, body").stop().animate({ scrollTop: $el.offset().top }, this.timer, function() {
+        $("html, body").stop().animate({ scrollTop: ($el.offset().top - this.ui.$header.outerHeight()) }, this.timer, function() {
             // Add small setTimeout to prevent un-focus project list.
             setTimeout(function() { self.isAnimate = false; }, 100);
         });
@@ -253,6 +254,10 @@ var projects = {
         // Get target class name.
         var target = '.' + href;
 
+        // Add is-active class on element.
+        this.ui.$links.removeClass('is-active');
+        $(e.currentTarget).addClass('is-active');
+
         // Filter list items.
         this.ui.$list.isotope({ filter: target });
 
@@ -269,6 +274,9 @@ var projects = {
     resetItems: function resetItems(e) {
         // Prevent default.
         e.preventDefault();
+
+        // Remove is-active class all links.
+        this.ui.$links.removeClass('is-active');
 
         // Filter list items.
         this.ui.$list.isotope({ filter: '' });

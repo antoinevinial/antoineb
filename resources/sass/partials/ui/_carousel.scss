@@ -26,21 +26,43 @@
 	  	padding-left: pxToRem($gutter * 2);
 	  	cursor: pointer;
 
+	  	&--intro,
 	  	&--txt {
 	  		position: relative;
 	  		padding-left: 0;
+	  		font-size: pxToRem(18px);
 
 	  		.carousel__item__container {
-	  			min-height: 425px;
+	  			min-height: 720px;
 	  			width: 420px;
-	  			padding: 63px;
+	  			padding: pxToRem(110px) pxToRem(63px);
 	  			background: black;
+	  		}
+
+	  		p + p {
+	  			margin-top: pxToRem(30px);
+	  		}
+
+	  		.carousel__item__title {
+	  			@extend %InhardtMedium;
+	  			display: block;
+	  			margin-bottom: pxToRem(30px);
+	  			font-size: pxToRem(24px);
+	  		}
+	  	}
+
+	  	&--txt {
+	  		padding-left: pxToRem($gutter * 2);
+
+	  		.carousel__item__container {
+	  			width: 550px;
+	  			padding: pxToRem(110px) pxToRem(150px) pxToRem(110px) pxToRem(63px);
 	  		}
 	  	}
 
 	  	&--next {
 	  		position: relative;
-	  		padding-left: 200px;
+	  		padding-left: pxToRem(160px);
 
 	  		.carousel__img {
 	  			opacity: 0.4;
@@ -48,13 +70,16 @@
 
 	  		.carousel__item__content {
 	  			position: absolute;
-	  			top: pxToRem(165px);
-	  			left: pxToRem(166px);
+	  			top: pxToRem(75px);
+	  			left: pxToRem(63px);
 	  			display: block;
 
 	  			&__label {
 	  				@extend %InhardtMedium;
+	  				position: relative;
+	  				left: pxToRem(-4px);
 	  				display: block;
+	  				margin-bottom: pxToRem(5px);
 	  				font-size: pxToRem(65px);
 	  				line-height: 1;
 	  			}
@@ -76,8 +101,7 @@
 	  		}
 
 	  		.icon {
-	  			display: block;
-	  			margin-top: pxToRem(30px);
+	  			margin-left: pxToRem(20px);
 	  		}
 	  	}
 	}
@@ -134,28 +158,22 @@
 	}
 }
 
-@media screen and (max-height: 900px) {
-	.carousel {
-		.carousel__item__container {
-			padding: pxToRem(50px) pxToRem(30px);
-		}
-	}
-}
-
 @include mobile {
 	.carousel {
 		&__item {
 			padding: 0 20px;
 
+			&--intro,
 			&--txt {
 				.carousel__item__container {
 					width: 100%;
+					padding: pxToRem(35px);
 				}
 			}
 
 			&--next {
 				.carousel__item__content {
-					top: pxToRem(25px);
+					top: pxToRem(35px);
 					right: pxToRem(35px);
 					left: pxToRem(35px);
 
@@ -163,6 +181,11 @@
 						margin-bottom: pxToRem(10px);
 						font-size: pxToRem(45px);
 					}
+				}
+
+				.icon {
+					display: block;
+					margin: pxToRem(5px) 0 pxToRem(15px);
 				}
 			}
 		}
