@@ -11,14 +11,21 @@
 // points are seamless.
 
 $mq-mobile-portrait     : 320px !default;
-$mq-mobile-landscape    : 480px !default;
+$mq-mobile-landscape    : 550px !default;
 $mq-tablet-portrait     : 768px !default;
 $mq-tablet-landscape    : 1024px !default;
 $mq-desktop             : 1382px !default;
 
+// Tablet.
+@mixin tablet {
+	@media (max-width: $mq-tablet-portrait) {
+		@content;
+	}
+}
+
 // Mobile.
 @mixin mobile {
-    @media (max-width : $mq-mobile-landscape) {
+    @media (max-width: $mq-mobile-landscape) {
         @content;
     }
 }

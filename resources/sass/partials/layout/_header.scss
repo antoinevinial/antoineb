@@ -228,6 +228,12 @@
 		}
 	}
 
+	@include tablet {
+		&__filters {
+			display: none;
+		}
+	}
+
 	@include mobile {
 		overflow: visible;
 
@@ -299,8 +305,6 @@
 		}
 
 		&--project {
-			height: 210px;
-
 			.header__item {
 				display: block;
 				margin-right: pxToRem(25px);

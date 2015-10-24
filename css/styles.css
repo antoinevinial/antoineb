@@ -184,9 +184,10 @@ img.picture {
 .append-4 {
   margin-right: 100%; }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   [class*="cell-"] {
     float: none;
+    width: 100%;
     padding: 0; }
   .prepend-1 {
     margin-left: 0; }
@@ -338,7 +339,10 @@ img.picture {
     height: 170px; }
     .header--project .header__item {
       margin-right: 1.5625rem; }
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
+    .header__filters {
+      display: none; } }
+  @media (max-width: 550px) {
     .header {
       overflow: visible; }
       .header--home {
@@ -378,11 +382,9 @@ img.picture {
       .header.is-open .header__filters {
         width: 100%;
         z-index: 15; }
-      .header--project {
-        height: 210px; }
-        .header--project .header__item {
-          display: block;
-          margin-right: 1.5625rem; } }
+      .header--project .header__item {
+        display: block;
+        margin-right: 1.5625rem; } }
 
 .is-header-sticky {
   padding-top: 10.625rem; }
@@ -393,7 +395,7 @@ img.picture {
     margin-top: 0;
     width: 100%;
     z-index: 10; }
-  @media (max-width: 480px) {
+  @media (max-width: 550px) {
     .is-header-sticky {
       padding-top: 9.0625rem; } }
 
@@ -521,7 +523,7 @@ a {
   overflow: hidden; }
 
 /* Transitions */
-.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
+.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .main, .carousel__slider, .carousel__item, .carousel__item--next .carousel__img, .carousel__btn, .carousel__btn path {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -552,9 +554,6 @@ a {
 
 .header__title, body, .carousel__btn {
   font-family: 'theinhardtregular', Arial, sans-serif; }
-
-.profile__title {
-  font-family: 'theinhardtthin', Arial, sans-serif; }
 
 .icon-arrow-up,
 .icon-arrow-down {
@@ -692,7 +691,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     transition: all 0.25s linear; }
     .projects.is-scrolled .projects__item.is-active {
       opacity: 1; }
-  @media (max-width: 480px) {
+  @media (max-width: 550px) {
     .projects__pager {
       display: none; }
     .projects__item {
@@ -772,6 +771,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
           letter-spacing: 2px; }
       .carousel__item--next .icon {
         margin-left: 1.25rem; }
+      .carousel__item--next:hover .carousel__img {
+        opacity: 0.5; }
   .carousel__pager {
     float: right; }
   .carousel__btn {
@@ -801,23 +802,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   .carousel__value {
     display: block; }
 
-@media (max-width: 480px) {
-  .carousel__item {
-    padding: 0 20px; }
-    .carousel__item--intro .carousel__item__container,
-    .carousel__item--txt .carousel__item__container {
-      width: 100%;
-      padding: 2.1875rem; }
-    .carousel__item--next .carousel__item__content {
-      top: 2.1875rem;
-      right: 2.1875rem;
-      left: 2.1875rem; }
-      .carousel__item--next .carousel__item__content__label {
-        margin-bottom: 0.625rem;
-        font-size: 2.8125rem; }
-    .carousel__item--next .icon {
-      display: block;
-      margin: 0.3125rem 0 0.9375rem; }
+@media (max-width: 768px) {
   .carousel__pager {
     float: none;
     margin-top: 2rem;
@@ -827,13 +812,38 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     padding-left: 0; }
   .carousel__btn--next {
     float: right;
-    padding-right: 0; }
-  .carousel__btn__label {
-    display: none; } }
+    padding-right: 0; } }
+
+@media (max-width: 550px) {
+  .carousel__item {
+    padding: 0 20px; }
+    .carousel__item--intro .carousel__item__container,
+    .carousel__item--txt .carousel__item__container {
+      width: 100%;
+      min-height: 400px;
+      padding: 2.1875rem; }
+    .carousel__item--next .carousel__item__content {
+      top: 2.1875rem;
+      right: 3.4375rem;
+      left: 3.4375rem; }
+      .carousel__item--next .carousel__item__content__label {
+        margin-bottom: 0.625rem;
+        font-size: 2.8125rem;
+        line-height: 2.5rem; }
+    .carousel__item--next .icon {
+      display: none;
+      margin: 0.3125rem 0 0.9375rem; } }
 
 .tpl-profile {
   background-color: #090909; }
-  .tpl-profile .header {
+  .tpl-profile .header:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100px;
     background-color: #161616; }
 
 .profile {
@@ -852,9 +862,6 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       display: block;
       width: 9999px;
       background-color: #161616; }
-  .profile__title {
-    font-size: 5rem;
-    color: #454545; }
   .profile__img {
     display: block;
     max-width: 100%; }
@@ -867,7 +874,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     border: none; }
   .profile__txt {
     margin-bottom: 100px; }
-  @media (max-width: 480px) {
+  @media (max-width: 550px) {
     .profile__txt {
       margin-bottom: 50px; }
     .profile__list {
@@ -893,7 +900,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     display: block;
     width: 100%;
     background-color: rgba(142, 239, 186, 0.5); }
-  @media (max-width: 480px) {
+  @media (max-width: 550px) {
     .dev-grid {
       display: none; } }
 
@@ -910,7 +917,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   font-family: inherit;
   color: black;
   border: none; }
-  @media (max-width: 480px) {
+  @media (max-width: 550px) {
     .dev-grid__btn {
       display: none; } }
 

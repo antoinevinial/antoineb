@@ -332,6 +332,8 @@ var carousel = {
 		this.ui.$body     = $('body');
 		this.ui.$header   = $('.js-header');
 		this.ui.$main     = $('.js-main');
+		this.ui.$close    = $('.js-page-transition');
+
 		this.ui.$carousel = $('.js-carousel');
 		this.ui.$slider   = this.ui.$carousel.find('.js-carousel-slider');
 		this.ui.$items    = this.ui.$carousel.find('.js-carousel-item');
@@ -353,7 +355,7 @@ var carousel = {
 
 	checkMobileDesktop: function checkMobileDesktop() {
 		// Check if we're on mobile.
-		if (this.ui.$win.outerWidth() <= 480) {
+		if (this.ui.$win.outerWidth() <= 550) {
 			this.ui.$items.outerWidth(this.ui.$win.outerWidth());
 		} else {
 			this.ui.$items.outerWidth('auto');
@@ -379,6 +381,11 @@ var carousel = {
 	    // If user press the left arrow, click on prev btn.
 	    if (e.keyCode == 37) {
 	        this.ui.$prev.trigger('click');
+	    }
+
+	    // If user press esc, close project.
+	    if (e.keyCode == 27) {
+	    	this.ui.$close.click();
 	    }
 	},
 

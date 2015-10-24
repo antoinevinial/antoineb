@@ -65,6 +65,7 @@
 	  		padding-left: pxToRem(160px);
 
 	  		.carousel__img {
+	  			@extend %transitionEase;
 	  			opacity: 0.4;
 	  		}
 
@@ -102,6 +103,12 @@
 
 	  		.icon {
 	  			margin-left: pxToRem(20px);
+	  		}
+
+	  		&:hover {
+	  			.carousel__img {
+	  				opacity: 0.5;
+	  			}
 	  		}
 	  	}
 	}
@@ -158,6 +165,26 @@
 	}
 }
 
+@include tablet {
+	.carousel__pager {
+		float: none;
+		margin-top: 2rem;
+		overflow: hidden;
+	}
+
+	.carousel__btn {
+		&--prev {
+			float: left;
+			padding-left: 0;
+		}
+
+		&--next {
+			float: right;
+			padding-right: 0;
+		}
+	}
+}
+
 @include mobile {
 	.carousel {
 		&__item {
@@ -167,6 +194,7 @@
 			&--txt {
 				.carousel__item__container {
 					width: 100%;
+					min-height: 400px;
 					padding: pxToRem(35px);
 				}
 			}
@@ -174,42 +202,21 @@
 			&--next {
 				.carousel__item__content {
 					top: pxToRem(35px);
-					right: pxToRem(35px);
-					left: pxToRem(35px);
+					right: pxToRem(55px);
+					left: pxToRem(55px);
 
 					&__label {
 						margin-bottom: pxToRem(10px);
 						font-size: pxToRem(45px);
+						line-height: pxToRem(40px);
 					}
 				}
 
 				.icon {
-					display: block;
+					display: none;
 					margin: pxToRem(5px) 0 pxToRem(15px);
 				}
 			}
 		}
-
-		&__pager {
-			float: none;
-			margin-top: 2rem;
-			overflow: hidden;
-		}
-
-		&__btn {
-			&--prev {
-				float: left;
-				padding-left: 0;
-			}
-
-			&--next {
-				float: right;
-				padding-right: 0;
-			}
-		}
-	}
-
-	.carousel__btn__label {
-		display: none;
 	}
 }
