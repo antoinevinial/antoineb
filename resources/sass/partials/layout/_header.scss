@@ -91,8 +91,8 @@
 	&__filters {
 		position: absolute;
 		top: pxToRem(40px);
-		right: 0;
-		width: 500px;
+		left: 0;
+		width: 100%;
 	}
 
 	&__filters__reset {
@@ -109,16 +109,32 @@
 	}
 
 	&__filters__btn {
-		float: right;
-		margin-top: 6px;
+		@extend %InhardtRegular;
+		@extend %transitionEase;
+		position: absolute;
+		top: pxToRem(3px);
+		right: 0;
+		padding: 0;
+		font-size: 18px;
+		color: $color-grey;
 		background: none;
 		border: none;
 		border-radius: 0;
 		outline: none;
 		cursor: pointer;
 
-		.icon-close {
-			display: none;
+		&--close {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.icon {
+			margin-left: 10px;
+		}
+
+		.icon-filters {
+			position: relative;
+			top: 2px;
 		}
 
 		path {
@@ -127,6 +143,8 @@
 		}
 
 		&:hover {
+			color: $color-font;
+
 			path {
 				fill: white;
 			}
@@ -135,10 +153,11 @@
 
 	&__filters__modal {
 		position: absolute;
-		top: 0;
-		right: pxToRem(28px);
+		top: pxToRem(40px);
+		left: 0;
 		opacity: 0;
 		pointer-events: none;
+		background-color: $background-dark;
 		@include transition(all 0.25s ease);
 	}
 
@@ -198,25 +217,17 @@
 
 	&.is-open {
 		.header__filters__btn {
-			display: none;
-		}
+			opacity: 0;
 
-		.header__filters__reset {
-			display: inline-block;
-			float: right;
+			&--close {
+				opacity: 1;
+				pointer-events: auto;
+			}
 		}
 
 		.header__filters__modal {
 			opacity: 1;
 			pointer-events: auto;
-		}
-
-		.icon-close {
-			display: block;
-		}
-
-		.icon-filters {
-			display: none;
 		}
 	}
 
@@ -225,12 +236,6 @@
 
 		.header__item {
 			margin-right: pxToRem(25px);
-		}
-	}
-
-	@include tablet {
-		&__filters {
-			display: none;
 		}
 	}
 
@@ -265,12 +270,15 @@
 		}
 
 		&__filters__btn {
-			position: relative;
-			top: pxToRem(6px);
-			z-index: 2;
+			top: pxToRem(12px);
+		}
+
+		&__filters__label {
+			display: none;
 		}
 
 		&__filters__modal {
+			top: pxToRem(80px);
 			right: 0px;
 			width: 100%;
 			padding: pxToRem(10px) 0;
@@ -294,13 +302,6 @@
 
 			&__label {
 				display: none;
-			}
-		}
-
-		&.is-open {
-			.header__filters {
-				width: 100%;
-				z-index: 15;
 			}
 		}
 

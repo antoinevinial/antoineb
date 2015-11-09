@@ -52,3 +52,9 @@
         display: none;
     }
 }
+
+@include mobile {
+    .break-mobile {
+        display: block;
+    }
+}

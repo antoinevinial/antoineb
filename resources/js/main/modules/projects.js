@@ -22,7 +22,7 @@ var projects = {
         this.ui.$header   = $('.js-header');
         this.ui.$projects = $('.js-projects');
         this.ui.$links    = $('.js-header-link');
-        this.ui.$reset    = $('.js-header-link-reset');
+        this.ui.$reset    = $('.js-header-reset');
         this.ui.$list     = this.ui.$projects.find('.js-projects-list');
         this.ui.$items    = this.ui.$projects.find('.js-projects-item');
     },
@@ -256,6 +256,7 @@ var projects = {
 
         // Add is-active class on element.
         this.ui.$links.removeClass('is-active');
+        this.ui.$reset.removeClass('is-active');
         $(e.currentTarget).addClass('is-active');
 
         // Filter list items.
@@ -278,10 +279,13 @@ var projects = {
         // Remove is-active class all links.
         this.ui.$links.removeClass('is-active');
 
+        // Add is-active class on reset link.
+        this.ui.$reset.addClass('is-active');
+
         // Filter list items.
         this.ui.$list.isotope({ filter: '' });
 
-        // Shiw pager.
+        // Show pager.
         this.ui.$pager.removeClass('is-fade');
 
         // Reset item active variable and isAlreadyPress variable.

@@ -175,11 +175,13 @@
 	.carousel__btn {
 		&--prev {
 			float: left;
+			margin-left: pxToRem(-5px);
 			padding-left: 0;
 		}
 
 		&--next {
 			float: right;
+			margin-right: pxToRem(-5px);
 			padding-right: 0;
 		}
 	}
@@ -201,20 +203,28 @@
 
 			&--next {
 				.carousel__item__content {
-					top: pxToRem(35px);
-					right: pxToRem(55px);
-					left: pxToRem(55px);
+					top: pxToRem(55px);
+					right: pxToRem(45px);
+					left: pxToRem(45px);
 
 					&__label {
 						margin-bottom: pxToRem(10px);
 						font-size: pxToRem(45px);
-						line-height: pxToRem(40px);
+						line-height: pxToRem(45px);
+					}
+
+					&__title {
+						display: none;
+					}
+
+					&__category {
+						display: none;
 					}
 				}
 
 				.icon {
-					display: none;
-					margin: pxToRem(5px) 0 pxToRem(15px);
+					display: block;
+					margin: pxToRem(30px) 0 pxToRem(15px);
 				}
 			}
 		}

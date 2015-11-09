@@ -10,18 +10,22 @@ header.header.header--home.js-header.js-header-home
 						li.header__item
 							a.header__link.js-page-transition(href="profile.html") Profile
 						div.header__filters
-							button.header__filters__btn.js-header-filters-btn
+							button.header__filters__btn.js-header-filters-btn 
+								span.header__filters__label Work
 								+icon-filters
-							a.header__filters__reset.js-header-link-reset(href="#")
+							a.header__filters__btn.header__filters__btn--close.js-header-close(href="#") 
+								span.header__filters__label Close
 								+icon-close
-							div.header__filters__modal
-								ul.header__filters__modal__list
-									li.header__filters__modal__item
-										a.header__filters__modal__link.js-header-link(href="interactive") #[+icon-interactive] Interactive
-									li.header__filters__modal__item
-										a.header__filters__modal__link.js-header-link(href="motion") #[+icon-motion] Motion
-									li.header__filters__modal__item
-										a.header__filters__modal__link.js-header-link(href="illustration") #[+icon-illustration] Illustration
-									li.header__filters__modal__item
-										a.header__filters__modal__link.js-header-link(href="photography") #[+icon-photography] Photography
+						div.header__filters__modal
+							ul.header__filters__modal__list
+								li.header__filters__modal__item
+									a.header__filters__modal__link.js-header-reset.is-active(href="interactive") #[+icon-all] All work
+								li.header__filters__modal__item
+									a.header__filters__modal__link.js-header-link(href="interactive") #[+icon-interactive] Interactive
+								li.header__filters__modal__item
+									a.header__filters__modal__link.js-header-link(href="motion") #[+icon-motion] Motion
+								li.header__filters__modal__item
+									a.header__filters__modal__link.js-header-link(href="illustration") #[+icon-illustration] Illustration
+								li.header__filters__modal__item
+									a.header__filters__modal__link.js-header-link(href="photography") #[+icon-photography] Photography
 
