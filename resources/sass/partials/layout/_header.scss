@@ -186,13 +186,15 @@
 		}
 
 		.icon {
+			@extend %transitionEase;
 			margin-right: pxToRem(5px);
+			fill: $color-grey;
 		}
 
 		&:hover {
 			color: white;
 
-			path {
+			.icon {
 				fill: white;
 			}
 		}
@@ -239,7 +241,7 @@
 		}
 	}
 
-	@include mobile {
+	@include tablet {
 		overflow: visible;
 
 		&--home {

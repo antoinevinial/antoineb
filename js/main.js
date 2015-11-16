@@ -469,11 +469,18 @@ var carousel = {
             "transform":"translate(" + this.left + "px,0)"
         });
 
+        // Add is-active class on curren item.
+        this.ui.$items.removeClass('is-active');
+        $(this.ui.$items[this.itemActive]).addClass('is-active');
+
         // Set height on the slider.
         this.setCarouselHeight();
 
         // Update progress.
         this.updateProgress();
+
+        // Check prev next.
+        this.checkPrevNext();
 	},
 
 	trackCSSAnimationEnd: function trackCSSAnimationEnd() {
@@ -512,6 +519,19 @@ var carousel = {
 
     	// Update progress bar width.
     	this.ui.$progress.css('width', perc);
+    },
+
+    checkPrevNext: function checkPrevNext() {
+    	if (this.itemActive == 0) {
+    		this.ui.$prev.addClass('is-fade');
+    		this.ui.$next.removeClass('is-fade');
+    	} else if (this.itemActive == this.ui.$items.length - 1) {
+    		this.ui.$prev.removeClass('is-fade');
+    		this.ui.$next.addClass('is-fade');
+    	} else {
+    		this.ui.$prev.removeClass('is-fade');
+    		this.ui.$next.removeClass('is-fade');
+    	}
     }
 };
 
@@ -898,7 +918,7 @@ var projects = {
             scrollTop = this.ui.$win.scrollTop();
 
         // Make pager sticky or not based on the scroll position.
-        if (scrollTop >= this.ui.$list.offset().top) {
+        if (scrollTop >= this.ui.$list.offset().top - this.ui.$header.outerHeight()) {
             // Calculate offset.
             var offset = this.ui.$list.offset().left + this.ui.$list.outerWidth();
 

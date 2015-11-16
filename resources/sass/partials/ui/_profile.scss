@@ -2,6 +2,8 @@
 	background-color: #090909;
 
 	.header {
+		overflow: hidden;
+
 		&:before {
 			content: "";
 			position: absolute;
@@ -16,8 +18,6 @@
 }
 
 .profile {
-	overflow: hidden;
-
 	.grid {
 		position: relative;
 		height: calc(100vh - 169px);
@@ -61,6 +61,15 @@
 
 		&__list {
 			margin-top: 25px;
+		}
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.tpl-profile {
+		.prepend-1 {
+			margin-left: 0;
+			width: 50%;
 		}
 	}
 }

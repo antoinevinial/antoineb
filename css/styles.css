@@ -323,10 +323,11 @@ img.picture {
       height: 1px;
       background-color: transparent; }
     .header__filters__modal__link .icon {
-      margin-right: 0.3125rem; }
+      margin-right: 0.3125rem;
+      fill: #828282; }
     .header__filters__modal__link:hover {
       color: white; }
-      .header__filters__modal__link:hover path {
+      .header__filters__modal__link:hover .icon {
         fill: white; }
     .header__filters__modal__link.is-active {
       color: white; }
@@ -348,7 +349,7 @@ img.picture {
     height: 170px; }
     .header--project .header__item {
       margin-right: 1.5625rem; }
-  @media (max-width: 550px) {
+  @media (max-width: 768px) {
     .header {
       overflow: visible; }
       .header--home {
@@ -527,7 +528,7 @@ a {
   overflow: hidden; }
 
 /* Transitions */
-.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .main, .carousel__slider, .carousel__item, .carousel__item--next .carousel__img, .carousel__btn, .carousel__btn path {
+.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .header__filters__modal__link .icon, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -653,7 +654,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     top: 0 !important;
     left: 100%;
     width: 26px;
-    padding-top: 1.5625rem;
+    padding-top: 0.625rem;
     z-index: 10;
     /* Modifiers */ }
     .projects__pager__list {
@@ -671,7 +672,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
         transition: all 0.25s linear; }
     .projects__pager.is-sticky {
       position: fixed !important;
-      top: 0; }
+      top: 108px !important; }
     .projects__pager.is-fade {
       opacity: 0; }
   .projects__btn {
@@ -724,7 +725,10 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     display: block;
     float: left;
     padding-left: 4rem;
-    cursor: pointer; }
+    cursor: pointer;
+    opacity: 0.5; }
+    .carousel__item.is-active {
+      opacity: 1; }
     .carousel__item--intro,
     .carousel__item--txt {
       position: relative;
@@ -733,7 +737,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       .carousel__item--intro .carousel__item__container,
       .carousel__item--txt .carousel__item__container {
         min-height: 720px;
-        width: 420px;
+        width: 480px;
         padding: 6.875rem 3.9375rem;
         background: black; }
       .carousel__item--intro p + p,
@@ -752,8 +756,6 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     .carousel__item--next {
       position: relative;
       padding-left: 10rem; }
-      .carousel__item--next .carousel__img {
-        opacity: 0.4; }
       .carousel__item--next .carousel__item__content {
         position: absolute;
         top: 4.6875rem;
@@ -779,8 +781,6 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
           letter-spacing: 2px; }
       .carousel__item--next .icon {
         margin-left: 1.25rem; }
-      .carousel__item--next:hover .carousel__img {
-        opacity: 0.5; }
   .carousel__pager {
     float: right; }
   .carousel__btn {
@@ -802,6 +802,9 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       color: white; }
       .carousel__btn:hover path {
         fill: white; }
+    .carousel__btn.is-fade {
+      pointer-events: none;
+      opacity: 0; }
   .carousel__section + .carousel__section {
     margin-top: 1.25rem; }
   .carousel__label {
@@ -850,49 +853,58 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
 
 .tpl-profile {
   background-color: #090909; }
-  .tpl-profile .header:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100px;
-    background-color: #161616; }
-
-.profile {
-  overflow: hidden; }
-  .profile .grid {
-    position: relative;
-    height: calc(100vh - 169px);
-    padding-top: 80px;
-    padding-bottom: 80px; }
-    .profile .grid:after {
+  .tpl-profile .header {
+    overflow: hidden; }
+    .tpl-profile .header:before {
       content: "";
       position: absolute;
       top: 0;
-      left: 100%;
-      bottom: 0;
+      left: 0;
       display: block;
-      width: 9999px;
+      width: 100%;
+      height: 100px;
       background-color: #161616; }
-  .profile__img {
+
+.profile .grid {
+  position: relative;
+  height: calc(100vh - 169px);
+  padding-top: 80px;
+  padding-bottom: 80px; }
+  .profile .grid:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    bottom: 0;
     display: block;
-    max-width: 100%; }
-  .profile__hr {
-    display: block;
-    width: 60px;
-    height: 1px;
-    margin: 40px 0;
-    background: #454545;
-    border: none; }
+    width: 9999px;
+    background-color: #161616; }
+
+.profile__img {
+  display: block;
+  max-width: 100%; }
+
+.profile__hr {
+  display: block;
+  width: 60px;
+  height: 1px;
+  margin: 40px 0;
+  background: #454545;
+  border: none; }
+
+.profile__txt {
+  margin-bottom: 100px; }
+
+@media (max-width: 550px) {
   .profile__txt {
-    margin-bottom: 100px; }
-  @media (max-width: 550px) {
-    .profile__txt {
-      margin-bottom: 50px; }
-    .profile__list {
-      margin-top: 25px; } }
+    margin-bottom: 50px; }
+  .profile__list {
+    margin-top: 25px; } }
+
+@media screen and (max-width: 900px) {
+  .tpl-profile .prepend-1 {
+    margin-left: 0;
+    width: 50%; } }
 
 .dev-grid {
   display: none;

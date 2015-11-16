@@ -232,7 +232,7 @@ var projects = {
             scrollTop = this.ui.$win.scrollTop();
 
         // Make pager sticky or not based on the scroll position.
-        if (scrollTop >= this.ui.$list.offset().top) {
+        if (scrollTop >= this.ui.$list.offset().top - this.ui.$header.outerHeight()) {
             // Calculate offset.
             var offset = this.ui.$list.offset().left + this.ui.$list.outerWidth();
 

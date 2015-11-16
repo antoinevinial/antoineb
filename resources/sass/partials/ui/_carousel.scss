@@ -25,6 +25,11 @@
 		float: left;
 	  	padding-left: pxToRem($gutter * 2);
 	  	cursor: pointer;
+	  	opacity: 0.5;
+
+	  	&.is-active {
+	  		opacity: 1;
+	  	}
 
 	  	&--intro,
 	  	&--txt {
@@ -34,7 +39,7 @@
 
 	  		.carousel__item__container {
 	  			min-height: 720px;
-	  			width: 420px;
+	  			width: 480px;
 	  			padding: pxToRem(110px) pxToRem(63px);
 	  			background: black;
 	  		}
@@ -63,11 +68,6 @@
 	  	&--next {
 	  		position: relative;
 	  		padding-left: pxToRem(160px);
-
-	  		.carousel__img {
-	  			@extend %transitionEase;
-	  			opacity: 0.4;
-	  		}
 
 	  		.carousel__item__content {
 	  			position: absolute;
@@ -103,12 +103,6 @@
 
 	  		.icon {
 	  			margin-left: pxToRem(20px);
-	  		}
-
-	  		&:hover {
-	  			.carousel__img {
-	  				opacity: 0.5;
-	  			}
 	  		}
 	  	}
 	}
@@ -146,6 +140,11 @@
 			path {
 				fill: white;
 			}
+		}
+
+		&.is-fade {
+			pointer-events: none;
+			opacity: 0;
 		}
 	}
 
