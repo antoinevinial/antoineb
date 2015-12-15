@@ -441,6 +441,12 @@ var carousel = {
 		// Get the target item.
 		var $target = $(this.ui.$items[index]);
 
+        // If target is already active, go next.
+        if ($target.hasClass('is-active') && (index != this.ui.$items.length - 1)) {
+            index = $(e.currentTarget).index() + 1;
+            $target = $(this.ui.$items[index + 1]);
+        }
+
 		// Reset left position.
 		this.left = 0;
 
@@ -1789,22 +1795,20 @@ if ( typeof define === 'function' && define.amd ) {
      * @return {Object} Current instance of EventEmitter for chaining.
      */
     proto.emitEvent = function emitEvent(evt, args) {
-        var listenersMap = this.getListenersAsObject(evt);
-        var listeners;
+        var listeners = this.getListenersAsObject(evt);
         var listener;
         var i;
         var key;
         var response;
 
-        for (key in listenersMap) {
-            if (listenersMap.hasOwnProperty(key)) {
-                listeners = listenersMap[key].slice(0);
-                i = listeners.length;
+        for (key in listeners) {
+            if (listeners.hasOwnProperty(key)) {
+                i = listeners[key].length;
 
                 while (i--) {
                     // If the listener returns true then it shall be removed from the event
                     // The function is executed either with a basic call or an apply if there is an args array
-                    listener = listeners[i];
+                    listener = listeners[key][i];
 
                     if (listener.once === true) {
                         this.removeListener(evt, listener.listener);

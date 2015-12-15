@@ -128,6 +128,12 @@ var carousel = {
 		// Get the target item.
 		var $target = $(this.ui.$items[index]);
 
+        // If target is already active, go next.
+        if ($target.hasClass('is-active') && (index != this.ui.$items.length - 1)) {
+            index = $(e.currentTarget).index() + 1;
+            $target = $(this.ui.$items[index + 1]);
+        }
+
 		// Reset left position.
 		this.left = 0;
 
