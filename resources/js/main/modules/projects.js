@@ -19,8 +19,10 @@ var projects = {
 
     bindUI: function bindUI() {
         this.ui.$win      = $(window);
+        this.ui.$header   = $('.js-header');
         this.ui.$projects = $('.js-projects');
         this.ui.$links    = $('.js-header-link');
+        this.ui.$reset    = $('.js-header-reset');
         this.ui.$list     = this.ui.$projects.find('.js-projects-list');
         this.ui.$items    = this.ui.$projects.find('.js-projects-item');
     },
@@ -30,6 +32,9 @@ var projects = {
 
         // Filter projects.
         this.ui.$links.on('click', $.proxy(this.filterItems, this));
+
+        // Reset projects.
+        this.ui.$reset.on('click', $.proxy(this.resetItems, this));
 
         // When an image is loaded, adjust isotope layout.
         this.ui.$list.imagesLoaded().progress( function() {
@@ -202,7 +207,7 @@ var projects = {
         this.isAnimate = true;
 
         // Scroll to the element.
-        $("html, body").stop().animate({ scrollTop: $el.offset().top }, this.timer, function() {
+        $("html, body").stop().animate({ scrollTop: ($el.offset().top - this.ui.$header.outerHeight()) }, this.timer, function() {
             // Add small setTimeout to prevent un-focus project list.
             setTimeout(function() { self.isAnimate = false; }, 100);
         });
@@ -227,7 +232,7 @@ var projects = {
             scrollTop = this.ui.$win.scrollTop();
 
         // Make pager sticky or not based on the scroll position.
-        if (scrollTop >= this.ui.$list.offset().top) {
+        if (scrollTop >= this.ui.$list.offset().top - this.ui.$header.outerHeight()) {
             // Calculate offset.
             var offset = this.ui.$list.offset().left + this.ui.$list.outerWidth();
 
@@ -249,17 +254,45 @@ var projects = {
         // Get target class name.
         var target = '.' + href;
 
+        // Add is-active class on element.
+        this.ui.$links.removeClass('is-active');
+        this.ui.$reset.removeClass('is-active');
+        $(e.currentTarget).addClass('is-active');
+
         // Filter list items.
         this.ui.$list.isotope({ filter: target });
-
-        // Filter pager items.
-        this.ui.$pagerList.isotope({ filter: target });
 
         // Hide pager.
         this.ui.$pager.addClass('is-fade');
 
         // Reset item active variable and isAlreadyPress variable.
         this.itemActive = 0;
+
+        // Scroll to top of the page.
+        $("html, body").animate({ scrollTop: 0 }, this.timer);
+    },
+
+    resetItems: function resetItems(e) {
+        // Prevent default.
+        e.preventDefault();
+
+        // Remove is-active class all links.
+        this.ui.$links.removeClass('is-active');
+
+        // Add is-active class on reset link.
+        this.ui.$reset.addClass('is-active');
+
+        // Filter list items.
+        this.ui.$list.isotope({ filter: '' });
+
+        // Show pager.
+        this.ui.$pager.removeClass('is-fade');
+
+        // Reset item active variable and isAlreadyPress variable.
+        this.itemActive = 0;
+
+        // Scroll to top of the page.
+        $("html, body").animate({ scrollTop: 0 }, this.timer);
     },
 
     toggleList: function toggleList(e) {

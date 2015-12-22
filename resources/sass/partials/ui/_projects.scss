@@ -35,7 +35,7 @@
 		top: 0 !important;
 		left: 100%;
 		width: 26px;
-		padding-top: pxToRem(25px);
+		padding-top: pxToRem(10px);
 		z-index: 10;
 
 		&__list {
@@ -60,7 +60,7 @@
 		/* Modifiers */
 		&.is-sticky {
 			position: fixed !important;
-			top: 0;
+			top: 108px !important;
 		}
 
 		&.is-fade {
@@ -113,7 +113,6 @@
 		}
 
 		&__item {
-			position: static !important;
 			width: 100%;
 			padding: 0px 0px pxToRem(40px);
 		}

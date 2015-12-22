@@ -45,6 +45,7 @@ $gutterMobile: 20px;
 @include mobile {
     [class*="cell-"] {
         float: none;
+        width: 100%;
         padding: 0;
     }
 

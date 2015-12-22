@@ -6,6 +6,7 @@ var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
 var filters  = require('./modules/filters.js');
 var pageTransition = require('./modules/page-transition.js');
+var header   = require('./modules/header.js');
 
 (function ($, oo, win) {
 
@@ -34,9 +35,14 @@ var pageTransition = require('./modules/page-transition.js');
         filters.init();
     }
 
+    // Init header module.
+    if($('.js-header-home').length) {
+        header.init();
+    }
+
 })(jQuery, oo, window);
 
-},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/filters.js":5,"./modules/page-transition.js":6,"./modules/projects.js":7}],2:[function(require,module,exports){
+},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/filters.js":5,"./modules/header.js":6,"./modules/page-transition.js":7,"./modules/projects.js":8}],2:[function(require,module,exports){
 /*
 * Declaration of the global namespace oo
 *  with 3 defaults namespace : utils, modules, plugins, libs
@@ -326,6 +332,8 @@ var carousel = {
 		this.ui.$body     = $('body');
 		this.ui.$header   = $('.js-header');
 		this.ui.$main     = $('.js-main');
+		this.ui.$close    = $('.js-page-transition');
+
 		this.ui.$carousel = $('.js-carousel');
 		this.ui.$slider   = this.ui.$carousel.find('.js-carousel-slider');
 		this.ui.$items    = this.ui.$carousel.find('.js-carousel-item');
@@ -347,7 +355,7 @@ var carousel = {
 
 	checkMobileDesktop: function checkMobileDesktop() {
 		// Check if we're on mobile.
-		if (this.ui.$win.outerWidth() <= 480) {
+		if (this.ui.$win.outerWidth() <= 550) {
 			this.ui.$items.outerWidth(this.ui.$win.outerWidth());
 		} else {
 			this.ui.$items.outerWidth('auto');
@@ -373,6 +381,11 @@ var carousel = {
 	    // If user press the left arrow, click on prev btn.
 	    if (e.keyCode == 37) {
 	        this.ui.$prev.trigger('click');
+	    }
+
+	    // If user press esc, close project.
+	    if (e.keyCode == 27) {
+	    	this.ui.$close.click();
 	    }
 	},
 
@@ -428,6 +441,12 @@ var carousel = {
 		// Get the target item.
 		var $target = $(this.ui.$items[index]);
 
+        // If target is already active, go next.
+        if ($target.hasClass('is-active') && (index != this.ui.$items.length - 1)) {
+            index = $(e.currentTarget).index() + 1;
+            $target = $(this.ui.$items[index + 1]);
+        }
+
 		// Reset left position.
 		this.left = 0;
 
@@ -456,11 +475,18 @@ var carousel = {
             "transform":"translate(" + this.left + "px,0)"
         });
 
+        // Add is-active class on curren item.
+        this.ui.$items.removeClass('is-active');
+        $(this.ui.$items[this.itemActive]).addClass('is-active');
+
         // Set height on the slider.
         this.setCarouselHeight();
 
         // Update progress.
         this.updateProgress();
+
+        // Check prev next.
+        this.checkPrevNext();
 	},
 
 	trackCSSAnimationEnd: function trackCSSAnimationEnd() {
@@ -499,6 +525,19 @@ var carousel = {
 
     	// Update progress bar width.
     	this.ui.$progress.css('width', perc);
+    },
+
+    checkPrevNext: function checkPrevNext() {
+    	if (this.itemActive == 0) {
+    		this.ui.$prev.addClass('is-fade');
+    		this.ui.$next.removeClass('is-fade');
+    	} else if (this.itemActive == this.ui.$items.length - 1) {
+    		this.ui.$prev.removeClass('is-fade');
+    		this.ui.$next.addClass('is-fade');
+    	} else {
+    		this.ui.$prev.removeClass('is-fade');
+    		this.ui.$next.removeClass('is-fade');
+    	}
     }
 };
 
@@ -545,15 +584,19 @@ var filters = {
 	bindUI: function bindUI() {
 		this.ui.$header = $('.js-header');	
 		this.ui.$btn    = this.ui.$header.find('.js-header-filters-btn');
-		this.ui.$links  = this.ui.$header.find('.js-header-link');
+		this.ui.$close  = this.ui.$header.find('.js-header-close');
 	},
 
 	bindEvents: function bindEvents() {
 		this.ui.$btn.on('click', $.proxy(this.toggleFilters, this));
-		this.ui.$links.on('click', $.proxy(this.toggleFilters, this));
+		this.ui.$close.on('click', $.proxy(this.toggleFilters, this));
 	},
 
-	toggleFilters: function toggleFilters() {
+	toggleFilters: function toggleFilters(e) {
+		// Prevent default.
+		e.preventDefault();
+
+		// Toggle class on header.
 		this.ui.$header.toggleClass('is-open');
 	}
 
@@ -561,6 +604,44 @@ var filters = {
 
 module.exports = filters;
 },{}],6:[function(require,module,exports){
+var header = {
+
+	ui: {},
+	topPos: 0,
+
+	init: function init() {
+		this.bindUI();
+		this.bindEvents();
+	},
+
+	bindUI: function bindUI() {
+		this.ui.$win    = $(window);
+		this.ui.$body   = $('body');
+		this.ui.$header = $('.js-header-home');
+		this.ui.$main   = $('.js-main');
+
+		this.topPos = this.ui.$header.offset().top;
+	},
+
+	bindEvents: function bindEvents() {
+		this.ui.$win.on('scroll', $.proxy(this.sticky, this));
+	},
+
+	sticky: function sticky() {
+		var scrollTop = this.ui.$win.scrollTop();
+
+		if (scrollTop >= this.topPos) {
+			this.ui.$body.addClass('is-header-sticky');
+		} else {
+			this.ui.$body.removeClass('is-header-sticky');
+		}
+	}
+
+};
+
+// Export module.
+module.exports = header;
+},{}],7:[function(require,module,exports){
 var pageTransition = {
 
 	ui: {},
@@ -608,7 +689,7 @@ var pageTransition = {
 };
 
 module.exports = pageTransition;
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 // Require imagesloaded plugin.
 var imagesLoaded = require('imagesloaded');
 
@@ -630,8 +711,10 @@ var projects = {
 
     bindUI: function bindUI() {
         this.ui.$win      = $(window);
+        this.ui.$header   = $('.js-header');
         this.ui.$projects = $('.js-projects');
         this.ui.$links    = $('.js-header-link');
+        this.ui.$reset    = $('.js-header-reset');
         this.ui.$list     = this.ui.$projects.find('.js-projects-list');
         this.ui.$items    = this.ui.$projects.find('.js-projects-item');
     },
@@ -641,6 +724,9 @@ var projects = {
 
         // Filter projects.
         this.ui.$links.on('click', $.proxy(this.filterItems, this));
+
+        // Reset projects.
+        this.ui.$reset.on('click', $.proxy(this.resetItems, this));
 
         // When an image is loaded, adjust isotope layout.
         this.ui.$list.imagesLoaded().progress( function() {
@@ -813,7 +899,7 @@ var projects = {
         this.isAnimate = true;
 
         // Scroll to the element.
-        $("html, body").stop().animate({ scrollTop: $el.offset().top }, this.timer, function() {
+        $("html, body").stop().animate({ scrollTop: ($el.offset().top - this.ui.$header.outerHeight()) }, this.timer, function() {
             // Add small setTimeout to prevent un-focus project list.
             setTimeout(function() { self.isAnimate = false; }, 100);
         });
@@ -838,7 +924,7 @@ var projects = {
             scrollTop = this.ui.$win.scrollTop();
 
         // Make pager sticky or not based on the scroll position.
-        if (scrollTop >= this.ui.$list.offset().top) {
+        if (scrollTop >= this.ui.$list.offset().top - this.ui.$header.outerHeight()) {
             // Calculate offset.
             var offset = this.ui.$list.offset().left + this.ui.$list.outerWidth();
 
@@ -860,17 +946,45 @@ var projects = {
         // Get target class name.
         var target = '.' + href;
 
+        // Add is-active class on element.
+        this.ui.$links.removeClass('is-active');
+        this.ui.$reset.removeClass('is-active');
+        $(e.currentTarget).addClass('is-active');
+
         // Filter list items.
         this.ui.$list.isotope({ filter: target });
-
-        // Filter pager items.
-        this.ui.$pagerList.isotope({ filter: target });
 
         // Hide pager.
         this.ui.$pager.addClass('is-fade');
 
         // Reset item active variable and isAlreadyPress variable.
         this.itemActive = 0;
+
+        // Scroll to top of the page.
+        $("html, body").animate({ scrollTop: 0 }, this.timer);
+    },
+
+    resetItems: function resetItems(e) {
+        // Prevent default.
+        e.preventDefault();
+
+        // Remove is-active class all links.
+        this.ui.$links.removeClass('is-active');
+
+        // Add is-active class on reset link.
+        this.ui.$reset.addClass('is-active');
+
+        // Filter list items.
+        this.ui.$list.isotope({ filter: '' });
+
+        // Show pager.
+        this.ui.$pager.removeClass('is-fade');
+
+        // Reset item active variable and isAlreadyPress variable.
+        this.itemActive = 0;
+
+        // Scroll to top of the page.
+        $("html, body").animate({ scrollTop: 0 }, this.timer);
     },
 
     toggleList: function toggleList(e) {
@@ -899,7 +1013,7 @@ var projects = {
 //Export module
 module.exports = projects;
 
-},{"imagesloaded":8}],8:[function(require,module,exports){
+},{"imagesloaded":9}],9:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -1236,7 +1350,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":9,"wolfy87-eventemitter":10}],9:[function(require,module,exports){
+},{"eventie":10,"wolfy87-eventemitter":11}],10:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -1320,7 +1434,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -1681,22 +1795,20 @@ if ( typeof define === 'function' && define.amd ) {
      * @return {Object} Current instance of EventEmitter for chaining.
      */
     proto.emitEvent = function emitEvent(evt, args) {
-        var listenersMap = this.getListenersAsObject(evt);
-        var listeners;
+        var listeners = this.getListenersAsObject(evt);
         var listener;
         var i;
         var key;
         var response;
 
-        for (key in listenersMap) {
-            if (listenersMap.hasOwnProperty(key)) {
-                listeners = listenersMap[key].slice(0);
-                i = listeners.length;
+        for (key in listeners) {
+            if (listeners.hasOwnProperty(key)) {
+                i = listeners[key].length;
 
                 while (i--) {
                     // If the listener returns true then it shall be removed from the event
                     // The function is executed either with a basic call or an apply if there is an args array
-                    listener = listeners[i];
+                    listener = listeners[key][i];
 
                     if (listener.once === true) {
                         this.removeListener(evt, listener.listener);

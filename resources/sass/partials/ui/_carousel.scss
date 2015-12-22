@@ -25,16 +25,84 @@
 		float: left;
 	  	padding-left: pxToRem($gutter * 2);
 	  	cursor: pointer;
+	  	opacity: 0.5;
 
+	  	&.is-active {
+	  		opacity: 1;
+	  	}
+
+	  	&--intro,
 	  	&--txt {
 	  		position: relative;
 	  		padding-left: 0;
+	  		font-size: pxToRem(18px);
 
 	  		.carousel__item__container {
-	  			min-height: 425px;
-	  			width: 300px;
-	  			padding: 63px;
+	  			min-height: 720px;
+	  			width: 480px;
+	  			padding: pxToRem(110px) pxToRem(63px);
 	  			background: black;
+	  		}
+
+	  		p + p {
+	  			margin-top: pxToRem(30px);
+	  		}
+
+	  		.carousel__item__title {
+	  			@extend %InhardtMedium;
+	  			display: block;
+	  			margin-bottom: pxToRem(30px);
+	  			font-size: pxToRem(24px);
+	  		}
+	  	}
+
+	  	&--txt {
+	  		padding-left: pxToRem($gutter * 2);
+
+	  		.carousel__item__container {
+	  			width: 550px;
+	  			padding: pxToRem(110px) pxToRem(150px) pxToRem(110px) pxToRem(63px);
+	  		}
+	  	}
+
+	  	&--next {
+	  		position: relative;
+	  		padding-left: pxToRem(160px);
+
+	  		.carousel__item__content {
+	  			position: absolute;
+	  			top: pxToRem(75px);
+	  			left: pxToRem(63px);
+	  			display: block;
+
+	  			&__label {
+	  				@extend %InhardtMedium;
+	  				position: relative;
+	  				left: pxToRem(-4px);
+	  				display: block;
+	  				margin-bottom: pxToRem(5px);
+	  				font-size: pxToRem(65px);
+	  				line-height: 1;
+	  			}
+
+	  			&__title {
+	  				display: inline-block;
+	  				margin-right: pxToRem(15px);
+	  				font-size: pxToRem(18px);
+	  				line-height: 1;
+	  			}
+
+	  			&__category {
+	  				font-size: pxToRem(14px);
+	  				line-height: 1;
+	  				color: $color-grey;
+	  				text-transform: uppercase;
+	  				letter-spacing: 2px;
+	  			}
+	  		}
+
+	  		.icon {
+	  			margin-left: pxToRem(20px);
 	  		}
 	  	}
 	}
@@ -73,6 +141,11 @@
 				fill: white;
 			}
 		}
+
+		&.is-fade {
+			pointer-events: none;
+			opacity: 0;
+		}
 	}
 
 	/* Texte */
@@ -91,10 +164,24 @@
 	}
 }
 
-@media screen and (max-height: 900px) {
-	.carousel {
-		.carousel__item__container {
-			padding: pxToRem(50px) pxToRem(30px);
+@include tablet {
+	.carousel__pager {
+		float: none;
+		margin-top: 2rem;
+		overflow: hidden;
+	}
+
+	.carousel__btn {
+		&--prev {
+			float: left;
+			margin-left: pxToRem(-5px);
+			padding-left: 0;
+		}
+
+		&--next {
+			float: right;
+			margin-right: pxToRem(-5px);
+			padding-right: 0;
 		}
 	}
 }
@@ -104,33 +191,41 @@
 		&__item {
 			padding: 0 20px;
 
+			&--intro,
 			&--txt {
 				.carousel__item__container {
 					width: 100%;
+					min-height: 400px;
+					padding: pxToRem(35px);
 				}
-			}
-		}
-
-		&__pager {
-			float: none;
-			margin-top: 2rem;
-			overflow: hidden;
-		}
-
-		&__btn {
-			&--prev {
-				float: left;
-				padding-left: 0;
 			}
 
 			&--next {
-				float: right;
-				padding-right: 0;
+				.carousel__item__content {
+					top: pxToRem(55px);
+					right: pxToRem(45px);
+					left: pxToRem(45px);
+
+					&__label {
+						margin-bottom: pxToRem(10px);
+						font-size: pxToRem(45px);
+						line-height: pxToRem(45px);
+					}
+
+					&__title {
+						display: none;
+					}
+
+					&__category {
+						display: none;
+					}
+				}
+
+				.icon {
+					display: block;
+					margin: pxToRem(30px) 0 pxToRem(15px);
+				}
 			}
 		}
-	}
-
-	.carousel__btn__label {
-		display: none;
 	}
 }

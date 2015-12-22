@@ -1,7 +1,13 @@
 .header {
-	@extend %transitionEase;
-	padding: pxToRem(60px) 0 pxToRem(40px);
+	margin-top: pxToRem(60px);
+	padding: 0 0 pxToRem(40px);
 	overflow: hidden;
+	background-color: $background-dark;
+	@include transition(opacity $transition-quick ease);
+
+	&--home {
+		height: pxToRem(110px);
+	}
 
 	&__nav {
 		position: relative;
@@ -85,21 +91,50 @@
 	&__filters {
 		position: absolute;
 		top: pxToRem(40px);
-		right: 0;
-		width: 500px;
+		left: 0;
+		width: 100%;
+	}
+
+	&__filters__reset {
+		display: none;
+		width: pxToRem(25px);
+		height: pxToRem(25px);
+
+		.icon {
+			position: relative;
+			top: pxToRem(12px);
+			display: block;
+			margin: 0 auto;
+		}
 	}
 
 	&__filters__btn {
-		float: right;
-		margin-top: 6px;
+		@extend %InhardtRegular;
+		@extend %transitionEase;
+		position: absolute;
+		top: pxToRem(3px);
+		right: 0;
+		padding: 0;
+		font-size: 18px;
+		color: $color-grey;
 		background: none;
 		border: none;
 		border-radius: 0;
 		outline: none;
 		cursor: pointer;
 
-		.icon-close {
-			display: none;
+		&--close {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.icon {
+			margin-left: 10px;
+		}
+
+		.icon-filters {
+			position: relative;
+			top: 2px;
 		}
 
 		path {
@@ -108,6 +143,8 @@
 		}
 
 		&:hover {
+			color: $color-font;
+
 			path {
 				fill: white;
 			}
@@ -116,10 +153,11 @@
 
 	&__filters__modal {
 		position: absolute;
-		top: 0;
-		right: pxToRem(28px);
+		top: pxToRem(40px);
+		left: 0;
 		opacity: 0;
 		pointer-events: none;
+		background-color: $background-dark;
 		@include transition(all 0.25s ease);
 	}
 
@@ -130,21 +168,46 @@
 
 	&__filters__modal__link {
 		@extend %transitionEase;
+		position: relative;
 		font-size: pxToRem(12px);
 		letter-spacing: 1px;
 		color: $color-grey;
 
+		&:before {
+			@extend %transitionEase;
+			content: "";
+			position: absolute;
+			top: pxToRem(-49px);
+			left: 0;
+			display: block;
+			width: 100%;
+			height: 1px;
+			background-color: transparent;
+		}
+
 		.icon {
+			@extend %transitionEase;
 			margin-right: pxToRem(5px);
+			fill: $color-grey;
 		}
 
 		&:hover {
 			color: white;
 
 			.icon {
-				path {
-					fill: white;
-				}
+				fill: white;
+			}
+		}
+
+		&.is-active {
+			color: white;
+
+			&:before {
+				background-color: white;
+			}
+
+			path {
+				fill: white;
 			}
 		}
 	}
@@ -155,17 +218,18 @@
 	}
 
 	&.is-open {
+		.header__filters__btn {
+			opacity: 0;
+
+			&--close {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+
 		.header__filters__modal {
 			opacity: 1;
 			pointer-events: auto;
-		}
-
-		.icon-close {
-			display: block;
-		}
-
-		.icon-filters {
-			display: none;
 		}
 	}
 
@@ -177,9 +241,12 @@
 		}
 	}
 
-	@include mobile {
-		margin-top: 0;
+	@include tablet {
 		overflow: visible;
+
+		&--home {
+			height: pxToRem(85px);
+		}
 
 		&__nav {
 			padding-top: pxToRem(24px);
@@ -199,13 +266,21 @@
 			top: pxToRem(15px);
 		}
 
-		&__filters__btn {
+		&__filters__reset {
 			position: relative;
-			top: pxToRem(6px);
-			z-index: 2;
+			z-index: 5;
+		}
+
+		&__filters__btn {
+			top: pxToRem(12px);
+		}
+
+		&__filters__label {
+			display: none;
 		}
 
 		&__filters__modal {
+			top: pxToRem(80px);
 			right: 0px;
 			width: 100%;
 			padding: pxToRem(10px) 0;
@@ -218,6 +293,12 @@
 			margin-bottom: pxToRem(15px);
 		}
 
+		&__filters__modal__link {
+			&:before {
+				display: none;
+			}
+		}
+
 		&__back {
 			top: 1.6rem;
 
@@ -226,20 +307,28 @@
 			}
 		}
 
-		&.is-open {
-			.header__filters {
-				width: 100%;
-				z-index: 15;
-			}
-		}
-
 		&--project {
-			height: 210px;
-
 			.header__item {
 				display: block;
 				margin-right: pxToRem(25px);
 			}
 		}
+	}
+}
+
+.is-header-sticky {
+	padding-top: pxToRem(170px);
+
+	.header--home {
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin-top: 0;
+		width: 100%;
+		z-index: 10;
+	}
+
+	@include mobile {
+		padding-top: pxToRem(145px);
 	}
 }

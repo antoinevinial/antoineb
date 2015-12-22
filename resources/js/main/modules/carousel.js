@@ -19,6 +19,8 @@ var carousel = {
 		this.ui.$body     = $('body');
 		this.ui.$header   = $('.js-header');
 		this.ui.$main     = $('.js-main');
+		this.ui.$close    = $('.js-page-transition');
+
 		this.ui.$carousel = $('.js-carousel');
 		this.ui.$slider   = this.ui.$carousel.find('.js-carousel-slider');
 		this.ui.$items    = this.ui.$carousel.find('.js-carousel-item');
@@ -40,7 +42,7 @@ var carousel = {
 
 	checkMobileDesktop: function checkMobileDesktop() {
 		// Check if we're on mobile.
-		if (this.ui.$win.outerWidth() <= 480) {
+		if (this.ui.$win.outerWidth() <= 550) {
 			this.ui.$items.outerWidth(this.ui.$win.outerWidth());
 		} else {
 			this.ui.$items.outerWidth('auto');
@@ -66,6 +68,11 @@ var carousel = {
 	    // If user press the left arrow, click on prev btn.
 	    if (e.keyCode == 37) {
 	        this.ui.$prev.trigger('click');
+	    }
+
+	    // If user press esc, close project.
+	    if (e.keyCode == 27) {
+	    	this.ui.$close.click();
 	    }
 	},
 
@@ -121,6 +128,12 @@ var carousel = {
 		// Get the target item.
 		var $target = $(this.ui.$items[index]);
 
+        // If target is already active, go next.
+        if ($target.hasClass('is-active') && (index != this.ui.$items.length - 1)) {
+            index = $(e.currentTarget).index() + 1;
+            $target = $(this.ui.$items[index + 1]);
+        }
+
 		// Reset left position.
 		this.left = 0;
 
@@ -149,11 +162,18 @@ var carousel = {
             "transform":"translate(" + this.left + "px,0)"
         });
 
+        // Add is-active class on curren item.
+        this.ui.$items.removeClass('is-active');
+        $(this.ui.$items[this.itemActive]).addClass('is-active');
+
         // Set height on the slider.
         this.setCarouselHeight();
 
         // Update progress.
         this.updateProgress();
+
+        // Check prev next.
+        this.checkPrevNext();
 	},
 
 	trackCSSAnimationEnd: function trackCSSAnimationEnd() {
@@ -192,6 +212,19 @@ var carousel = {
 
     	// Update progress bar width.
     	this.ui.$progress.css('width', perc);
+    },
+
+    checkPrevNext: function checkPrevNext() {
+    	if (this.itemActive == 0) {
+    		this.ui.$prev.addClass('is-fade');
+    		this.ui.$next.removeClass('is-fade');
+    	} else if (this.itemActive == this.ui.$items.length - 1) {
+    		this.ui.$prev.removeClass('is-fade');
+    		this.ui.$next.addClass('is-fade');
+    	} else {
+    		this.ui.$prev.removeClass('is-fade');
+    		this.ui.$next.removeClass('is-fade');
+    	}
     }
 };
 
