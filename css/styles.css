@@ -351,6 +351,7 @@ img.picture {
       margin-right: 1.5625rem; }
   @media (max-width: 768px) {
     .header {
+      margin-top: 2.1875rem;
       overflow: visible; }
       .header--home {
         height: 5.3125rem; }
@@ -402,7 +403,7 @@ img.picture {
     z-index: 10; }
   @media (max-width: 550px) {
     .is-header-sticky {
-      padding-top: 9.0625rem; } }
+      padding-top: 7.5rem; } }
 
 @media print {
   /* ------------------------------------------------------------------ */

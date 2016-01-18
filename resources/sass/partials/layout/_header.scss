@@ -242,6 +242,7 @@
 	}
 
 	@include tablet {
+		margin-top: pxToRem(35px);
 		overflow: visible;
 
 		&--home {
@@ -329,6 +330,6 @@
 	}
 
 	@include mobile {
-		padding-top: pxToRem(145px);
+		padding-top: pxToRem(120px);
 	}
 }
