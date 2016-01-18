@@ -319,6 +319,12 @@ var carousel = {
 	itemActive: 0,
 	isAnimate: false,
 
+	touch: {
+	    start: 0,
+	    move: 0,
+	    delta: 0
+	},
+
 	init: function init() {
 		this.bindUI();
 		this.bindEvents();
@@ -351,12 +357,18 @@ var carousel = {
 		this.ui.$items.on('click', $.proxy(this.goClick, this));
 		this.ui.$win.on('keydown', $.proxy(this.pressKeyboard, this));
 		this.ui.$win.on('resize', $.proxy(this.checkMobileDesktop, this));
+
+		// Touch events.
+		this.ui.$win.on('touchstart', $.proxy(this.touchStart, this));
+		this.ui.$win.on('touchmove', $.proxy(this.touchMove, this));
+		this.ui.$win.on('touchend', $.proxy(this.touchEnd, this));
 	},
 
 	checkMobileDesktop: function checkMobileDesktop() {
 		// Check if we're on mobile.
 		if (this.ui.$win.outerWidth() <= 550) {
 			this.ui.$items.outerWidth(this.ui.$win.outerWidth());
+			return;
 		} else {
 			this.ui.$items.outerWidth('auto');
 		}
@@ -365,6 +377,34 @@ var carousel = {
 		this.itemActive = 0;
 		this.left = 0;
 		this.slideCarousel();
+	},
+
+	touchStart: function touchStart(e) {
+		// Do nothing if carousel is animated.
+		if (this.isAnimate) { return; }
+
+	    // Update touch start and move position.
+	    this.touch.start = e.originalEvent.touches[0].pageX;
+	    this.touch.move = e.originalEvent.touches[0].pageX;
+	},
+
+	touchMove: function touchMove(e) {
+	    // Update touch move position.
+	    this.touch.move = e.originalEvent.touches[0].pageX;
+	},
+
+	touchEnd: function touchEnd() {	    
+		var self = this;
+
+	    // Return if user doesn't touch scroll really.
+	    if (Math.abs(this.touch.move - this.touch.start) < 100) { return; }
+
+	    // Click on prev or next btn.
+	    if (this.touch.move < this.touch.start && this.touch.move != 0) {
+	        this.ui.$next.click();
+	    } else if (this.touch.move > this.touch.start && this.touch.move != 0) {
+	        this.ui.$prev.click();
+	    }	    
 	},
 
 	setCarouselHeight: function setCarouselHeight() {
@@ -1795,20 +1835,22 @@ if ( typeof define === 'function' && define.amd ) {
      * @return {Object} Current instance of EventEmitter for chaining.
      */
     proto.emitEvent = function emitEvent(evt, args) {
-        var listeners = this.getListenersAsObject(evt);
+        var listenersMap = this.getListenersAsObject(evt);
+        var listeners;
         var listener;
         var i;
         var key;
         var response;
 
-        for (key in listeners) {
-            if (listeners.hasOwnProperty(key)) {
-                i = listeners[key].length;
+        for (key in listenersMap) {
+            if (listenersMap.hasOwnProperty(key)) {
+                listeners = listenersMap[key].slice(0);
+                i = listeners.length;
 
                 while (i--) {
                     // If the listener returns true then it shall be removed from the event
                     // The function is executed either with a basic call or an apply if there is an args array
-                    listener = listeners[key][i];
+                    listener = listeners[i];
 
                     if (listener.once === true) {
                         this.removeListener(evt, listener.listener);

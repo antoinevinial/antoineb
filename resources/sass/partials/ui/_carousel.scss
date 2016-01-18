@@ -198,6 +198,14 @@
 					min-height: 400px;
 					padding: pxToRem(35px);
 				}
+
+				.carousel__item__title {
+					font-size: pxToRem(20px);
+				}
+
+				p {
+					-webkit-text-size-adjust: 100%
+				}
 			}
 
 			&--next {
