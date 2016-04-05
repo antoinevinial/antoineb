@@ -282,6 +282,7 @@ img.picture {
     outline: none;
     cursor: pointer; }
     .header__filters__btn--close {
+      top: 0.0625rem;
       opacity: 0;
       pointer-events: none; }
     .header__filters__btn .icon {
