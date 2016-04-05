@@ -2,12 +2,14 @@ doctype html
 html
 	head
 		include ../partials/_metas
+		include ../mixins/_header--project
 
 	body.tpl-project
 		div.site-container.js-site-container
 			include ../components/_base
 			include ../partials/_grid
-			include ../partials/_header--project
+
+			block header
 			
 			main.main.is-fade.js-main
 				block content
