@@ -527,7 +527,7 @@ a {
   opacity: 0; }
 
 /* Transitions */
-.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .header__filters__modal__link .icon, .main, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
+.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .header__filters__modal__link .icon, .main, .carousel__img, .carousel__slider, .carousel__item, .carousel__btn, .carousel__btn path {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -772,8 +772,12 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
           color: #828282;
           text-transform: uppercase;
           letter-spacing: 2px; }
+      .carousel__item--next .carousel__img {
+        opacity: 0.1; }
       .carousel__item--next .icon {
         margin-left: 1.25rem; }
+      .carousel__item--next:hover .carousel__img {
+        opacity: 0.2; }
   .carousel__pager {
     float: right; }
   .carousel__btn {

@@ -3,6 +3,7 @@
 	margin-bottom: 50px;
 
 	&__img {
+		@extend %transitionEase;
 	    display: block;
 	    max-width: 100%;
 	    margin: 0 auto;
@@ -101,8 +102,18 @@
 	  			}
 	  		}
 
+	  		.carousel__img {
+	  			opacity: 0.1;
+	  		}
+
 	  		.icon {
 	  			margin-left: pxToRem(20px);
+	  		}
+
+	  		&:hover {
+	  			.carousel__img {
+	  				opacity: 0.2;
+	  			}
 	  		}
 	  	}
 	}
