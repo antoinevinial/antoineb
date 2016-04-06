@@ -52,17 +52,14 @@ var carousel = {
 	},
 
 	checkMobileDesktop: function checkMobileDesktop() {
-		// Check if we're on mobile.
-		if (this.ui.$win.outerWidth() <= 550) {
-			this.ui.$items.outerWidth(this.ui.$win.outerWidth());
-			return;
-		} else {
-			this.ui.$items.outerWidth('auto');
+		// Reset carousel.
+		// this.itemActive = 0;
+		this.left = 0;
+
+		for (i=0; i < this.itemActive; i++) {
+			this.left -= $(this.ui.$items[i]).outerWidth();
 		}
 
-		// Reset carousel.
-		this.itemActive = 0;
-		this.left = 0;
 		this.slideCarousel();
 	},
 
