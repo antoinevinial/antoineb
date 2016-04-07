@@ -21,12 +21,19 @@
 	}
 
 	&__item {
-		@extend %transitionEase;
 		display: block;
 		float: left;
+		max-width: calc(100vw - #{$gutter * 2});
 	  	padding-left: pxToRem($gutter * 2);
 	  	cursor: pointer;
 	  	opacity: 0.5;
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none;   /* Chrome/Safari/Opera */
+		-khtml-user-select: none;    /* Konqueror */
+		-moz-user-select: none;      /* Firefox */
+		-ms-user-select: none;       /* IE/Edge */
+		user-select: none;           /* non-prefixed version, currently */
+	  	transition: opacity 0.25s ease;
 
 	  	&.is-active {
 	  		opacity: 1;

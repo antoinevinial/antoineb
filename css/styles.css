@@ -68,7 +68,8 @@ http://stackoverflow.com/questions/2991623/make-background-size-work-in-ie
 /*-------------------------------------------
     GENERIC TRANSITIONS
 -------------------------------------------*/
-.clearfix:before, .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   content: " ";
   display: table;
   clear: both; }
@@ -134,7 +135,7 @@ img.picture {
 /*        PROJECT STYLESHEET
 /* ------------------------------------------------------------------ */
 .grid {
-  max-width: 1024px;
+  max-width: 1408px;
   padding: 0 4rem; }
 
 .row {
@@ -231,7 +232,8 @@ img.picture {
   .header__link {
     font-size: 1.125rem;
     color: #828282; }
-    .header__link:hover, .header__link.is-active {
+    .header__link:hover,
+    .header__link.is-active {
       color: #ffffff; }
   .header__label {
     display: inline-block;
@@ -528,7 +530,7 @@ a {
   opacity: 0; }
 
 /* Transitions */
-.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .header__filters__modal__link .icon, .main, .carousel__img, .carousel__item, .carousel__btn, .carousel__btn path {
+.header__progress, .header__link, .header__back, .header__back .icon path, .header__filters__btn, .header__filters__btn path, .header__filters__modal__link, .header__filters__modal__link:before, .header__filters__modal__link .icon, .main, .carousel__img, .carousel__btn, .carousel__btn path {
   transition: all 0.25s ease; }
 
 @font-face {
@@ -553,7 +555,8 @@ a {
   font-style: normal; }
 
 /* Extend based on the font */
-.carousel__item--intro .carousel__item__title, .carousel__item--txt .carousel__item__title, .carousel__item--next .carousel__item__content__label {
+.carousel__item--intro .carousel__item__title,
+.carousel__item--txt .carousel__item__title, .carousel__item--next .carousel__item__content__label {
   font-family: 'theinhardtmedium', Arial, sans-serif; }
 
 .header__title, .header__filters__btn, body, .carousel__btn {
@@ -665,7 +668,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
       margin: 0 0.0625rem 0.125rem;
       background: #454545;
       cursor: pointer; }
-      .projects__pager__item:hover, .projects__pager__item.is-active {
+      .projects__pager__item:hover,
+      .projects__pager__item.is-active {
         background: #ffffff;
         transition: all 0.25s linear; }
     .projects__pager.is-sticky {
@@ -723,23 +727,41 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   .carousel__item {
     display: block;
     float: left;
+    max-width: calc(100vw - 64px);
     padding-left: 4rem;
     cursor: pointer;
-    opacity: 0.5; }
+    opacity: 0.5;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Chrome/Safari/Opera */
+    -khtml-user-select: none;
+    /* Konqueror */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE/Edge */
+    user-select: none;
+    /* non-prefixed version, currently */
+    transition: opacity 0.25s ease; }
     .carousel__item.is-active {
       opacity: 1; }
-    .carousel__item--intro, .carousel__item--txt {
+    .carousel__item--intro,
+    .carousel__item--txt {
       position: relative;
       padding-left: 0;
       font-size: 1.125rem; }
-      .carousel__item--intro .carousel__item__container, .carousel__item--txt .carousel__item__container {
+      .carousel__item--intro .carousel__item__container,
+      .carousel__item--txt .carousel__item__container {
         min-height: 720px;
         width: 480px;
         padding: 6.875rem 3.9375rem;
         background: black; }
-      .carousel__item--intro p + p, .carousel__item--txt p + p {
+      .carousel__item--intro p + p,
+      .carousel__item--txt p + p {
         margin-top: 1.875rem; }
-      .carousel__item--intro .carousel__item__title, .carousel__item--txt .carousel__item__title {
+      .carousel__item--intro .carousel__item__title,
+      .carousel__item--txt .carousel__item__title {
         display: block;
         margin-bottom: 1.875rem;
         font-size: 1.5rem; }
@@ -829,13 +851,16 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
 @media (max-width: 550px) {
   .carousel__item {
     padding: 0 20px; }
-    .carousel__item--intro .carousel__item__container, .carousel__item--txt .carousel__item__container {
+    .carousel__item--intro .carousel__item__container,
+    .carousel__item--txt .carousel__item__container {
       width: 100%;
       min-height: 400px;
       padding: 2.1875rem; }
-    .carousel__item--intro .carousel__item__title, .carousel__item--txt .carousel__item__title {
+    .carousel__item--intro .carousel__item__title,
+    .carousel__item--txt .carousel__item__title {
       font-size: 1.25rem; }
-    .carousel__item--intro p, .carousel__item--txt p {
+    .carousel__item--intro p,
+    .carousel__item--txt p {
       -webkit-text-size-adjust: 100%; }
     .carousel__item--next .carousel__item__content {
       top: 3.4375rem;
