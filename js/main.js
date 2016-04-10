@@ -475,6 +475,9 @@ var carousel = {
 	goClick: function goClick(e) {
 		var index = $(e.currentTarget).index();
 
+		// Return if carousel if animated.
+		if (this.isAnimate) { return; }
+
 		// Get the target item.
 		var $target = $(this.ui.$items[index]);
 

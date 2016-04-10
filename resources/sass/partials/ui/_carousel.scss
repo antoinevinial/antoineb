@@ -23,7 +23,7 @@
 	&__item {
 		display: block;
 		float: left;
-		max-width: calc(100vw - #{$gutter * 2});
+		max-width: calc(100vw - 150px);
 	  	padding-left: pxToRem($gutter * 2);
 	  	cursor: pointer;
 	  	opacity: 0.5;
@@ -207,6 +207,7 @@
 @include mobile {
 	.carousel {
 		&__item {
+			max-width: calc(100vw - 50px);
 			padding: 0 20px;
 
 			&--intro,
