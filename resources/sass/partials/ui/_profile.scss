@@ -23,12 +23,13 @@
 		height: calc(100vh - 169px);
 		padding-top: 80px;
 		padding-bottom: 80px;
+		background-color: black;
 
 		&:after {
 			content: "";
 			position: absolute;
 			top: 0;
-			left: 100%;
+			left: calc(100% - 64px);
 			bottom: 0;
 			display: block;
 			width: 9999px;
@@ -55,6 +56,10 @@
 	}
 
 	@include mobile {
+		.grid:after {
+			display: none;
+		}
+
 		&__txt {
 			margin-bottom: 50px;
 		}
