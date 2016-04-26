@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 //import modules
-var oo       = require('../libs/oo.js');
 var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
@@ -8,7 +7,7 @@ var filters  = require('./modules/filters.js');
 var pageTransition = require('./modules/page-transition.js');
 var header   = require('./modules/header.js');
 
-(function ($, oo, win) {
+(function ($, win) {
 
 	// Init grid module.
 	if ($('.js-dev-grid').length) {
@@ -40,277 +39,9 @@ var header   = require('./modules/header.js');
         header.init();
     }
 
-})(jQuery, oo, window);
+})(jQuery, window);
 
-},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/filters.js":5,"./modules/header.js":6,"./modules/page-transition.js":7,"./modules/projects.js":8}],2:[function(require,module,exports){
-/*
-* Declaration of the global namespace oo
-*  with 3 defaults namespace : utils, modules, plugins, libs
-*/
-var oo = {
-    utils : {},
-    modules : {},
-    //plugins : {},
-    libs : {}
-};
-
-/*--------------------------------------------------------------
-* Namespace utils
---------------------------------------------------------------*/
-var oo = (function($, oo){
-
-    "use strict";
-
-    var utils = oo.utils || (oo['utils'] = {}),
-        $body = $('body');
-
-    /*
-    * oo.utils.hasJs
-    * on load page, remove html Class "no-js" and add class "has-js"
-    */
-    utils.hasJs = function hasJs(){
-        $('html').removeClass('no-js').addClass('has-js');
-    };
-
-    /*
-    * oo.utils.goToTop
-    * Scroll to top on class="gototop" links
-    */
-    utils.goToTop = function goToTop(speed){
-        var s = speed || 240;
-        $('.backtotop').on('click',function(e) {
-            e.preventDefault();
-            $('html,body').stop().animate({scrollTop : 0}, s);
-        });
-    };
-
-    /*
-    * oo.utils.goTo
-    * Scroll to offset passed in params
-    */
-    utils.goTo = function goTo(offsetY, speed){
-        $('html,body').stop().animate({ scrollTop:offsetY || 0 }, speed || 240);
-    };
-
-    /*
-    * oo.utils.formHeader
-    * Expand a search input
-    */
-    utils.formHeader = function formHeader(){
-        var $formHeader = $('#search'),
-            input = $formHeader.find('input[type="text"]');
-
-        $formHeader.delegate(':submit', 'click', function(e){
-            if(!$formHeader.hasClass('expand')){
-                $formHeader.addClass('expand');
-                input.focus();
-                e.preventDefault();
-            } else {
-                if('' === input.val()){
-                    $formHeader.removeClass('expand');
-                    e.preventDefault();
-                }
-            }
-        });
-    };
-
-    /*
-    * oo.utils.placeholder
-    * Polyfill placeholder for browsers that do not support native placeholder
-    */
-    utils.placeholder = function placeholder(){
-        var i = document.createElement("input");
-        // Only bind if placeholder isn't natively supported by the browser
-        if (!("placeholder" in i)) {
-            $("input[placeholder], textarea[placeholder]").each(function () {
-                var self = $(this);
-                self.addClass('placeholder');
-                self.val(self.attr("placeholder")).bind({
-                    focus: function () {
-                        if (self.val() === self.attr("placeholder")) {
-                            self.val("");
-                            self.removeClass('placeholder');
-                        }
-                    },
-                    blur: function () {
-                        var label = self.attr("placeholder");
-                        if (label && self.val() === "") {
-                            self.val(label);
-                            self.addClass('placeholder');
-                        }
-                    }
-                });
-            });
-        }
-    };
-
-    /*
-    * oo.utils.externalLinks
-    */
-    utils.externalLinks = function externalLinks(target){
-        $body.on('click', 'a[rel="external"]', function(e){
-            e.preventDefault();
-            window.open($(this).attr('href'), target || '_blank');
-        });
-    };
-
-    /**
-    * oo.utils.bindUI
-    * Create the jQuery objects
-    * params : An object of UI selectors
-    * e.g : ui = oo.utils.bindUI({ 'content':'#content' });
-    * So the dom object will be available in ui.content
-    */
-    utils.bindUI = function bindUI(inBodyContextUI, outBodyContextUI) {
-        var ui = {}, i;
-        inBodyContextUI = inBodyContextUI || {};
-        outBodyContextUI = outBodyContextUI || {};
-
-        for (i in inBodyContextUI) {
-            ui[i] = $body.find(inBodyContextUI[i]);
-        }
-
-        for (i in outBodyContextUI) {
-            if (typeof ui[i] != 'undefined') {
-                throw new Error('Element is already binded in context @oo.utils.bindUI');
-            }
-
-            ui[i] = $(outBodyContextUI[i]);
-        }
-
-        ui.$body = $body;
-
-        return ui;
-    };
-
-    /*
-    * oo.utils.replaceSVG
-    * replace all the svg images by png ones
-    * require Modernizr
-    */
-    utils.replaceSVG = function replaceSVG() {
-        if (Modernizr && !Modernizr.inlinesvg) {
-            $.each($body.find('img[src$=".svg"]'), function(key, el) {
-                var src = el.getAttribute('src');
-                el.setAttribute('src', src.replace('.svg', '.png'));
-            });
-        }
-    };
-
-
-    /*
-    *  CUSTOM EVENTS
-    */
-    utils.customEvents = {};
-    /*
-    * oo.utils.customClick (fast click for mobile)
-    */
-    utils.customEvents.click = (!!('ontouchstart' in window)) ? 'touchend' : 'click';
-
-    /*
-    * oo.utils.customResize (orientationChange first)
-    */
-    utils.customEvents.resize = (undefined !== window.orientation) ? 'orientationchange' : 'resize';
-
-    /*
-    * oo.utils.cls
-    * generic classes names
-    */
-    utils.cls = {
-        hide: 'hidden',
-        ishidden: 'is-hidden',
-        active: 'is-active',
-        fixed: 'is-fixed',
-        visible: 'is-visible',
-        invisible: 'is-invisible'
-    };
-
-    /*
-    * oo.utils.printBtn
-    * button to print current page
-    */
-    utils.printBtn = function printBtn(){
-        $body.on('click','.js-print',function(e) {
-            e.preventDefault();
-            window.print();
-        });
-    };
-
-    /*
-    * oo.utils.getLocationHash
-    * @return {string} location.hash
-    */
-    utils.getLocationHash = function getLocationHash() {
-        return window.location.hash.substring(1)
-    }
-
-    /*
-    * oo.utils.autosubmitForm
-    * autosumit a form when a select triggers the event "change"
-    */
-    utils.autosubmitForm = function autosubmitForm(){
-
-        var fn = function fn(){
-            $(this).closest('form').submit();
-        };
-
-        $('form.js-autosubmit').on('change', 'select', fn);
-    };
-
-    /*
-    * oo.utils.detectPlatform
-    * @param fn {function} : callback with the platform
-    */
-    utils.detectPlatform = function detectPlatform(fn){
-        var cb = fn || function(){},
-            platform;
-
-        if(navigator.userAgent.match(/Android/i)){
-            platform = "android";
-        }
-
-        if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i)){
-            platform = "ios";
-        }
-
-        if(navigator.userAgent.match(/webOS/i)){
-            platform = "webos";
-        }
-
-        if(navigator.userAgent.match(/windows phone/i)){
-            platform = "windowsphone";
-        }
-
-        if(navigator.userAgent.match(/BlackBerry/i)){
-            platform = "blackberry";
-        }
-
-        fn(platform);
-    }
-
-    /*
-    * oo.utils.isMobileTablet
-    * @return {boolean}
-    */
-    utils.isMobileTablet = (
-        navigator.userAgent.match(/Android/i) ||
-        navigator.userAgent.match(/webOS/i) ||
-        navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPod/i) ||
-        navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/windows phone/i) ||
-        navigator.userAgent.match(/BlackBerry/i)
-    ) ? true : false;
-
-    return oo;
-
-})(jQuery, (oo || {}) );
-
-
-//Export oo
-module.exports = oo;
-
-},{}],3:[function(require,module,exports){
+},{"./modules/carousel.js":2,"./modules/dev-grid.js":3,"./modules/filters.js":4,"./modules/header.js":5,"./modules/page-transition.js":6,"./modules/projects.js":7}],2:[function(require,module,exports){
 var carousel = {
 
 	ui: {},
@@ -584,7 +315,7 @@ var carousel = {
 //Export module
 module.exports = carousel;
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var devGrid = {
 
     ui: {},
@@ -611,7 +342,7 @@ var devGrid = {
 //Export module
 module.exports = devGrid;
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var filters = {
 
 	ui: {},
@@ -643,7 +374,7 @@ var filters = {
 };
 
 module.exports = filters;
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var header = {
 
 	ui: {},
@@ -681,7 +412,7 @@ var header = {
 
 // Export module.
 module.exports = header;
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var pageTransition = {
 
 	ui: {},
@@ -729,7 +460,7 @@ var pageTransition = {
 };
 
 module.exports = pageTransition;
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Require imagesloaded plugin.
 var imagesLoaded = require('imagesloaded');
 
@@ -1053,7 +784,7 @@ var projects = {
 //Export module
 module.exports = projects;
 
-},{"imagesloaded":9}],9:[function(require,module,exports){
+},{"imagesloaded":8}],8:[function(require,module,exports){
 /*!
  * imagesLoaded v3.1.8
  * JavaScript is all like "You images are done yet or what?"
@@ -1390,7 +1121,7 @@ function makeArray( obj ) {
 
 });
 
-},{"eventie":10,"wolfy87-eventemitter":11}],10:[function(require,module,exports){
+},{"eventie":9,"wolfy87-eventemitter":10}],9:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -1474,7 +1205,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/
@@ -1835,22 +1566,20 @@ if ( typeof define === 'function' && define.amd ) {
      * @return {Object} Current instance of EventEmitter for chaining.
      */
     proto.emitEvent = function emitEvent(evt, args) {
-        var listenersMap = this.getListenersAsObject(evt);
-        var listeners;
+        var listeners = this.getListenersAsObject(evt);
         var listener;
         var i;
         var key;
         var response;
 
-        for (key in listenersMap) {
-            if (listenersMap.hasOwnProperty(key)) {
-                listeners = listenersMap[key].slice(0);
-                i = listeners.length;
+        for (key in listeners) {
+            if (listeners.hasOwnProperty(key)) {
+                i = listeners[key].length;
 
                 while (i--) {
                     // If the listener returns true then it shall be removed from the event
                     // The function is executed either with a basic call or an apply if there is an args array
-                    listener = listeners[i];
+                    listener = listeners[key][i];
 
                     if (listener.once === true) {
                         this.removeListener(evt, listener.listener);
