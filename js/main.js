@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 //import modules
-var oo       = require('../libs/oo.js');
 var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
@@ -8,7 +7,7 @@ var filters  = require('./modules/filters.js');
 var pageTransition = require('./modules/page-transition.js');
 var header   = require('./modules/header.js');
 
-(function ($, oo, win) {
+(function ($, win) {
 
 	// Init grid module.
 	if ($('.js-dev-grid').length) {
@@ -40,277 +39,9 @@ var header   = require('./modules/header.js');
         header.init();
     }
 
-})(jQuery, oo, window);
+})(jQuery, window);
 
-},{"../libs/oo.js":2,"./modules/carousel.js":3,"./modules/dev-grid.js":4,"./modules/filters.js":5,"./modules/header.js":6,"./modules/page-transition.js":7,"./modules/projects.js":8}],2:[function(require,module,exports){
-/*
-* Declaration of the global namespace oo
-*  with 3 defaults namespace : utils, modules, plugins, libs
-*/
-var oo = {
-    utils : {},
-    modules : {},
-    //plugins : {},
-    libs : {}
-};
-
-/*--------------------------------------------------------------
-* Namespace utils
---------------------------------------------------------------*/
-var oo = (function($, oo){
-
-    "use strict";
-
-    var utils = oo.utils || (oo['utils'] = {}),
-        $body = $('body');
-
-    /*
-    * oo.utils.hasJs
-    * on load page, remove html Class "no-js" and add class "has-js"
-    */
-    utils.hasJs = function hasJs(){
-        $('html').removeClass('no-js').addClass('has-js');
-    };
-
-    /*
-    * oo.utils.goToTop
-    * Scroll to top on class="gototop" links
-    */
-    utils.goToTop = function goToTop(speed){
-        var s = speed || 240;
-        $('.backtotop').on('click',function(e) {
-            e.preventDefault();
-            $('html,body').stop().animate({scrollTop : 0}, s);
-        });
-    };
-
-    /*
-    * oo.utils.goTo
-    * Scroll to offset passed in params
-    */
-    utils.goTo = function goTo(offsetY, speed){
-        $('html,body').stop().animate({ scrollTop:offsetY || 0 }, speed || 240);
-    };
-
-    /*
-    * oo.utils.formHeader
-    * Expand a search input
-    */
-    utils.formHeader = function formHeader(){
-        var $formHeader = $('#search'),
-            input = $formHeader.find('input[type="text"]');
-
-        $formHeader.delegate(':submit', 'click', function(e){
-            if(!$formHeader.hasClass('expand')){
-                $formHeader.addClass('expand');
-                input.focus();
-                e.preventDefault();
-            } else {
-                if('' === input.val()){
-                    $formHeader.removeClass('expand');
-                    e.preventDefault();
-                }
-            }
-        });
-    };
-
-    /*
-    * oo.utils.placeholder
-    * Polyfill placeholder for browsers that do not support native placeholder
-    */
-    utils.placeholder = function placeholder(){
-        var i = document.createElement("input");
-        // Only bind if placeholder isn't natively supported by the browser
-        if (!("placeholder" in i)) {
-            $("input[placeholder], textarea[placeholder]").each(function () {
-                var self = $(this);
-                self.addClass('placeholder');
-                self.val(self.attr("placeholder")).bind({
-                    focus: function () {
-                        if (self.val() === self.attr("placeholder")) {
-                            self.val("");
-                            self.removeClass('placeholder');
-                        }
-                    },
-                    blur: function () {
-                        var label = self.attr("placeholder");
-                        if (label && self.val() === "") {
-                            self.val(label);
-                            self.addClass('placeholder');
-                        }
-                    }
-                });
-            });
-        }
-    };
-
-    /*
-    * oo.utils.externalLinks
-    */
-    utils.externalLinks = function externalLinks(target){
-        $body.on('click', 'a[rel="external"]', function(e){
-            e.preventDefault();
-            window.open($(this).attr('href'), target || '_blank');
-        });
-    };
-
-    /**
-    * oo.utils.bindUI
-    * Create the jQuery objects
-    * params : An object of UI selectors
-    * e.g : ui = oo.utils.bindUI({ 'content':'#content' });
-    * So the dom object will be available in ui.content
-    */
-    utils.bindUI = function bindUI(inBodyContextUI, outBodyContextUI) {
-        var ui = {}, i;
-        inBodyContextUI = inBodyContextUI || {};
-        outBodyContextUI = outBodyContextUI || {};
-
-        for (i in inBodyContextUI) {
-            ui[i] = $body.find(inBodyContextUI[i]);
-        }
-
-        for (i in outBodyContextUI) {
-            if (typeof ui[i] != 'undefined') {
-                throw new Error('Element is already binded in context @oo.utils.bindUI');
-            }
-
-            ui[i] = $(outBodyContextUI[i]);
-        }
-
-        ui.$body = $body;
-
-        return ui;
-    };
-
-    /*
-    * oo.utils.replaceSVG
-    * replace all the svg images by png ones
-    * require Modernizr
-    */
-    utils.replaceSVG = function replaceSVG() {
-        if (Modernizr && !Modernizr.inlinesvg) {
-            $.each($body.find('img[src$=".svg"]'), function(key, el) {
-                var src = el.getAttribute('src');
-                el.setAttribute('src', src.replace('.svg', '.png'));
-            });
-        }
-    };
-
-
-    /*
-    *  CUSTOM EVENTS
-    */
-    utils.customEvents = {};
-    /*
-    * oo.utils.customClick (fast click for mobile)
-    */
-    utils.customEvents.click = (!!('ontouchstart' in window)) ? 'touchend' : 'click';
-
-    /*
-    * oo.utils.customResize (orientationChange first)
-    */
-    utils.customEvents.resize = (undefined !== window.orientation) ? 'orientationchange' : 'resize';
-
-    /*
-    * oo.utils.cls
-    * generic classes names
-    */
-    utils.cls = {
-        hide: 'hidden',
-        ishidden: 'is-hidden',
-        active: 'is-active',
-        fixed: 'is-fixed',
-        visible: 'is-visible',
-        invisible: 'is-invisible'
-    };
-
-    /*
-    * oo.utils.printBtn
-    * button to print current page
-    */
-    utils.printBtn = function printBtn(){
-        $body.on('click','.js-print',function(e) {
-            e.preventDefault();
-            window.print();
-        });
-    };
-
-    /*
-    * oo.utils.getLocationHash
-    * @return {string} location.hash
-    */
-    utils.getLocationHash = function getLocationHash() {
-        return window.location.hash.substring(1)
-    }
-
-    /*
-    * oo.utils.autosubmitForm
-    * autosumit a form when a select triggers the event "change"
-    */
-    utils.autosubmitForm = function autosubmitForm(){
-
-        var fn = function fn(){
-            $(this).closest('form').submit();
-        };
-
-        $('form.js-autosubmit').on('change', 'select', fn);
-    };
-
-    /*
-    * oo.utils.detectPlatform
-    * @param fn {function} : callback with the platform
-    */
-    utils.detectPlatform = function detectPlatform(fn){
-        var cb = fn || function(){},
-            platform;
-
-        if(navigator.userAgent.match(/Android/i)){
-            platform = "android";
-        }
-
-        if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/iPad/i)){
-            platform = "ios";
-        }
-
-        if(navigator.userAgent.match(/webOS/i)){
-            platform = "webos";
-        }
-
-        if(navigator.userAgent.match(/windows phone/i)){
-            platform = "windowsphone";
-        }
-
-        if(navigator.userAgent.match(/BlackBerry/i)){
-            platform = "blackberry";
-        }
-
-        fn(platform);
-    }
-
-    /*
-    * oo.utils.isMobileTablet
-    * @return {boolean}
-    */
-    utils.isMobileTablet = (
-        navigator.userAgent.match(/Android/i) ||
-        navigator.userAgent.match(/webOS/i) ||
-        navigator.userAgent.match(/iPhone/i) ||
-        navigator.userAgent.match(/iPod/i) ||
-        navigator.userAgent.match(/iPad/i) ||
-        navigator.userAgent.match(/windows phone/i) ||
-        navigator.userAgent.match(/BlackBerry/i)
-    ) ? true : false;
-
-    return oo;
-
-})(jQuery, (oo || {}) );
-
-
-//Export oo
-module.exports = oo;
-
-},{}],3:[function(require,module,exports){
+},{"./modules/carousel.js":2,"./modules/dev-grid.js":3,"./modules/filters.js":4,"./modules/header.js":5,"./modules/page-transition.js":6,"./modules/projects.js":7}],2:[function(require,module,exports){
 var carousel = {
 
 	ui: {},
@@ -584,7 +315,7 @@ var carousel = {
 //Export module
 module.exports = carousel;
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var devGrid = {
 
     ui: {},
@@ -611,7 +342,7 @@ var devGrid = {
 //Export module
 module.exports = devGrid;
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 var filters = {
 
 	ui: {},
@@ -643,7 +374,7 @@ var filters = {
 };
 
 module.exports = filters;
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var header = {
 
 	ui: {},
@@ -681,7 +412,7 @@ var header = {
 
 // Export module.
 module.exports = header;
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 var pageTransition = {
 
 	ui: {},
@@ -729,7 +460,7 @@ var pageTransition = {
 };
 
 module.exports = pageTransition;
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 // Require imagesloaded plugin.
 var imagesLoaded = require('imagesloaded');
 
@@ -1053,9 +784,9 @@ var projects = {
 //Export module
 module.exports = projects;
 
-},{"imagesloaded":9}],9:[function(require,module,exports){
+},{"imagesloaded":8}],8:[function(require,module,exports){
 /*!
- * imagesLoaded v3.1.8
+ * imagesLoaded v3.2.0
  * JavaScript is all like "You images are done yet or what?"
  * MIT License
  */
@@ -1065,7 +796,7 @@ module.exports = projects;
 
   /*global define: false, module: false, require: false */
 
-  if ( typeof define === 'function' && define.amd ) {
+  if ( typeof define == 'function' && define.amd ) {
     // AMD
     define( [
       'eventEmitter/EventEmitter',
@@ -1073,7 +804,7 @@ module.exports = projects;
     ], function( EventEmitter, eventie ) {
       return factory( window, EventEmitter, eventie );
     });
-  } else if ( typeof exports === 'object' ) {
+  } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
     module.exports = factory(
       window,
@@ -1099,7 +830,6 @@ function factory( window, EventEmitter, eventie ) {
 
 var $ = window.jQuery;
 var console = window.console;
-var hasConsole = typeof console !== 'undefined';
 
 // -------------------------- helpers -------------------------- //
 
@@ -1113,7 +843,7 @@ function extend( a, b ) {
 
 var objToString = Object.prototype.toString;
 function isArray( obj ) {
-  return objToString.call( obj ) === '[object Array]';
+  return objToString.call( obj ) == '[object Array]';
 }
 
 // turn element or nodeList into an array
@@ -1122,9 +852,9 @@ function makeArray( obj ) {
   if ( isArray( obj ) ) {
     // use object if already an array
     ary = obj;
-  } else if ( typeof obj.length === 'number' ) {
+  } else if ( typeof obj.length == 'number' ) {
     // convert nodeList to array
-    for ( var i=0, len = obj.length; i < len; i++ ) {
+    for ( var i=0; i < obj.length; i++ ) {
       ary.push( obj[i] );
     }
   } else {
@@ -1144,17 +874,17 @@ function makeArray( obj ) {
   function ImagesLoaded( elem, options, onAlways ) {
     // coerce ImagesLoaded() without new, to be new ImagesLoaded()
     if ( !( this instanceof ImagesLoaded ) ) {
-      return new ImagesLoaded( elem, options );
+      return new ImagesLoaded( elem, options, onAlways );
     }
     // use elem as selector string
-    if ( typeof elem === 'string' ) {
+    if ( typeof elem == 'string' ) {
       elem = document.querySelectorAll( elem );
     }
 
     this.elements = makeArray( elem );
     this.options = extend( {}, this.options );
 
-    if ( typeof options === 'function' ) {
+    if ( typeof options == 'function' ) {
       onAlways = options;
     } else {
       extend( this.options, options );
@@ -1186,25 +916,71 @@ function makeArray( obj ) {
     this.images = [];
 
     // filter & find items if we have an item selector
-    for ( var i=0, len = this.elements.length; i < len; i++ ) {
+    for ( var i=0; i < this.elements.length; i++ ) {
       var elem = this.elements[i];
-      // filter siblings
-      if ( elem.nodeName === 'IMG' ) {
-        this.addImage( elem );
-      }
-      // find children
-      // no non-element nodes, #143
-      var nodeType = elem.nodeType;
-      if ( !nodeType || !( nodeType === 1 || nodeType === 9 || nodeType === 11 ) ) {
-        continue;
-      }
-      var childElems = elem.querySelectorAll('img');
-      // concat childElems to filterFound array
-      for ( var j=0, jLen = childElems.length; j < jLen; j++ ) {
-        var img = childElems[j];
-        this.addImage( img );
+      this.addElementImages( elem );
+    }
+  };
+
+  /**
+   * @param {Node} element
+   */
+  ImagesLoaded.prototype.addElementImages = function( elem ) {
+    // filter siblings
+    if ( elem.nodeName == 'IMG' ) {
+      this.addImage( elem );
+    }
+    // get background image on element
+    if ( this.options.background === true ) {
+      this.addElementBackgroundImages( elem );
+    }
+
+    // find children
+    // no non-element nodes, #143
+    var nodeType = elem.nodeType;
+    if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
+      return;
+    }
+    var childImgs = elem.querySelectorAll('img');
+    // concat childElems to filterFound array
+    for ( var i=0; i < childImgs.length; i++ ) {
+      var img = childImgs[i];
+      this.addImage( img );
+    }
+
+    // get child background images
+    if ( typeof this.options.background == 'string' ) {
+      var children = elem.querySelectorAll( this.options.background );
+      for ( i=0; i < children.length; i++ ) {
+        var child = children[i];
+        this.addElementBackgroundImages( child );
       }
     }
+  };
+
+  var elementNodeTypes = {
+    1: true,
+    9: true,
+    11: true
+  };
+
+  ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
+    var style = getStyle( elem );
+    // get url inside url("...")
+    var reURL = /url\(['"]*([^'"\)]+)['"]*\)/gi;
+    var matches = reURL.exec( style.backgroundImage );
+    while ( matches !== null ) {
+      var url = matches && matches[1];
+      if ( url ) {
+        this.addBackground( url, elem );
+      }
+      matches = reURL.exec( style.backgroundImage );
+    }
+  };
+
+  // IE8
+  var getStyle = window.getComputedStyle || function( elem ) {
+    return elem.currentStyle;
   };
 
   /**
@@ -1215,73 +991,63 @@ function makeArray( obj ) {
     this.images.push( loadingImage );
   };
 
+  ImagesLoaded.prototype.addBackground = function( url, elem ) {
+    var background = new Background( url, elem );
+    this.images.push( background );
+  };
+
   ImagesLoaded.prototype.check = function() {
     var _this = this;
-    var checkedCount = 0;
-    var length = this.images.length;
+    this.progressedCount = 0;
     this.hasAnyBroken = false;
     // complete if no images
-    if ( !length ) {
+    if ( !this.images.length ) {
       this.complete();
       return;
     }
 
-    function onConfirm( image, message ) {
-      if ( _this.options.debug && hasConsole ) {
-        console.log( 'confirm', image, message );
-      }
-
-      _this.progress( image );
-      checkedCount++;
-      if ( checkedCount === length ) {
-        _this.complete();
-      }
-      return true; // bind once
+    function onProgress( image, elem, message ) {
+      // HACK - Chrome triggers event before object properties have changed. #83
+      setTimeout( function() {
+        _this.progress( image, elem, message );
+      });
     }
 
-    for ( var i=0; i < length; i++ ) {
+    for ( var i=0; i < this.images.length; i++ ) {
       var loadingImage = this.images[i];
-      loadingImage.on( 'confirm', onConfirm );
+      loadingImage.once( 'progress', onProgress );
       loadingImage.check();
     }
   };
 
-  ImagesLoaded.prototype.progress = function( image ) {
+  ImagesLoaded.prototype.progress = function( image, elem, message ) {
+    this.progressedCount++;
     this.hasAnyBroken = this.hasAnyBroken || !image.isLoaded;
-    // HACK - Chrome triggers event before object properties have changed. #83
-    var _this = this;
-    setTimeout( function() {
-      _this.emit( 'progress', _this, image );
-      if ( _this.jqDeferred && _this.jqDeferred.notify ) {
-        _this.jqDeferred.notify( _this, image );
-      }
-    });
+    // progress event
+    this.emit( 'progress', this, image, elem );
+    if ( this.jqDeferred && this.jqDeferred.notify ) {
+      this.jqDeferred.notify( this, image );
+    }
+    // check if completed
+    if ( this.progressedCount == this.images.length ) {
+      this.complete();
+    }
+
+    if ( this.options.debug && console ) {
+      console.log( 'progress: ' + message, image, elem );
+    }
   };
 
   ImagesLoaded.prototype.complete = function() {
     var eventName = this.hasAnyBroken ? 'fail' : 'done';
     this.isComplete = true;
-    var _this = this;
-    // HACK - another setTimeout so that confirm happens after progress
-    setTimeout( function() {
-      _this.emit( eventName, _this );
-      _this.emit( 'always', _this );
-      if ( _this.jqDeferred ) {
-        var jqMethod = _this.hasAnyBroken ? 'reject' : 'resolve';
-        _this.jqDeferred[ jqMethod ]( _this );
-      }
-    });
+    this.emit( eventName, this );
+    this.emit( 'always', this );
+    if ( this.jqDeferred ) {
+      var jqMethod = this.hasAnyBroken ? 'reject' : 'resolve';
+      this.jqDeferred[ jqMethod ]( this );
+    }
   };
-
-  // -------------------------- jquery -------------------------- //
-
-  if ( $ ) {
-    $.fn.imagesLoaded = function( options, callback ) {
-      var instance = new ImagesLoaded( this, options, callback );
-      return instance.jqDeferred.promise( $(this) );
-    };
-  }
-
 
   // --------------------------  -------------------------- //
 
@@ -1292,105 +1058,119 @@ function makeArray( obj ) {
   LoadingImage.prototype = new EventEmitter();
 
   LoadingImage.prototype.check = function() {
-    // first check cached any previous images that have same src
-    var resource = cache[ this.img.src ] || new Resource( this.img.src );
-    if ( resource.isConfirmed ) {
-      this.confirm( resource.isLoaded, 'cached was confirmed' );
-      return;
-    }
-
     // If complete is true and browser supports natural sizes,
     // try to check for image status manually.
-    if ( this.img.complete && this.img.naturalWidth !== undefined ) {
+    var isComplete = this.getIsImageComplete();
+    if ( isComplete ) {
       // report based on naturalWidth
       this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
       return;
     }
 
     // If none of the checks above matched, simulate loading on detached element.
-    var _this = this;
-    resource.on( 'confirm', function( resrc, message ) {
-      _this.confirm( resrc.isLoaded, message );
-      return true;
-    });
+    this.proxyImage = new Image();
+    eventie.bind( this.proxyImage, 'load', this );
+    eventie.bind( this.proxyImage, 'error', this );
+    // bind to image as well for Firefox. #191
+    eventie.bind( this.img, 'load', this );
+    eventie.bind( this.img, 'error', this );
+    this.proxyImage.src = this.img.src;
+  };
 
-    resource.check();
+  LoadingImage.prototype.getIsImageComplete = function() {
+    return this.img.complete && this.img.naturalWidth !== undefined;
   };
 
   LoadingImage.prototype.confirm = function( isLoaded, message ) {
     this.isLoaded = isLoaded;
-    this.emit( 'confirm', this, message );
-  };
-
-  // -------------------------- Resource -------------------------- //
-
-  // Resource checks each src, only once
-  // separate class from LoadingImage to prevent memory leaks. See #115
-
-  var cache = {};
-
-  function Resource( src ) {
-    this.src = src;
-    // add to cache
-    cache[ src ] = this;
-  }
-
-  Resource.prototype = new EventEmitter();
-
-  Resource.prototype.check = function() {
-    // only trigger checking once
-    if ( this.isChecked ) {
-      return;
-    }
-    // simulate loading on detached element
-    var proxyImage = new Image();
-    eventie.bind( proxyImage, 'load', this );
-    eventie.bind( proxyImage, 'error', this );
-    proxyImage.src = this.src;
-    // set flag
-    this.isChecked = true;
+    this.emit( 'progress', this, this.img, message );
   };
 
   // ----- events ----- //
 
   // trigger specified handler for event type
-  Resource.prototype.handleEvent = function( event ) {
+  LoadingImage.prototype.handleEvent = function( event ) {
     var method = 'on' + event.type;
     if ( this[ method ] ) {
       this[ method ]( event );
     }
   };
 
-  Resource.prototype.onload = function( event ) {
+  LoadingImage.prototype.onload = function() {
     this.confirm( true, 'onload' );
-    this.unbindProxyEvents( event );
+    this.unbindEvents();
   };
 
-  Resource.prototype.onerror = function( event ) {
+  LoadingImage.prototype.onerror = function() {
     this.confirm( false, 'onerror' );
-    this.unbindProxyEvents( event );
+    this.unbindEvents();
   };
 
-  // ----- confirm ----- //
+  LoadingImage.prototype.unbindEvents = function() {
+    eventie.unbind( this.proxyImage, 'load', this );
+    eventie.unbind( this.proxyImage, 'error', this );
+    eventie.unbind( this.img, 'load', this );
+    eventie.unbind( this.img, 'error', this );
+  };
 
-  Resource.prototype.confirm = function( isLoaded, message ) {
-    this.isConfirmed = true;
+  // -------------------------- Background -------------------------- //
+
+  function Background( url, element ) {
+    this.url = url;
+    this.element = element;
+    this.img = new Image();
+  }
+
+  // inherit LoadingImage prototype
+  Background.prototype = new LoadingImage();
+
+  Background.prototype.check = function() {
+    eventie.bind( this.img, 'load', this );
+    eventie.bind( this.img, 'error', this );
+    this.img.src = this.url;
+    // check if image is already complete
+    var isComplete = this.getIsImageComplete();
+    if ( isComplete ) {
+      this.confirm( this.img.naturalWidth !== 0, 'naturalWidth' );
+      this.unbindEvents();
+    }
+  };
+
+  Background.prototype.unbindEvents = function() {
+    eventie.unbind( this.img, 'load', this );
+    eventie.unbind( this.img, 'error', this );
+  };
+
+  Background.prototype.confirm = function( isLoaded, message ) {
     this.isLoaded = isLoaded;
-    this.emit( 'confirm', this, message );
+    this.emit( 'progress', this, this.element, message );
   };
 
-  Resource.prototype.unbindProxyEvents = function( event ) {
-    eventie.unbind( event.target, 'load', this );
-    eventie.unbind( event.target, 'error', this );
-  };
+  // -------------------------- jQuery -------------------------- //
 
-  // -----  ----- //
+  ImagesLoaded.makeJQueryPlugin = function( jQuery ) {
+    jQuery = jQuery || window.jQuery;
+    if ( !jQuery ) {
+      return;
+    }
+    // set local variable
+    $ = jQuery;
+    // $().imagesLoaded()
+    $.fn.imagesLoaded = function( options, callback ) {
+      var instance = new ImagesLoaded( this, options, callback );
+      return instance.jqDeferred.promise( $(this) );
+    };
+  };
+  // try making plugin
+  ImagesLoaded.makeJQueryPlugin();
+
+  // --------------------------  -------------------------- //
 
   return ImagesLoaded;
 
 });
 
-},{"eventie":10,"wolfy87-eventemitter":11}],10:[function(require,module,exports){
+},{"eventie":9,"wolfy87-eventemitter":10}],9:[function(require,module,exports){
 /*!
  * eventie v1.0.6
  * event binding helper
@@ -1474,7 +1254,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 })( window );
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * EventEmitter v4.2.11 - git.io/ee
  * Unlicense - http://unlicense.org/

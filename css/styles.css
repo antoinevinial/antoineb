@@ -1,7 +1,8 @@
 /* ------------------------------------------------------------------ */
 /*        OO CORE
 /* ------------------------------------------------------------------ */
-/*------------------------------------*    PROJECT VARIABLES
+/*------------------------------------*\
+    PROJECT VARIABLES
 \*------------------------------------*/
 /*-------------------------------------------
     FUNCTIONS
@@ -416,8 +417,7 @@ img.picture {
     /* Black prints faster: h5bp.com/s */
     box-shadow: none !important;
     text-shadow: none !important; }
-  a,
-  a:visited {
+  a, a:visited {
     text-decoration: underline; }
   a[href]:after {
     content: " (" attr(href) ")"; }
@@ -426,31 +426,25 @@ img.picture {
   /*
      * Don't show links for images, or javascript/internal links
      */
-  .ir a:after,
-  a[href^="javascript:"]:after,
-  a[href^="#"]:after {
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
     content: ""; }
-  pre,
-  blockquote {
+  pre, blockquote {
     border: 1px solid #999;
     page-break-inside: avoid; }
   thead {
     display: table-header-group;
     /* h5bp.com/t */ }
-  tr,
-  img {
+  tr, img {
     page-break-inside: avoid; }
   img {
     max-width: 100% !important; }
   @page {
     margin: 0.5cm; }
-  p,
-  h2,
-  h3 {
+
+  p, h2, h3 {
     orphans: 3;
     widows: 3; }
-  h2,
-  h3 {
+  h2, h3 {
     page-break-after: avoid; } }
 
 .tpl-project .main {
@@ -466,19 +460,7 @@ img.picture {
    v2.0 | 20110126
    License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -487,8 +469,7 @@ time, mark, audio, video {
   vertical-align: baseline; }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block; }
 
 body {
@@ -500,8 +481,7 @@ ol, ul {
 blockquote, q {
   quotes: none; }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after, q:before, q:after {
   content: '';
   content: none; }
 
@@ -534,22 +514,22 @@ a {
 
 @font-face {
   font-family: 'theinhardtmedium';
-  src: url("../fonts/theinhardtmed-webfont.eot");
-  src: url("../fonts/theinhardtmed-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/theinhardtmed-webfont.woff2") format("woff2"), url("../fonts/theinhardtmed-webfont.woff") format("woff"), url("../fonts/theinhardtmed-webfont.ttf") format("truetype"), url("../fonts/theinhardtmed-webfont.svg#theinhardtmedium") format("svg");
+  src: url('../fonts/theinhardtmed-webfont.eot');
+  src: url('../fonts/theinhardtmed-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/theinhardtmed-webfont.woff2') format('woff2'), url('../fonts/theinhardtmed-webfont.woff') format('woff'), url('../fonts/theinhardtmed-webfont.ttf') format('truetype'), url('../fonts/theinhardtmed-webfont.svg#theinhardtmedium') format('svg');
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'theinhardtregular';
-  src: url("../fonts/theinhardtreg-webfont.eot");
-  src: url("../fonts/theinhardtreg-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/theinhardtreg-webfont.woff2") format("woff2"), url("../fonts/theinhardtreg-webfont.woff") format("woff"), url("../fonts/theinhardtreg-webfont.ttf") format("truetype"), url("../fonts/theinhardtreg-webfont.svg#theinhardtregular") format("svg");
+  src: url('../fonts/theinhardtreg-webfont.eot');
+  src: url('../fonts/theinhardtreg-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/theinhardtreg-webfont.woff2') format('woff2'), url('../fonts/theinhardtreg-webfont.woff') format('woff'), url('../fonts/theinhardtreg-webfont.ttf') format('truetype'), url('../fonts/theinhardtreg-webfont.svg#theinhardtregular') format('svg');
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'theinhardtthin';
-  src: url("../fonts/theinhardtthin-webfont.eot");
-  src: url("../fonts/theinhardtthin-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/theinhardtthin-webfont.woff2") format("woff2"), url("../fonts/theinhardtthin-webfont.woff") format("woff"), url("../fonts/theinhardtthin-webfont.ttf") format("truetype"), url("../fonts/theinhardtthin-webfont.svg#theinhardtthin") format("svg");
+  src: url('../fonts/theinhardtthin-webfont.eot');
+  src: url('../fonts/theinhardtthin-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/theinhardtthin-webfont.woff2') format('woff2'), url('../fonts/theinhardtthin-webfont.woff') format('woff'), url('../fonts/theinhardtthin-webfont.ttf') format('truetype'), url('../fonts/theinhardtthin-webfont.svg#theinhardtthin') format('svg');
   font-weight: normal;
   font-style: normal; }
 
@@ -560,13 +540,11 @@ a {
 .header__title, .header__filters__btn, body, .carousel__btn {
   font-family: 'theinhardtregular', Arial, sans-serif; }
 
-.icon-arrow-up,
-.icon-arrow-down {
+.icon-arrow-up, .icon-arrow-down {
   width: 7px;
   height: 16px; }
 
-.icon-arrow-left,
-.icon-arrow-right {
+.icon-arrow-left, .icon-arrow-right {
   width: 16px;
   height: 7px; }
 
@@ -902,11 +880,9 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
     display: block;
     width: 9999px;
     background-color: #161616; }
-
 .profile__img {
   display: block;
   max-width: 100%; }
-
 .profile__hr {
   display: block;
   width: 60px;
@@ -914,10 +890,8 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   margin: 40px 0;
   background: #454545;
   border: none; }
-
 .profile__txt {
   margin-bottom: 100px; }
-
 @media (max-width: 550px) {
   .profile .grid:after {
     display: none; }
@@ -942,8 +916,7 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
   pointer-events: none; }
   .dev-grid.is-visible {
     display: block; }
-  .dev-grid .grid,
-  .dev-grid .row {
+  .dev-grid .grid, .dev-grid .row {
     height: 100%; }
   .dev-grid [class*="cell-"] {
     height: 100%; }
@@ -975,5 +948,6 @@ https://github.com/stubbornella/oocss/wiki/standard-module-format
 @media (max-width: 550px) {
   .break-mobile {
     display: block; } }
+
 
 /*# sourceMappingURL=maps/styles.css.map */

@@ -1,5 +1,4 @@
 //import modules
-var oo       = require('../libs/oo.js');
 var devGrid  = require('./modules/dev-grid.js');
 var projects = require('./modules/projects.js');
 var carousel = require('./modules/carousel.js');
@@ -7,7 +6,7 @@ var filters  = require('./modules/filters.js');
 var pageTransition = require('./modules/page-transition.js');
 var header   = require('./modules/header.js');
 
-(function ($, oo, win) {
+(function ($, win) {
 
 	// Init grid module.
 	if ($('.js-dev-grid').length) {
@@ -39,4 +38,4 @@ var header   = require('./modules/header.js');
         header.init();
     }
 
-})(jQuery, oo, window);
+})(jQuery, window);
